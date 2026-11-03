@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wesensvollzüge der Kirche</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: ein 16:9-Bühnenbild (1600×900) skaliert in den Bildschirm; darunter eine Navigationsleiste mit Kapitel-Fortschritt.
+   Farbsystem: Navy als Grund, je eine feste Farbe pro Grundvollzug (M blau, L gold, D grün, K rot) – auf jeder Folie gleich. */
+:root {
+  --app: #10172a;
+  --navy: #1b2740;
+  --navy-2: #26365a;
+  --paper: #f3f5f9;
+  --card: #ffffff;
+  --text: #1b2740;
+  --muted: #5a6680;
+  --line: #d8deea;
+  --on-dark: #eef2fa;
+  --on-dark-muted: #a9b6d0;
+  --m: #3462a3;
+  --l: #c4952a;
+  --d: #3f7d58;
+  --k: #b0474a;
+  --m-soft: #e3ebf7;
+  --l-soft: #f7efdb;
+  --d-soft: #e1efe6;
+  --k-soft: #f6e3e3;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  margin: 0; background: var(--app); color: var(--on-dark); font-family: var(--body);
+  overflow: hidden; -webkit-font-smoothing: antialiased;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  box-sizing: border-box;
+}
+*, *::before, *::after { box-sizing: border-box; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--l); outline-offset: 3px; }
+
+#app { height: 100%; display: grid; grid-template-rows: 1fr auto; gap: 10px; padding-block: 12px 10px; }
+#viewport { position: relative; min-height: 0; min-width: 0; overflow: hidden; touch-action: pan-y; }
+#scaler { position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px; transform-origin: center; }
+#stage { position: absolute; inset: 0; border-radius: 18px; overflow: hidden; background: var(--paper); box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+
+/* ---------- Folien ---------- */
+.slide {
+  position: absolute; inset: 0; display: none; flex-direction: column;
+  background: var(--paper); color: var(--text); padding: 0 80px;
+}
+.slide.on { display: flex; }
+.slide.dark { background: var(--navy); color: var(--on-dark); }
+.sh { padding-top: 56px; display: grid; gap: 6px; }
+.kicker { font: 700 17px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; gap: 12px; align-items: center; }
+.kicker i { font-style: normal; display: inline-block; width: 26px; height: 3px; background: currentColor; border-radius: 2px; }
+.sh h2 { margin: 0; font: 800 50px/1.08 var(--display); letter-spacing: -.01em; text-wrap: balance; }
+.sh h2 .vz-name { color: var(--c, inherit); }
+.body { flex: 1; min-height: 0; padding-top: 34px; padding-bottom: 14px; display: flex; flex-direction: column; gap: 22px; }
+.src { margin: 0 0 6px; font-size: 14px; color: var(--muted); }
+.src a { color: inherit; }
+.sf { display: flex; justify-content: space-between; gap: 20px; padding: 14px 0 22px; border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); }
+.sf .next { font-weight: 600; }
+.sf .num { font-variant-numeric: tabular-nums; }
+.dark .sf { border-color: rgba(255,255,255,.12); color: var(--on-dark-muted); }
+
+h3 { margin: 0; font: 700 30px/1.15 var(--display); }
+h4 { margin: 0 0 12px; font: 700 17px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+p { margin: 0; }
+ul.list, ol.list { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; font-size: 24px; line-height: 1.32; }
+ul.list li { padding-left: 26px; position: relative; }
+ul.list li::before { content: ""; position: absolute; left: 2px; top: .52em; width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--navy-2)); }
+ol.list { counter-reset: n; }
+ol.list li { counter-increment: n; padding-left: 46px; position: relative; }
+ol.list li::before { content: counter(n); position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--c, var(--navy)); color: #fff; font: 700 18px/32px var(--body); text-align: center; }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px 30px; min-width: 0; }
+.band { border-radius: 14px; padding: 20px 28px; background: var(--navy); color: var(--on-dark); font-size: 23px; line-height: 1.35; display: flex; gap: 22px; align-items: baseline; }
+.band b { font: 700 15px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--l); flex: none; }
+
+/* Chips für Grundvollzüge */
+.tag { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 6px; border-radius: 99px; font: 700 15px/1 var(--body); background: var(--soft); color: var(--c); white-space: nowrap; }
+.tag::before { content: attr(data-l); width: 22px; height: 22px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font-size: 13px; }
+.M { --c: var(--m); --soft: var(--m-soft); }
+.L { --c: var(--l); --soft: var(--l-soft); }
+.D { --c: var(--d); --soft: var(--d-soft); }
+.K { --c: var(--k); --soft: var(--k-soft); }
+
+/* Schrittweise Einblendung */
+[data-step] { transition: opacity .45s ease, transform .55s cubic-bezier(.2,.7,.2,1); }
+[data-step]:not(.shown) { opacity: 0; transform: translateY(18px); pointer-events: none; }
+
+/* ---------- Titel ---------- */
+.title-slide { justify-content: center; padding: 0 110px; }
+.title-slide h1 { margin: 0; font: 800 104px/1 var(--display); letter-spacing: -.02em; max-width: 1000px; }
+.title-slide .sub { margin-top: 26px; font-size: 32px; color: var(--on-dark-muted); display: flex; gap: 14px; flex-wrap: wrap; }
+.title-slide .sub span { color: var(--c); font-weight: 600; }
+.title-slide .lf { margin-top: 90px; max-width: 900px; }
+.title-slide .lf small { display: block; font: 700 17px/1 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--l); margin-bottom: 14px; }
+.title-slide .lf p { font: 500 40px/1.2 var(--display); }
+.title-slide .by { position: absolute; left: 110px; bottom: 56px; color: var(--on-dark-muted); font-size: 19px; }
+.orbs { position: absolute; right: 90px; top: 90px; width: 460px; height: 460px; }
+.orb { position: absolute; border-radius: 50%; background: var(--c); display: grid; place-items: center; font: 800 var(--fs, 40px)/1 var(--display); color: rgba(255,255,255,.92); box-shadow: 0 18px 40px rgba(0,0,0,.35); animation: float 7s ease-in-out infinite; }
+.orb:nth-child(1) { width: 190px; height: 190px; left: 60px; top: 0; --fs: 64px; }
+.orb:nth-child(2) { width: 120px; height: 120px; left: 270px; top: 120px; animation-delay: -2s; }
+.orb:nth-child(3) { width: 84px; height: 84px; left: 90px; top: 230px; --fs: 30px; animation-delay: -4s; }
+.orb:nth-child(4) { width: 170px; height: 170px; left: 240px; top: 270px; --fs: 56px; animation-delay: -1s; }
+@keyframes float { 50% { transform: translateY(-12px); } }
+
+/* ---------- Leitfrage & Roadmap ---------- */
+.intro { display: grid; grid-template-columns: 1fr 1.15fr; gap: 40px; flex: 1; }
+.lf-card { background: var(--navy); color: var(--on-dark); border-radius: 20px; padding: 44px; display: flex; flex-direction: column; gap: 22px; }
+.lf-card small { font: 700 17px/1 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--l); }
+.lf-card p { font: 700 44px/1.15 var(--display); text-wrap: balance; }
+.lf-card .how { margin-top: auto; font-size: 22px; line-height: 1.4; color: var(--on-dark-muted); }
+.road { display: grid; gap: 12px; align-content: start; }
+.road h4 { margin-bottom: 4px; }
+.road button { display: grid; grid-template-columns: 54px 1fr auto; align-items: center; gap: 18px; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 20px; cursor: pointer; transition: transform .2s, border-color .2s, box-shadow .2s; }
+.road button:hover { transform: translateX(6px); border-color: var(--navy-2); box-shadow: 0 8px 24px rgba(27,39,64,.12); }
+.road .n { width: 54px; height: 54px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font: 800 24px/1 var(--display); }
+.road strong { display: block; font: 700 25px/1.15 var(--display); }
+.road span.d { font-size: 19px; color: var(--muted); }
+.road .go { font-size: 15px; font-weight: 700; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+
+/* ---------- Überblick 4 ---------- */
+.four { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; }
+.four button { all: unset; box-sizing: border-box; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 30px 34px; display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; align-content: center; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s, opacity .45s; }
+.four button::after { content: ""; position: absolute; inset: auto 0 0 0; height: 6px; background: var(--c); transform: scaleX(.12); transform-origin: left; transition: transform .35s; }
+.four button:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(27,39,64,.14); }
+.four button:hover::after, .four button:focus-visible::after { transform: none; }
+.four .nm { font: 800 38px/1 var(--display); color: var(--c); letter-spacing: .02em; }
+.four .gr { font-size: 20px; color: var(--muted); font-style: italic; }
+.four .de { grid-column: 1; font-size: 25px; line-height: 1.35; }
+.four .lt { grid-row: 1 / span 3; grid-column: 2; width: 92px; height: 92px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font: 800 44px/1 var(--display); align-self: center; }
+
+/* ---------- Detailfolie Grundvollzug ---------- */
+.vz { display: grid; grid-template-columns: 1.05fr 1fr 1.1fr; grid-template-rows: 1fr auto; gap: 24px; flex: 1; min-height: 0; }
+.vz-def { background: var(--c); color: #fff; border-radius: 18px; padding: 34px; display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden; }
+.vz-def .bl { position: absolute; right: -20px; bottom: -70px; font: 800 300px/1 var(--display); opacity: .14; }
+.vz-def .greek { font: 500 20px/1.3 var(--body); opacity: .85; }
+.vz-def h3 { font-size: 30px; }
+.vz-def p.lead { font-size: 26px; line-height: 1.35; }
+.vz .merk { grid-column: 1 / -1; }
+.vz .merk { background: var(--soft); color: var(--text); border-radius: 14px; padding: 18px 28px; font: 600 26px/1.3 var(--body); display: flex; gap: 22px; align-items: baseline; }
+.vz .merk b { font: 700 15px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--c); flex: none; }
+.vz .raster { margin-top: auto; font-size: 17px; color: var(--muted); }
+
+/* ---------- Zusammenhang ---------- */
+.web { display: grid; grid-template-columns: 1fr 380px; gap: 30px; flex: 1; min-height: 0; }
+.web svg { width: 100%; height: 100%; }
+.web .node { cursor: pointer; }
+.web .node rect { fill: var(--card); stroke: var(--line); stroke-width: 2; transition: stroke .25s, fill .25s; }
+.web .node text { font-family: var(--display); }
+.web .node.sel rect, .web .node:hover rect { stroke: var(--c); stroke-width: 4; }
+.web .edge { stroke: var(--line); stroke-width: 4; fill: none; transition: stroke .3s, stroke-width .3s; }
+.web .edge.hot { stroke: var(--c); stroke-width: 7; }
+.web .elabel { font: 600 19px var(--body); fill: var(--muted); transition: fill .3s; }
+.web .elabel.hot { fill: var(--text); }
+.web .spoke { stroke: var(--line); stroke-width: 3; stroke-dasharray: 6 8; }
+.web .core { fill: var(--navy); }
+.web .flow { stroke-dasharray: 14 18; animation: flow 1.6s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -64; } }
+.explain { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 30px; display: flex; flex-direction: column; gap: 16px; }
+.explain .who { font: 800 32px/1 var(--display); color: var(--c, var(--navy)); }
+.explain p { font-size: 23px; line-height: 1.4; }
+.explain .hint { margin-top: auto; font-size: 17px; color: var(--muted); }
+
+/* ---------- Tabellen ---------- */
+.tbl-wrap { flex: 1; min-height: 0; }
+table.grid { color: var(--text); width: 100%; border-collapse: separate; border-spacing: 0; font-size: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+table.grid th { background: var(--navy); color: var(--on-dark); text-align: left; font: 700 20px/1.2 var(--body); padding: 18px 26px; }
+table.grid td { padding: 20px 26px; border-top: 1px solid var(--line); vertical-align: top; line-height: 1.3; transition: opacity .3s, background .3s; }
+table.grid td:first-child { font-weight: 700; width: 22%; }
+table.grid td:first-child .tag { font-size: 17px; }
+table.grid tr:hover td { background: #f7f9fc; }
+table.grid td.dim, table.grid th.dim { opacity: .18; }
+table.grid a { color: var(--m); }
+.seg { display: inline-flex; background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 4px; gap: 4px; }
+.seg button { border: 0; background: transparent; padding: 8px 18px; border-radius: 99px; font-weight: 700; font-size: 17px; color: var(--muted); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 18px; color: var(--muted); }
+
+/* ---------- Praxis-Karten ---------- */
+.quad { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; }
+.quad .card { display: flex; flex-direction: column; gap: 12px; padding: 24px 28px; }
+.quad .card .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.quad .card .top h3 { font-size: 27px; color: var(--c); }
+.quad .card p { font-size: 22px; line-height: 1.38; }
+.check { font: 600 15px/1 var(--body); color: var(--muted); display: inline-flex; gap: 8px; align-items: center; }
+.check::before { content: "✓"; width: 22px; height: 22px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font-size: 13px; }
+
+/* ---------- Interview ---------- */
+.iv { display: grid; grid-template-columns: 520px 1fr; gap: 70px; align-items: center; flex: 1; padding: 0 20px; }
+.iv .photo { width: 520px; height: 520px; border-radius: 50%; overflow: hidden; position: relative; box-shadow: 0 0 0 12px var(--navy), 0 0 0 16px var(--l); }
+.iv .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.iv h2 { margin: 0 0 10px; font: 800 58px/1.05 var(--display); text-wrap: balance; }
+.iv .role { font-size: 22px; color: var(--on-dark-muted); margin-bottom: 34px; }
+.iv .qs { display: grid; gap: 12px; }
+.iv .qs button { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 18px; text-align: left; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 14px 18px; cursor: pointer; font-size: 23px; line-height: 1.3; color: var(--on-dark); transition: background .2s, transform .2s; }
+.iv .qs button:hover { background: rgba(255,255,255,.12); transform: translateX(6px); }
+.iv .qs .tag { font-size: 15px; }
+
+.ivq { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; flex: 1; min-height: 0; }
+.ivq .said { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 30px 34px; display: flex; flex-direction: column; gap: 16px; }
+.ivq .said .q { font: 600 italic 23px/1.35 var(--body); color: var(--muted); padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.ivq .said ul.list { font-size: 23px; }
+.ivq .why { background: var(--soft); border-radius: 18px; padding: 30px 34px; display: flex; flex-direction: column; gap: 16px; }
+.ivq .why .def { font: 700 26px/1.25 var(--display); color: var(--c); }
+.ivq .why p { font-size: 23px; line-height: 1.42; }
+.ivq .why .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.ivq .fact { margin-top: auto; display: flex; gap: 18px; align-items: baseline; }
+.ivq .fact strong { font: 800 64px/1 var(--display); color: var(--c); font-variant-numeric: tabular-nums; }
+.ivq .fact span { font-size: 20px; color: var(--muted); line-height: 1.3; }
+
+/* ---------- Analyse ---------- */
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; flex: 1; min-height: 0; }
+.three .card { display: flex; flex-direction: column; gap: 16px; }
+.three .card h3 { font-size: 30px; display: flex; align-items: center; gap: 12px; }
+.three .card h3 i { width: 14px; height: 14px; border-radius: 50%; background: var(--dot); }
+.items { display: grid; gap: 16px; }
+.item { display: grid; gap: 8px; font-size: 21px; line-height: 1.35; }
+.item .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.item .tag { font-size: 13px; padding: 4px 10px 4px 4px; }
+.item .tag::before { width: 18px; height: 18px; font-size: 11px; }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; min-height: 0; }
+.two .card { display: flex; flex-direction: column; gap: 14px; }
+.two .card h3 { font-size: 30px; }
+.vor { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: start; font-size: 22px; line-height: 1.32; padding: 10px 0; border-top: 1px solid var(--line); }
+.vor:first-of-type { border-top: 0; }
+.vor .tags { display: flex; gap: 4px; }
+.vor .tag { padding: 0; width: 26px; height: 26px; justify-content: center; }
+.vor .tag::before { width: 26px; height: 26px; }
+.vor .tag.all { background: var(--navy); color: #fff; padding: 4px 10px; width: auto; font-size: 13px; }
+.vor .tag.all::before { display: none; }
+
+/* ---------- Urteil ---------- */
+.verdict { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; flex: 1; min-height: 0; }
+.answer { background: var(--navy); color: var(--on-dark); border-radius: 20px; padding: 38px 40px; display: flex; flex-direction: column; gap: 20px; }
+.answer small { font: 700 16px/1 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--l); }
+.answer .q { font: 500 24px/1.3 var(--display); color: var(--on-dark-muted); }
+.answer .a { font: 800 40px/1.15 var(--display); text-wrap: balance; }
+.answer p.more { font-size: 22px; line-height: 1.42; color: var(--on-dark); }
+.amp-board { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 30px 32px; display: flex; flex-direction: column; gap: 14px; }
+.amp-board .lbl { font-size: 18px; color: var(--muted); line-height: 1.35; }
+.amp { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 14px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 14px; cursor: pointer; background: var(--card); text-align: left; transition: border-color .2s, transform .15s; }
+.amp:hover { border-color: var(--c); }
+.amp:active { transform: scale(.98); }
+.amp .nm { font: 700 25px/1 var(--display); color: var(--c); }
+.amp .lights { display: flex; gap: 8px; }
+.amp .lights i { width: 26px; height: 26px; border-radius: 50%; background: #e7ebf2; transition: background .3s, box-shadow .3s; }
+.amp[data-v="1"] .lights i:nth-child(1) { background: #2f9e5b; box-shadow: 0 0 14px #2f9e5b; }
+.amp[data-v="2"] .lights i:nth-child(2) { background: #e0a419; box-shadow: 0 0 14px #e0a419; }
+.amp[data-v="3"] .lights i:nth-child(3) { background: #cf3f3f; box-shadow: 0 0 14px #cf3f3f; }
+.amp .state { grid-column: 1 / -1; font-size: 16px; color: var(--muted); }
+.amp-board .reset { align-self: start; border: 0; background: none; color: var(--muted); font-size: 16px; text-decoration: underline; cursor: pointer; padding: 0; }
+
+.sources { columns: 2; column-gap: 50px; font-size: 21px; line-height: 1.4; margin: 0; padding: 0; list-style: none; }
+.sources li { break-inside: avoid; padding: 10px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 34px 1fr; gap: 10px; }
+.sources li span { font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sources a { color: var(--m); white-space: nowrap; }
+.end-note { font: 700 30px/1.25 var(--display); }
+
+/* ---------- Übergangs-Overlays ---------- */
+#wipe { position: absolute; inset: 0; z-index: 20; background: var(--navy); color: var(--on-dark); display: grid; place-content: center; text-align: left; padding: 0 140px; clip-path: inset(0 0 0 100%); pointer-events: none; }
+#wipe .wn { font: 800 22px/1 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--l); }
+#wipe .wt { font: 800 120px/1 var(--display); margin-top: 18px; letter-spacing: -.02em; }
+#wipe .ws { font-size: 34px; color: var(--on-dark-muted); margin-top: 16px; }
+#wipe .wl { margin-top: 60px; font-size: 22px; color: var(--on-dark-muted); border-left: 4px solid var(--l); padding-left: 18px; max-width: 900px; }
+#wipe .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; display: flex; }
+#wipe .bar i { flex: 1; }
+
+#film { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); height: 120px; z-index: 30; pointer-events: none; opacity: 0; overflow: hidden; }
+#filmTrack { position: absolute; left: 0; top: 10px; display: flex; gap: 14px; will-change: transform; }
+.chip { width: 210px; height: 100px; flex: none; border-radius: 12px; background: rgba(27,39,64,.92); border: 1px solid rgba(255,255,255,.14); padding: 12px 14px; display: flex; flex-direction: column; justify-content: space-between; color: var(--on-dark); box-shadow: 0 10px 30px rgba(0,0,0,.4); transition: transform .3s, border-color .3s, background .3s; }
+.chip b { font: 800 26px/1 var(--display); font-variant-numeric: tabular-nums; }
+.chip span { font-size: 14px; line-height: 1.2; color: var(--on-dark-muted); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.chip.target { transform: scale(1.12); border-color: var(--l); background: var(--navy-2); }
+
+/* ---------- Leiste ---------- */
+#bar { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.nb { flex: none; height: 40px; min-width: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: var(--on-dark); cursor: pointer; font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.nb:hover { background: rgba(255,255,255,.12); }
+.nb svg { width: 18px; height: 18px; }
+#progress { flex: 1; min-width: 0; display: flex; gap: 10px; align-items: flex-end; }
+.pch { flex: var(--n) 1 0; min-width: 0; display: grid; gap: 5px; }
+.pch small { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--on-dark-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .3s; }
+.pch.cur small { color: var(--on-dark); }
+.pch .segs { display: flex; gap: 3px; }
+.pseg { flex: 1; height: 8px; border-radius: 4px; border: 0; padding: 0; background: rgba(255,255,255,.14); cursor: pointer; transition: background .3s, transform .2s; }
+.pseg:hover { transform: scaleY(1.6); }
+.pseg.done { background: rgba(255,255,255,.45); }
+.pseg.cur { background: var(--l); }
+#count { font-variant-numeric: tabular-nums; font-size: 15px; color: var(--on-dark-muted); white-space: nowrap; min-width: 56px; text-align: center; }
+#timer { font-variant-numeric: tabular-nums; }
+#jumpbox { position: absolute; right: 24px; top: 24px; z-index: 40; background: var(--navy); color: var(--on-dark); border-radius: 12px; padding: 12px 18px; font: 800 30px/1 var(--display); box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+
+/* ---------- Übersicht & Hilfe ---------- */
+.overlay { position: fixed; inset: 0; z-index: 100; background: rgba(10,15,28,.94); overflow: auto; padding: max(24px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.overlay .inner { max-width: 1200px; margin: 0 auto; display: grid; gap: 26px; }
+.overlay header { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.overlay h2 { margin: 0; font: 800 30px/1.1 var(--display); }
+.ov-ch { display: grid; gap: 10px; }
+.ov-ch h3 { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--l); font-family: var(--body); }
+.ov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.ov-grid button { text-align: left; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); padding: 12px 14px; cursor: pointer; display: grid; gap: 6px; min-height: 86px; align-content: start; }
+.ov-grid button:hover { background: rgba(255,255,255,.12); }
+.ov-grid button.cur { border-color: var(--l); background: rgba(196,149,42,.16); }
+.ov-grid b { font: 800 22px/1 var(--display); }
+.ov-grid span { font-size: 15px; line-height: 1.25; color: var(--on-dark-muted); }
+.keys { display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; font-size: 17px; align-items: center; }
+kbd { font: 600 14px/1 var(--body); padding: 6px 10px; border-radius: 6px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); margin-right: 4px; display: inline-block; }
+#black { position: fixed; inset: 0; z-index: 90; background: #000; cursor: pointer; }
+
+@media (max-width: 720px) {
+  .pch small, #count, .hide-sm { display: none; }
+  #bar { gap: 6px; }
+  .nb { min-width: 36px; height: 36px; padding: 0 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orb, .web .flow { animation: none; }
+  [data-step] { transition: opacity .2s; transform: none !important; }
+}
+</style>
+
+<div id="app">
+  <div id="viewport">
+    <div id="scaler">
+      <div id="stage">
+
+<!-- ============ TEIL 1 · EINSTIEG ============ -->
+<section class="slide dark title-slide" data-chapter="1" data-title="Wesensvollzüge der Kirche" data-nofoot>
+  <h1>Wesensvollzüge der Kirche</h1>
+  <div class="sub"><span class="M">Martyria</span>·<span class="L">Leiturgia</span>·<span class="D">Diakonia</span>·<span class="K">Koinonia</span></div>
+  <div class="lf">
+    <small>Leitfrage</small>
+    <p>Woran lässt sich erkennen, ob Kirche ihrem Auftrag gerecht wird?</p>
+  </div>
+  <div class="orbs" aria-hidden="true">
+    <div class="orb M">M</div><div class="orb L">L</div><div class="orb D">D</div><div class="orb K">K</div>
+  </div>
+  <div class="by">Q2 Katholische Religion · Gruppe 1</div>
+</section>
+
+<section class="slide" data-chapter="1" data-title="Leitfrage und Vorgehen">
+  <header class="sh"><span class="kicker"><i></i>Einstieg</span><h2>Unsere Leitfrage und unser Weg</h2></header>
+  <div class="body">
+    <div class="intro">
+      <div class="lf-card rise">
+        <small>Leitfrage</small>
+        <p>Woran lässt sich erkennen, ob Kirche ihrem Auftrag gerecht wird?</p>
+        <div class="how">Unser Ansatz: Wir übersetzen den Auftrag der Kirche in vier Grundvollzüge, leiten daraus prüfbare Kriterien ab und wenden sie auf zwei Ebenen an – die Pfarrei vor Ort und das Erzbistum Köln.</div>
+      </div>
+      <div class="road">
+        <h4>Der rote Faden – zum Springen anklicken</h4>
+        <button class="rise" data-goto="2"><span class="n">1</span><span><strong>Grundlagen</strong><span class="d">Die vier Grundvollzüge erklären</span></span><span class="go">Folie 3</span></button>
+        <button class="rise" data-goto="8"><span class="n">2</span><span><strong>Methode</strong><span class="d">Kriterien in einem Analyseraster festlegen</span></span><span class="go">Folie 9</span></button>
+        <button class="rise" data-goto="9"><span class="n">3</span><span><strong>Praxis</strong><span class="d">Wipperfürth, Pfarrer-Interview, Erzbistum Köln</span></span><span class="go">Folie 10</span></button>
+        <button class="rise" data-goto="16"><span class="n">4</span><span><strong>Vergleich</strong><span class="d">Gemeinde und Erzbistum gegenüberstellen</span></span><span class="go">Folie 17</span></button>
+        <button class="rise" data-goto="17"><span class="n">5</span><span><strong>Urteil</strong><span class="d">Stärken, Lücken, Zielkonflikte und Vorschläge</span></span><span class="go">Folie 18</span></button>
+      </div>
+    </div>
+  </div>
+  <p class="src">Quelle: Arbeitsblatt Gruppe 1, S. 2–3</p>
+</section>
+
+<!-- ============ TEIL 2 · GRUNDLAGEN ============ -->
+<section class="slide" data-chapter="2" data-title="Die vier Grundvollzüge">
+  <header class="sh"><span class="kicker"><i></i>Grundlagen</span><h2>Die vier Grundvollzüge im Überblick</h2></header>
+  <div class="body">
+    <div class="four">
+      <button class="M" data-step="1" data-goto="3"><span class="nm">MARTYRIA</span><span class="gr">μαρτυρία · Zeugnis</span><span class="de">Glauben bezeugen und weitergeben</span><span class="lt">M</span></button>
+      <button class="L" data-step="2" data-goto="4"><span class="nm">LEITURGIA</span><span class="gr">λειτουργία · Gottesdienst</span><span class="de">Glauben gemeinsam feiern</span><span class="lt">L</span></button>
+      <button class="D" data-step="3" data-goto="5"><span class="nm">DIAKONIA</span><span class="gr">διακονία · Dienst</span><span class="de">Menschen konkret helfen</span><span class="lt">D</span></button>
+      <button class="K" data-step="4" data-goto="6"><span class="nm">KOINONIA</span><span class="gr">κοινωνία · Gemeinschaft</span><span class="de">Glauben und Leben miteinander teilen</span><span class="lt">K</span></button>
+    </div>
+  </div>
+  <p class="src">Quelle: Erzbistum Köln: Grundvollzüge der Kirche; Arbeitsblatt Gruppe 1 · Karte anklicken, um direkt zur Erklärung zu springen</p>
+</section>
+
+<section class="slide M" data-chapter="2" data-title="Martyria – Zeugnis">
+  <header class="sh"><span class="kicker"><i></i>Grundlagen · 1 von 4</span><h2><span class="vz-name">Martyria</span> – Zeugnis und Verkündigung</h2></header>
+  <div class="body">
+    <div class="vz">
+      <div class="vz-def rise"><span class="bl" aria-hidden="true">M</span><span class="greek">griech. μαρτυρία = Zeugnis</span><h3>Was bedeutet Martyria?</h3><p class="lead">Kirche bezeugt die Botschaft des Evangeliums und macht den christlichen Glauben verständlich.</p></div>
+      <div class="card" data-step="1"><h4>Mögliche Formen</h4><ul class="list"><li>Predigt und Glaubensgespräche</li><li>Religions- und Glaubensbildung</li><li>Katechese, z. B. Erstkommunion­vorbereitung</li><li>öffentliche Kommunikation über den Glauben</li></ul></div>
+      <div class="card" data-step="2"><h4>Beobachtbare Kriterien</h4><ol class="list"><li>Gibt es konkrete Angebote, in denen der Glaube vermittelt oder vertieft wird?</li><li>Werden Glaubensinhalte verständlich und für verschiedene Zielgruppen zugänglich gemacht?</li></ol></div>
+      <div class="merk" data-step="3"><b>Merksatz</b>Martyria = Kirche gibt Zeugnis von ihrem Glauben.</div>
+    </div>
+  </div>
+  <p class="src">Quelle: Erzbistum Köln; Arbeitsblatt Gruppe 1</p>
+</section>
+
+<section class="slide L" data-chapter="2" data-title="Leiturgia – Gottesdienst">
+  <header class="sh"><span class="kicker"><i></i>Grundlagen · 2 von 4</span><h2><span class="vz-name">Leiturgia</span> – Gottesdienst und Feier</h2></header>
+  <div class="body">
+    <div class="vz">
+      <div class="vz-def rise"><span class="bl" aria-hidden="true">L</span><span class="greek">griech. λειτουργία = öffentlicher Dienst, Gottesdienst</span><h3>Was bedeutet Leiturgia?</h3><p class="lead">Kirche feiert ihren Glauben – besonders in Gottesdiensten, Gebet und Sakramenten.</p></div>
+      <div class="card" data-step="1"><h4>Mögliche Formen</h4><ul class="list"><li>Eucharistie / Heilige Messe</li><li>Gebet und Andachten</li><li>Taufe, Firmung, Eucharistie usw.</li><li>Gottesdienste für Familien, Kinder und Schulen</li></ul></div>
+      <div class="card" data-step="2"><h4>Beobachtbare Kriterien</h4><ol class="list"><li>Gibt es regelmäßig unterschiedliche Gottesdienstformen?</li><li>Können verschiedene Gruppen – z. B. Kinder und Familien – am liturgischen Leben teilnehmen?</li></ol></div>
+      <div class="merk" data-step="3"><b>Merksatz</b>Leiturgia = Kirche feiert ihren Glauben.</div>
+    </div>
+  </div>
+  <p class="src">Quelle: Erzbistum Köln: Gottesdienst und Liturgie; Arbeitsblatt Gruppe 1</p>
+</section>
+
+<section class="slide D" data-chapter="2" data-title="Diakonia – Dienst am Nächsten">
+  <header class="sh"><span class="kicker"><i></i>Grundlagen · 3 von 4</span><h2><span class="vz-name">Diakonia</span> – Dienst am Nächsten</h2></header>
+  <div class="body">
+    <div class="vz">
+      <div class="vz-def rise"><span class="bl" aria-hidden="true">D</span><span class="greek">griech. διακονία = Dienst</span><h3>Was bedeutet Diakonia?</h3><p class="lead">Kirche setzt Nächstenliebe praktisch um und unterstützt Menschen, die Hilfe brauchen.</p></div>
+      <div class="card" data-step="1"><h4>Mögliche Formen</h4><ul class="list"><li>Caritas und soziale Hilfen</li><li>Unterstützung von Menschen in Not</li><li>Kranken-, Senioren- und Beratungs­angebote</li><li>Spenden- und Hilfsaktionen</li></ul></div>
+      <div class="card" data-step="2"><h4>Beobachtbare Kriterien</h4><ol class="list"><li>Gibt es konkrete Hilfsangebote oder soziale Projekte?</li><li>Erreichen diese Angebote Menschen, die tatsächlich Unterstützung benötigen?</li></ol></div>
+      <div class="merk" data-step="3"><b>Merksatz</b>Diakonia = Kirche dient dem Menschen.</div>
+    </div>
+  </div>
+  <p class="src">Quelle: Erzbistum Köln: Grundvollzüge / Caritas; Arbeitsblatt Gruppe 1</p>
+</section>
+
+<section class="slide K" data-chapter="2" data-title="Koinonia – Gemeinschaft">
+  <header class="sh"><span class="kicker"><i></i>Grundlagen · 4 von 4</span><h2><span class="vz-name">Koinonia</span> – Gemeinschaft</h2></header>
+  <div class="body">
+    <div class="vz">
+      <div class="vz-def rise"><span class="bl" aria-hidden="true">K</span><span class="greek">griech. κοινωνία = Gemeinschaft, Teilhabe</span><h3>Was bedeutet Koinonia?</h3><p class="lead">Kirche lebt Gemeinschaft – mit Gott und zwischen Menschen.</p></div>
+      <div class="card" data-step="1"><h4>Mögliche Formen</h4><ul class="list"><li>Gemeindegruppen und Jugendangebote</li><li>Pfarrfeste und gemeinsame Veranstaltungen</li><li>Chöre, Messdiener, Pfadfinder</li><li>gegenseitige Unterstützung und Begegnung</li></ul></div>
+      <div class="card" data-step="2"><h4>Beobachtbare Kriterien</h4><ol class="list"><li>Gibt es regelmäßige Möglichkeiten für Begegnung und Gemeinschaft?</li><li>Werden unterschiedliche Altersgruppen und Menschen in das Gemeindeleben einbezogen?</li></ol></div>
+      <div class="merk" data-step="3"><b>Merksatz</b>Koinonia = Kirche lebt Gemeinschaft.</div>
+    </div>
+  </div>
+  <p class="src">Quelle: Erzbistum Köln; Katholisch in Wipperfürth; Arbeitsblatt Gruppe 1</p>
+</section>
+
+<section class="slide" data-chapter="2" data-title="Warum die vier zusammengehören">
+  <header class="sh"><span class="kicker"><i></i>Grundlagen · Zusammenhang</span><h2>Warum gehören die vier zusammen?</h2></header>
+  <div class="body">
+    <div class="web">
+      <svg viewBox="0 0 1060 560" role="group" aria-label="Die vier Grundvollzüge sind miteinander und mit der Kirche verbunden">
+        <line class="spoke" x1="250" y1="150" x2="460" y2="245"/>
+        <line class="spoke" x1="810" y1="150" x2="600" y2="245"/>
+        <line class="spoke" x1="810" y1="410" x2="600" y2="315"/>
+        <line class="spoke" x1="250" y1="410" x2="460" y2="315"/>
+        <path class="edge" id="e-ML" d="M 360 95 L 700 95"/>
+        <path class="edge" id="e-LD" d="M 830 160 L 830 400"/>
+        <path class="edge" id="e-DK" d="M 700 465 L 360 465"/>
+        <path class="edge" id="e-KM" d="M 230 400 L 230 160"/>
+        <text class="elabel" id="t-ML" x="530" y="80" text-anchor="middle">verkünden → feiern</text>
+        <text class="elabel" id="t-LD" x="860" y="285" text-anchor="start">feiern → senden</text>
+        <text class="elabel" id="t-DK" x="530" y="500" text-anchor="middle">helfen → verbinden</text>
+        <text class="elabel" id="t-KM" x="200" y="285" text-anchor="end">leben → bezeugen</text>
+        <circle class="core" cx="530" cy="280" r="110"/>
+        <text x="530" y="292" text-anchor="middle" fill="#ffffff" style="font: 800 38px var(--display)">KIRCHE</text>
+        <g class="node M" data-k="M" tabindex="0" role="button" aria-label="Martyria"><rect x="100" y="45" width="260" height="110" rx="16"/><text x="130" y="100" style="fill:var(--m);font-weight:800;font-size:34px">MARTYRIA</text><text x="130" y="132" style="fill:var(--muted);font: 400 19px var(--body)">bezeugen</text></g>
+        <g class="node L" data-k="L" tabindex="0" role="button" aria-label="Leiturgia"><rect x="700" y="45" width="260" height="110" rx="16"/><text x="730" y="100" style="fill:var(--l);font-weight:800;font-size:34px">LEITURGIA</text><text x="730" y="132" style="fill:var(--muted);font: 400 19px var(--body)">feiern</text></g>
+        <g class="node D" data-k="D" tabindex="0" role="button" aria-label="Diakonia"><rect x="700" y="405" width="260" height="110" rx="16"/><text x="730" y="460" style="fill:var(--d);font-weight:800;font-size:34px">DIAKONIA</text><text x="730" y="492" style="fill:var(--muted);font: 400 19px var(--body)">helfen</text></g>
+        <g class="node K" data-k="K" tabindex="0" role="button" aria-label="Koinonia"><rect x="100" y="405" width="260" height="110" rx="16"/><text x="130" y="460" style="fill:var(--k);font-weight:800;font-size:34px">KOINONIA</text><text x="130" y="492" style="fill:var(--muted);font: 400 19px var(--body)">verbinden</text></g>
+      </svg>
+      <div class="explain" id="explain">
+        <span class="who">Ein Auftrag</span>
+        <p>Kein Bereich steht für sich allein: Verkündigung, Feier, Dienst und Gemeinschaft ergänzen sich. Das Erzbistum nennt sie untrennbar verbunden und gleichwertig.</p>
+        <p class="hint">Einen Grundvollzug anklicken, um seine Verbindungen zu sehen.</p>
+      </div>
+    </div>
+  </div>
+  <p class="src">Quelle: Erzbistum Köln, Amtsblatt 2022: Die vier Grundvollzüge sind untrennbar verbunden und gleichwertig.</p>
+</section>
+
+<!-- ============ TEIL 3 · METHODE ============ -->
+<section class="slide" data-chapter="3" data-title="Unser Analyseraster">
+  <header class="sh"><span class="kicker"><i></i>Methode</span><h2>Unser Analyseraster</h2></header>
+  <div class="body">
+    <div class="tbl-wrap">
+      <table class="grid">
+        <thead><tr><th>Grundvollzug</th><th>Kriterium 1</th><th>Kriterium 2</th></tr></thead>
+        <tbody>
+          <tr data-step="1"><td><span class="tag M" data-l="M">Martyria</span></td><td>Glaube wird vermittelt</td><td>Angebote zur Glaubensbildung</td></tr>
+          <tr data-step="2"><td><span class="tag L" data-l="L">Leiturgia</span></td><td>Glaube wird gefeiert</td><td>regelmäßige und vielfältige Gottesdienste</td></tr>
+          <tr data-step="3"><td><span class="tag D" data-l="D">Diakonia</span></td><td>Nächstenliebe wird praktisch</td><td>konkrete Hilfe für Menschen</td></tr>
+          <tr data-step="4"><td><span class="tag K" data-l="K">Koinonia</span></td><td>Gemeinschaft wird ermöglicht</td><td>Begegnung und Teilhabe</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="band" data-step="5"><b>Warum dieses Raster?</b>Damit wir Gemeinde vor Ort und Erzbistum Köln mit denselben Maßstäben vergleichen können.</div>
+  </div>
+  <p class="src">Quelle: Arbeitsblatt Gruppe 1, S. 2–3</p>
+</section>
+
+<!-- ============ TEIL 4 · PRAXIS ============ -->
+<section class="slide" data-chapter="4" data-title="Pfarrei St. Nikolaus Wipperfürth">
+  <header class="sh"><span class="kicker"><i></i>Praxis · Gemeinde vor Ort</span><h2>Pfarrei St. Nikolaus Wipperfürth</h2></header>
+  <div class="body">
+    <div class="quad">
+      <div class="card M" data-step="1"><div class="top"><h3>Martyria</h3><span class="check">Glaube wird vermittelt</span></div><p>Die Erstkommunionvorbereitung enthält Katechese und Glaubensvermittlung; Eltern, Begleiter und Seelsorger wirken mit.</p></div>
+      <div class="card L" data-step="2"><div class="top"><h3>Leiturgia</h3><span class="check">regelmäßig und vielfältig</span></div><p>Die Pfarrei bietet regelmäßig Heilige Messen; zusätzlich gibt es Familien- und Kleine-Leute-Gottesdienste.</p></div>
+      <div class="card D" data-step="3"><div class="top"><h3>Diakonia</h3><span class="check">konkrete Hilfe</span></div><p>Belegt sind u. a. Caritas-Kollekte und Spenden- und Hilfsaktionen; außerdem gibt es Angebote für Senioren.</p></div>
+      <div class="card K" data-step="4"><div class="top"><h3>Koinonia</h3><span class="check">Begegnung und Teilhabe</span></div><p>Es gibt Familienangebote, Messdiener, Chöre, Pfadfinder und ein Pfarrfest – also verschiedene Formen gemeinsamer Begegnung.</p></div>
+    </div>
+    <div class="band" data-step="5"><b>Zwischenfazit</b>Auf der Website sind alle vier Grundvollzüge durch konkrete Angebote sichtbar. Wie stark sie genutzt werden, zeigt die Website nicht – deshalb haben wir den Pfarrer gefragt.</div>
+  </div>
+  <p class="src">Quelle: katholisch-in-wipperfuerth.de: Gottesdienste, Erstkommunion, Familien, Messdiener, Pfarrnachrichten 2025/26</p>
+</section>
+
+<section class="slide dark" data-chapter="4" data-title="Interview mit Pfarrer Lambert Schäfer">
+  <div class="body" style="padding-top:60px">
+    <div class="iv">
+      <div class="photo rise"><img src="assets/pfarrer.jpg" alt="Pfarrer Lambert Schäfer"></div>
+      <div>
+        <span class="kicker" style="color:var(--l)"><i></i>Praxis · Nachgefragt</span>
+        <h2>Interview mit Pfarrer Lambert Schäfer</h2>
+        <p class="role">Unsere Fragen leiten sich aus der Leitfrage ab – jede zielt auf einen Grundvollzug.</p>
+        <div class="qs">
+          <button class="rise" data-goto="11"><span class="tag K" data-l="K">Koinonia</span>Wie wird die Kirche an Jugendliche herangeführt?</button>
+          <button class="rise" data-goto="12"><span class="tag D" data-l="D">Diakonia</span>Inwiefern leistet die Kirche soziale Hilfe in Wipperfürth?</button>
+          <button class="rise" data-goto="13"><span class="tag M" data-l="M">Martyria</span>Wie geht die Kirche mit den Massenaustritten um?</button>
+          <button class="rise" data-goto="14"><span class="tag L" data-l="L">Leiturgia</span>Wie sieht die Zukunft der Kirche in Wipperfürth aus?</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide K" data-chapter="4" data-title="Interview 1 · Jugend">
+  <header class="sh"><span class="kicker"><i></i>Interview · Frage 1 von 4</span><h2>Jugend an die Kirche heranführen</h2></header>
+  <div class="body">
+    <div class="ivq">
+      <div class="said rise">
+        <p class="q">„Wie wird die Kirche an Jugendliche herangeführt?“</p>
+        <ul class="list">
+          <li data-step="1">Gestuftes Modell: Kinder werden nach der Kommunion durch Projekte weiter eingebunden.</li>
+          <li data-step="2">Zur Firmung werden Angebote neu gestaltet; Gemeinden arbeiten stärker zusammen.</li>
+          <li data-step="3">Jugendliche können z. B. im Jugendchor oder als Messdiener mitmachen.</li>
+        </ul>
+      </div>
+      <div class="why" data-step="4">
+        <div class="tags"><span class="tag K" data-l="K">Koinonia</span></div>
+        <p class="def">Koinonia bedeutet Gemeinschaft.</p>
+        <p>Die Kirche schafft Begegnungen und gibt Kindern und Jugendlichen einen Platz. Gemeinsame Projekte, Chöre und Ehrenamt stärken Zugehörigkeit und Zusammenhalt.</p>
+        <div class="fact"><strong data-count="400">400+</strong><span>Ehrenamtliche und 20 Chöre<br>laut Pfarrer</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="src">Quelle: Interview mit Pfarrer Lambert Schäfer</p>
+</section>
+
+<section class="slide D" data-chapter="4" data-title="Interview 2 · Caritas-Arbeit">
+  <header class="sh"><span class="kicker"><i></i>Interview · Frage 2 von 4</span><h2>Caritas-Arbeit vor Ort</h2></header>
+  <div class="body">
+    <div class="ivq">
+      <div class="said rise">
+        <p class="q">„Inwiefern leistet die Kirche soziale Hilfe in Wipperfürth?“</p>
+        <ul class="list">
+          <li data-step="1">Spenden und Lebensmittelgutscheine für Menschen in Not</li>
+          <li data-step="1">Unterstützung nach dem Brand in Wipperfürth</li>
+          <li data-step="2">Günstiger Wohnraum für Bedürftige und Familien</li>
+          <li data-step="2">Ökumenische Initiative: Kleidung und Essen</li>
+          <li data-step="3">Monatliches Trauerfrühstück mit Seelsorge</li>
+        </ul>
+      </div>
+      <div class="why" data-step="4">
+        <div class="tags"><span class="tag D" data-l="D">Diakonia</span></div>
+        <p class="def">Diakonia bedeutet Dienst am Menschen.</p>
+        <p>Die Kirche unterstützt Menschen in schwierigen Lebenslagen – mit finanzieller, materieller und seelischer Hilfe. So wird Nächstenliebe nicht nur gepredigt, sondern praktisch umgesetzt.</p>
+        <div class="fact"><strong>3</strong><span>Arten von Hilfe:<br>finanziell · materiell · seelisch</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="src">Quelle: Interview mit Pfarrer Lambert Schäfer</p>
+</section>
+
+<section class="slide M" data-chapter="4" data-title="Interview 3 · Kirchenaustritte">
+  <header class="sh"><span class="kicker"><i></i>Interview · Frage 3 von 4</span><h2>Umgang mit Kirchenaustritten</h2></header>
+  <div class="body">
+    <div class="ivq">
+      <div class="said rise">
+        <p class="q">„Wie geht die Kirche mit den Massenaustritten um?“</p>
+        <ul class="list">
+          <li data-step="1">Austritte aus finanziellen Gründen kann er teilweise nicht nachvollziehen.</li>
+          <li data-step="2">Austritte nach Missbrauchsskandalen kann er verstehen; er lehnt solche Taten ab.</li>
+          <li data-step="2">Ehrenamtliche und Mitarbeitende sollen Präventionskurse besuchen.</li>
+          <li data-step="3">Er betonte: Eine Taufe bleibt auch nach einem Austritt bestehen.</li>
+        </ul>
+      </div>
+      <div class="why" data-step="4">
+        <div class="tags"><span class="tag M" data-l="M">Martyria</span></div>
+        <p class="def">Martyria bedeutet, den Glauben zu bezeugen.</p>
+        <p>Austritte zeigen, dass die Glaubwürdigkeit der Kirche infrage steht. Entscheidend ist der Umgang mit Missbrauch: Prävention und verantwortliches Handeln können helfen, Vertrauen zurückzugewinnen.</p>
+        <div class="fact"><strong>4 : 1</strong><span>Verhältnis von Sterbefällen<br>zu Taufen (laut Pfarrer, ca.)</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="src">Quelle: Interview mit Pfarrer Lambert Schäfer</p>
+</section>
+
+<section class="slide L" data-chapter="4" data-title="Interview 4 · Zukunft">
+  <header class="sh"><span class="kicker"><i></i>Interview · Frage 4 von 4</span><h2>Zukunft der Kirche in Wipperfürth</h2></header>
+  <div class="body">
+    <div class="ivq">
+      <div class="said rise">
+        <p class="q">„Wie sieht die Zukunft der Kirche in Wipperfürth aus?“</p>
+        <ul class="list">
+          <li data-step="1">Soziale Medien sollen stärker genutzt werden.</li>
+          <li data-step="2">Bis 2030 ist eine Neuorganisation des Bistumsbereichs geplant: Radevormwald, Hückeswagen, Lindlar, Wipperfürth und Marienheide.</li>
+          <li data-step="3">Laut Pfarrer wären dort nur zwei Priester zuständig – deshalb können bzw. müssen Gottesdienste ausfallen.</li>
+        </ul>
+      </div>
+      <div class="why" data-step="4">
+        <div class="tags"><span class="tag L" data-l="L">Leiturgia</span><span class="tag M" data-l="M">Martyria</span></div>
+        <p class="def">Hier wird es für die Leiturgia eng.</p>
+        <p>Weniger Priester für mehr Orte bedeutet: Gottesdienste werden seltener. Soziale Medien sollen helfen, den Glauben trotzdem sichtbar zu halten.</p>
+        <div class="fact"><strong>5 : 2</strong><span>Orte im künftigen Bereich<br>zu zuständigen Priestern</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="src">Quelle: Interview mit Pfarrer Lambert Schäfer</p>
+</section>
+
+<section class="slide" data-chapter="4" data-title="Erzbistum Köln">
+  <header class="sh"><span class="kicker"><i></i>Praxis · Diözesane Ebene</span><h2>Erzbistum Köln</h2></header>
+  <div class="body">
+    <div class="quad">
+      <div class="card M" data-step="1"><div class="top"><h3>Martyria</h3><span class="check">Glaube wird vermittelt</span></div><p>Das Erzbistum nennt Glaubenskurse, Gebetskreise und eine stärkere Glaubensverkündigung als konkrete Ziele.</p></div>
+      <div class="card L" data-step="2"><div class="top"><h3>Leiturgia</h3><span class="check">Glaube wird gefeiert</span></div><p>Gottesdienst und Liturgie gelten als zentraler Bereich des kirchlichen Lebens; es gibt liturgische Bildungsangebote und Materialien.</p></div>
+      <div class="card D" data-step="3"><div class="top"><h3>Diakonia</h3><span class="check">konkrete Hilfe</span></div><p>Ein strategisches Ziel lautet „Diakonisch wirken“. Caritative Arbeit wird als eigenes kirchliches Handlungsfeld hervorgehoben.</p></div>
+      <div class="card K" data-step="4"><div class="top"><h3>Koinonia</h3><span class="check">Begegnung und Teilhabe</span></div><p>Mit „Church Planting“ entstehen seit 2025 neue Gemeinden an vier Standorten – als neue Zugänge zu Glauben und Gemeinschaft.</p></div>
+    </div>
+    <div class="band" data-step="5"><b>Zwischenfazit</b>Das Erzbistum beschreibt alle vier Bereiche als Teil seines Auftrags und setzt dafür unterschiedliche Schwerpunkte.</div>
+  </div>
+  <p class="src">Quelle: Erzbistum Köln: strategische Ziele 2025/26; Gottesdienst &amp; Liturgie; Church Planting 2026</p>
+</section>
+
+<!-- ============ TEIL 5 · URTEIL ============ -->
+<section class="slide" data-chapter="5" data-title="Vergleich Gemeinde und Erzbistum">
+  <header class="sh"><span class="kicker"><i></i>Analyse</span><h2>Vergleich: Gemeinde ↔ Erzbistum</h2></header>
+  <div class="body">
+    <div class="toolbar"><span>Gleiches Raster, zwei Ebenen</span>
+      <div class="seg" role="group" aria-label="Spalten hervorheben">
+        <button id="cmp-both" data-cmp="both" aria-pressed="true">Beide</button>
+        <button id="cmp-w" data-cmp="w" aria-pressed="false">Wipperfürth</button>
+        <button id="cmp-k" data-cmp="k" aria-pressed="false">Erzbistum</button>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="grid" id="cmp">
+        <thead><tr><th></th><th class="cw">Pfarrei Wipperfürth</th><th class="ck">Erzbistum Köln</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag M" data-l="M">Martyria</span></td><td class="cw">Katechese / Erstkommunion</td><td class="ck">Glaubenskurse und Verkündigung</td></tr>
+          <tr><td><span class="tag L" data-l="L">Leiturgia</span></td><td class="cw">regelmäßige Messen, Familiengottesdienste</td><td class="ck">Gottesdienst und liturgische Bildung</td></tr>
+          <tr><td><span class="tag D" data-l="D">Diakonia</span></td><td class="cw">Caritas-Kollekte, Hilfsaktionen, Trauerfrühstück</td><td class="ck">strategisches Ziel „Diakonisch wirken“ · <a href="https://www.caritasnet.de/" target="_blank" rel="noopener">Caritasverband</a></td></tr>
+          <tr><td><span class="tag K" data-l="K">Koinonia</span></td><td class="cw">Jugend, Chöre, Messdiener, Pfarrfest</td><td class="ck">neue Gemeinden durch Church Planting</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="band" data-step="1"><b>Analyse</b>Die Grundvollzüge sind auf beiden Ebenen erkennbar. Lokal zeigen sie sich vor allem in konkreten Angeboten, diözesan zusätzlich in strategischen Programmen.</div>
+  </div>
+  <p class="src">Quelle: Eigene Gegenüberstellung auf Basis der genannten Quellen</p>
+</section>
+
+<section class="slide" data-chapter="5" data-title="Stärken, Lücken, Zielkonflikte">
+  <header class="sh"><span class="kicker"><i></i>Analyse</span><h2>Stärken, Lücken und Zielkonflikte</h2></header>
+  <div class="body">
+    <div class="three">
+      <div class="card" data-step="1" style="--dot: var(--d)">
+        <h3><i></i>Stärken</h3>
+        <div class="items">
+          <div class="item">Alle vier Grundvollzüge sind auf beiden Ebenen durch konkrete Angebote belegt.<div class="tags"><span class="tag M" data-l="M">M</span><span class="tag L" data-l="L">L</span><span class="tag D" data-l="D">D</span><span class="tag K" data-l="K">K</span></div></div>
+          <div class="item">Großes Ehrenamt: über 400 Ehrenamtliche und 20 Chöre.<div class="tags"><span class="tag K" data-l="K">Koinonia</span></div></div>
+          <div class="item">Vielfältige praktische Hilfe – vom Lebensmittelgutschein bis zum Trauerfrühstück.<div class="tags"><span class="tag D" data-l="D">Diakonia</span></div></div>
+        </div>
+      </div>
+      <div class="card" data-step="2" style="--dot: var(--l)">
+        <h3><i></i>Lücken</h3>
+        <div class="items">
+          <div class="item">Websites zeigen Angebote, aber nicht, wie viele Menschen sie tatsächlich erreichen.<div class="tags"><span class="tag M" data-l="M">M</span><span class="tag L" data-l="L">L</span><span class="tag D" data-l="D">D</span><span class="tag K" data-l="K">K</span></div></div>
+          <div class="item">Glaubwürdigkeit ist durch Missbrauchsskandale beschädigt; das zeigen die Austritte.<div class="tags"><span class="tag M" data-l="M">Martyria</span></div></div>
+          <div class="item">Jugendliche nach Kommunion und Firmung zu halten, muss erst neu gestaltet werden.<div class="tags"><span class="tag K" data-l="K">Koinonia</span></div></div>
+        </div>
+      </div>
+      <div class="card" data-step="3" style="--dot: var(--k)">
+        <h3><i></i>Zielkonflikte</h3>
+        <div class="items">
+          <div class="item">Weniger Priester für mehr Orte: Gottesdienste fallen aus, obwohl Liturgie zentral sein soll.<div class="tags"><span class="tag L" data-l="L">Leiturgia</span></div></div>
+          <div class="item">Weniger Taufen als Sterbefälle: Gemeinschaft soll wachsen, während die Gemeinde schrumpft.<div class="tags"><span class="tag K" data-l="K">Koinonia</span></div></div>
+          <div class="item">Neue Projekte des Erzbistums und bestehende Angebote vor Ort brauchen dieselben Kräfte.<div class="tags"><span class="tag K" data-l="K">K</span><span class="tag D" data-l="D">D</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="src">Quelle: Eigene Auswertung aus Analyseraster, Praxisanalyse und Interview</p>
+</section>
+
+<section class="slide" data-chapter="5" data-title="Verbesserungsvorschläge">
+  <header class="sh"><span class="kicker"><i></i>Urteil</span><h2>Realistische Verbesserungsvorschläge</h2></header>
+  <div class="body">
+    <div class="two">
+      <div class="card" data-step="1">
+        <h3>Gemeinde vor Ort</h3>
+        <div class="vor">Angebote für Jugendliche sichtbarer und digitaler kommunizieren<span class="tags"><span class="tag K" data-l="K"></span><span class="tag M" data-l="M"></span></span></div>
+        <div class="vor">Bei Gottesdiensten stärker verschiedene Altersgruppen einbeziehen<span class="tags"><span class="tag L" data-l="L"></span></span></div>
+        <div class="vor">Ehrenamtliche gezielt gewinnen und entlasten<span class="tags"><span class="tag K" data-l="K"></span></span></div>
+        <div class="vor">Bestehende soziale Angebote besser bekannt machen<span class="tags"><span class="tag D" data-l="D"></span></span></div>
+        <div class="vor">Nach Veranstaltungen regelmäßig Feedback einholen<span class="tags"><span class="tag all">alle</span></span></div>
+      </div>
+      <div class="card" data-step="2">
+        <h3>Erzbistum Köln</h3>
+        <div class="vor">Neue Formen der Glaubensvermittlung weiter erproben<span class="tags"><span class="tag M" data-l="M"></span></span></div>
+        <div class="vor">Erfolgreiche lokale Projekte stärker miteinander vernetzen<span class="tags"><span class="tag K" data-l="K"></span></span></div>
+        <div class="vor">Diakonische und gemeinschaftliche Projekte sichtbarer machen<span class="tags"><span class="tag D" data-l="D"></span><span class="tag K" data-l="K"></span></span></div>
+        <div class="vor">Wirkung an Teilnahme und Rückmeldungen messen, nicht nur an Angeboten<span class="tags"><span class="tag all">alle</span></span></div>
+        <div class="vor">Gute Beispiele aus Gemeinden verbreiten<span class="tags"><span class="tag all">alle</span></span></div>
+      </div>
+    </div>
+    <div class="band" data-step="3"><b>Unser Maßstab</b>Ein Vorschlag zählt nur, wenn er realistisch, überprüfbar und mit mindestens einem Grundvollzug verbunden ist.</div>
+  </div>
+  <p class="src">Quelle: Eigene Vorschläge, abgeleitet aus Analyseraster und Praxisanalyse</p>
+</section>
+
+<section class="slide" data-chapter="5" data-title="Antwort auf die Leitfrage">
+  <header class="sh"><span class="kicker"><i></i>Urteil</span><h2>Zurück zur Leitfrage</h2></header>
+  <div class="body">
+    <div class="verdict">
+      <div class="answer rise">
+        <small>Leitfrage</small>
+        <p class="q">Woran lässt sich erkennen, ob Kirche ihrem Auftrag gerecht wird?</p>
+        <p class="a" data-step="1">Daran, dass alle vier Grundvollzüge erkennbar, erreichbar und miteinander verbunden gelebt werden.</p>
+        <p class="more" data-step="2">In Wipperfürth und im Erzbistum Köln ist das weitgehend der Fall. Offen bleibt, wie viele Menschen die Angebote erreichen – und wie sie bei Priestermangel und Austritten tragfähig bleiben.</p>
+      </div>
+      <div class="amp-board">
+        <h4 style="margin:0">Live-Abstimmung mit der Klasse</h4>
+        <p class="lbl">Wie gut wird Wipperfürth dem jeweiligen Grundvollzug gerecht? Antippen schaltet um: grün → gelb → rot.</p>
+        <button class="amp M" id="amp-M" data-k="M"><span class="nm">Martyria</span><span class="lights"><i></i><i></i><i></i></span><span class="state">noch offen</span></button>
+        <button class="amp L" id="amp-L" data-k="L"><span class="nm">Leiturgia</span><span class="lights"><i></i><i></i><i></i></span><span class="state">noch offen</span></button>
+        <button class="amp D" id="amp-D" data-k="D"><span class="nm">Diakonia</span><span class="lights"><i></i><i></i><i></i></span><span class="state">noch offen</span></button>
+        <button class="amp K" id="amp-K" data-k="K"><span class="nm">Koinonia</span><span class="lights"><i></i><i></i><i></i></span><span class="state">noch offen</span></button>
+        <button class="reset" id="amp-reset">Abstimmung zurücksetzen</button>
+      </div>
+    </div>
+  </div>
+  <p class="src">Diskussion: Welcher Grundvollzug ist in eurer eigenen Gemeinde am stärksten – und welcher fehlt?</p>
+</section>
+
+<section class="slide" data-chapter="5" data-title="Quellen">
+  <header class="sh"><span class="kicker"><i></i>Anhang</span><h2>Quellen</h2></header>
+  <div class="body">
+    <ol class="sources">
+      <li><span>1</span>Arbeitsblatt: Q2 Katholische Religionslehre – Gruppe 1: Wesensvollzüge der Kirche, S. 2–3.</li>
+      <li><span>2</span>Erzbistum Köln, Amtsblatt 2022: Grundvollzüge als Martyria, Leiturgia, Diakonia und Koinonia.</li>
+      <li><span>3</span>Erzbistum Köln: Gottesdienst und Liturgie.</li>
+      <li><span>4</span>Erzbistum Köln: Strategische Ziele / pastorale Schwerpunkte (2025/26).</li>
+      <li><span>5</span>Erzbistum Köln: „Church Planting“ – neue Gemeinden, 19.06.2026.</li>
+      <li><span>6</span>Caritasverband für das Erzbistum Köln: <a href="https://www.caritasnet.de/" target="_blank" rel="noopener">caritasnet.de</a></li>
+      <li><span>7</span>Kath. Kirchengemeinde St. Nikolaus Wipperfürth: Gottesdienste.</li>
+      <li><span>8</span>Katholisch in Wipperfürth: Erstkommunion &amp; Eucharistie.</li>
+      <li><span>9</span>Katholisch in Wipperfürth: Familien, Messdiener und Veranstaltungen.</li>
+      <li><span>10</span>Katholisch in Wipperfürth: Pfarrnachrichten 2025/2026 · <a href="https://www.katholisch-in-wipperfuerth.de/" target="_blank" rel="noopener">katholisch-in-wipperfuerth.de</a></li>
+      <li><span>11</span>Interview mit Pfarrer Lambert Schäfer.</li>
+    </ol>
+    <p class="end-note" style="margin-top:auto">Vielen Dank! Fragen und Diskussion.</p>
+  </div>
+</section>
+
+        <div id="wipe" aria-hidden="true"><div class="wn"></div><div class="wt"></div><div class="ws"></div><div class="wl">Leitfrage: Woran lässt sich erkennen, ob Kirche ihrem Auftrag gerecht wird?</div><div class="bar"><i style="background:var(--m)"></i><i style="background:var(--l)"></i><i style="background:var(--d)"></i><i style="background:var(--k)"></i></div></div>
+      </div>
+      <div id="jumpbox" hidden></div>
+    </div>
+    <div id="film" aria-hidden="true"><div id="filmTrack"></div></div>
+  </div>
+
+  <nav id="bar" aria-label="Folien-Navigation">
+    <button class="nb" id="prev" aria-label="Zurück"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div id="progress"></div>
+    <span id="count">1 / 21</span>
+    <button class="nb" id="next" aria-label="Weiter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg></button>
+    <button class="nb hide-sm" id="timer" title="Vortragszeit – klicken zum Zurücksetzen">00:00</button>
+    <button class="nb" id="ovBtn" title="Übersicht (O)" aria-label="Übersicht"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
+    <button class="nb hide-sm" id="fsBtn" title="Vollbild (F)" aria-label="Vollbild"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <button class="nb" id="helpBtn" title="Tastenkürzel (?)" aria-label="Hilfe">?</button>
+  </nav>
+</div>
+
+<div class="overlay" id="overview" hidden>
+  <div class="inner">
+    <header><h2>Alle Folien</h2><button class="nb" id="ovClose">Schließen</button></header>
+    <div id="ovBody" class="inner"></div>
+  </div>
+</div>
+
+<div class="overlay" id="help" hidden>
+  <div class="inner" style="max-width:640px">
+    <header><h2>Steuerung</h2><button class="nb" id="helpClose">Schließen</button></header>
+    <div class="keys">
+      <span><kbd>→</kbd><kbd>Leertaste</kbd></span><span>Weiter (blendet zuerst die nächsten Punkte ein)</span>
+      <span><kbd>←</kbd></span><span>Zurück</span>
+      <span><kbd>3</kbd><kbd>Enter</kbd></span><span>Direkt zu Folie 3 springen</span>
+      <span><kbd>Pos1</kbd><kbd>Ende</kbd></span><span>Erste / letzte Folie</span>
+      <span><kbd>O</kbd></span><span>Übersicht aller Folien</span>
+      <span><kbd>F</kbd></span><span>Vollbild</span>
+      <span><kbd>B</kbd></span><span>Bildschirm schwarz (Pause)</span>
+      <span><kbd>T</kbd></span><span>Vortragszeit zurücksetzen</span>
+      <span>Wischen</span><span>Auf dem Handy oder Tablet nach links/rechts wischen</span>
+    </div>
+  </div>
+</div>
+<div id="black" hidden></div>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const slides = $$('.slide');
+  const N = slides.length;
+  const CH = [
+    ['Einstieg', 'Worum es geht'],
+    ['Grundlagen', 'Die vier Grundvollzüge'],
+    ['Methode', 'Woran wir messen'],
+    ['Praxis', 'Wie es vor Ort aussieht'],
+    ['Analyse & Urteil', 'Was daraus folgt']
+  ];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ease = 'cubic-bezier(.2,.7,.2,1)';
+  let cur = -1, step = 0, busy = false, pending = null;
+
+  /* Fußzeile mit „Als Nächstes“ – macht die Überleitung sichtbar */
+  slides.forEach((s, i) => {
+    if (s.hasAttribute('data-nofoot')) return;
+    const nx = slides[i + 1];
+    const f = document.createElement('footer');
+    f.className = 'sf';
+    f.innerHTML = `<span>Q2 Katholische Religion · Gruppe 1</span><span class="next">${nx ? 'Als Nächstes: ' + nx.dataset.title : 'Ende'}</span><span class="num">${i + 1} / ${N}</span>`;
+    s.append(f);
+  });
+
+  const maxStep = i => Math.max(0, ...$$('[data-step]', slides[i]).map(e => +e.dataset.step));
+  const applySteps = (i, n) => $$('[data-step]', slides[i]).forEach(e => e.classList.toggle('shown', +e.dataset.step <= n));
+  const chOf = i => +slides[i].dataset.chapter;
+
+  const anim = (el, kf, opt) => el.animate(kf, { fill: 'both', easing: ease, ...opt, duration: reduce ? Math.min(opt.duration, 160) : opt.duration, delay: reduce ? 0 : (opt.delay || 0) }).finished;
+  const clearAnims = (...els) => els.forEach(el => el.getAnimations().forEach(a => a.cancel()));
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+
+  function entrance(el) {
+    if (reduce) return;
+    $$('.rise', el).forEach((e, k) => e.animate(
+      [{ opacity: 0, transform: 'translateY(22px)' }, { opacity: 1, transform: 'none' }],
+      { duration: 520, delay: 120 + k * 70, easing: ease, fill: 'backwards' }));
+  }
+
+  /* 1) Nachbarfolie: gerichtetes Schieben mit Tiefe */
+  async function slideTo(a, b, dir) {
+    b.classList.add('on');
+    entrance(b);
+    await Promise.all([
+      anim(a, [{ transform: 'none', opacity: 1, filter: 'blur(0)' }, { transform: `translateX(${-dir * 5}%) scale(.95)`, opacity: 0, filter: 'blur(5px)' }], { duration: 480 }),
+      anim(b, [{ transform: `translateX(${dir * 9}%)`, opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 560, delay: 40 })
+    ]);
+    a.classList.remove('on');
+    clearAnims(a, b);
+  }
+
+  /* 2) Neues Kapitel: Vorhang mit Kapitelname und Leitfrage */
+  async function chapterWipe(a, b, chapter) {
+    const w = $('#wipe');
+    $('.wn', w).textContent = `Teil ${chapter} von ${CH.length}`;
+    $('.wt', w).textContent = CH[chapter - 1][0];
+    $('.ws', w).textContent = CH[chapter - 1][1];
+    await anim(w, [{ clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 460 });
+    a.classList.remove('on'); b.classList.add('on');
+    if (!reduce) $$('.wt, .ws, .wl', w).forEach((e, k) => e.animate([{ opacity: 0, transform: 'translateX(40px)' }, { opacity: 1, transform: 'none' }], { duration: 420, delay: k * 90, easing: ease, fill: 'backwards' }));
+    await wait(1050);
+    entrance(b);
+    await anim(w, [{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 100% 0 0)' }], { duration: 480 });
+    clearAnims(w);
+  }
+
+  /* 3) Überspringen: Bühne zoomt heraus, Filmstreifen fährt zur Zielfolie */
+  const film = $('#film'), track = $('#filmTrack');
+  track.innerHTML = slides.map((s, i) => `<div class="chip"><b>${i + 1}</b><span>${s.dataset.title}</span></div>`).join('');
+  const chips = $$('.chip', track);
+  const CHIP = 224;
+  const trackX = i => film.clientWidth / 2 - (i * CHIP + 105);
+  async function skipTo(a, b, from, to) {
+    const stage = $('#stage');
+    chips.forEach(c => c.classList.remove('target'));
+    const dist = Math.abs(to - from);
+    track.style.transform = `translateX(${trackX(from)}px)`;
+    await Promise.all([
+      anim(stage, [{ transform: 'none', filter: 'blur(0)', opacity: 1 }, { transform: 'scale(.8)', filter: 'blur(6px)', opacity: .35 }], { duration: 300 }),
+      anim(film, [{ opacity: 0 }, { opacity: 1 }], { duration: 260 })
+    ]);
+    await anim(track, [{ transform: `translateX(${trackX(from)}px)` }, { transform: `translateX(${trackX(to)}px)` }], { duration: 380 + Math.min(dist, 12) * 55, easing: 'cubic-bezier(.65,0,.35,1)' });
+    chips[to].classList.add('target');
+    a.classList.remove('on'); b.classList.add('on');
+    await wait(220);
+    entrance(b);
+    await Promise.all([
+      anim(stage, [{ transform: 'scale(.8)', filter: 'blur(6px)', opacity: .35 }, { transform: 'none', filter: 'blur(0)', opacity: 1 }], { duration: 420 }),
+      anim(film, [{ opacity: 1 }, { opacity: 0 }], { duration: 300 })
+    ]);
+    clearAnims(stage, film, track);
+    track.style.transform = '';
+  }
+
+  async function go(t, opts = {}) {
+    t = Math.max(0, Math.min(N - 1, t));
+    if (t === cur) { if (opts.all) { step = maxStep(t); applySteps(t, step); } return; }
+    if (busy) { pending = [t, opts]; return; }
+    busy = true;
+    const from = cur;
+    const showAll = opts.all || (from >= 0 && Math.abs(t - from) > 1);
+    step = showAll ? maxStep(t) : 0;
+    applySteps(t, step);
+    const a = slides[from], b = slides[t];
+    cur = t; updateUI();
+    try {
+      if (from < 0) { b.classList.add('on'); entrance(b); }
+      else if (Math.abs(t - from) > 1) await skipTo(a, b, from, t);
+      else if (chOf(t) !== chOf(from) && t > from) await chapterWipe(a, b, chOf(t));
+      else await slideTo(a, b, t > from ? 1 : -1);
+    } finally {
+      slides.forEach((s, i) => s.classList.toggle('on', i === cur));
+      busy = false;
+      if (pending) { const p = pending; pending = null; go(...p); }
+    }
+  }
+  function next() {
+    if (busy) return;
+    if (step < maxStep(cur)) { step++; applySteps(cur, step); return; }
+    go(cur + 1);
+  }
+  function prev() {
+    if (busy) return;
+    if (step > 0) { step--; applySteps(cur, step); return; }
+    go(cur - 1, { all: true });
+  }
+
+  /* Fortschrittsleiste nach Kapiteln */
+  const prog = $('#progress');
+  CH.forEach(([name], ci) => {
+    const idx = slides.map((s, i) => i).filter(i => chOf(i) === ci + 1);
+    const g = document.createElement('div');
+    g.className = 'pch'; g.style.setProperty('--n', idx.length);
+    g.innerHTML = `<small>${name}</small><div class="segs">${idx.map(i => `<button class="pseg" data-i="${i}" title="${i + 1}: ${slides[i].dataset.title}" aria-label="Folie ${i + 1}: ${slides[i].dataset.title}"></button>`).join('')}</div>`;
+    prog.append(g);
+  });
+  const segs = $$('.pseg');
+  function updateUI() {
+    segs.forEach(s => { const i = +s.dataset.i; s.classList.toggle('done', i < cur); s.classList.toggle('cur', i === cur); });
+    $$('.pch').forEach((g, ci) => g.classList.toggle('cur', ci + 1 === chOf(cur)));
+    $('#count').textContent = `${cur + 1} / ${N}`;
+    try { history.replaceState(null, '', '#folie-' + (cur + 1)); } catch (e) {}
+    document.title = 'Wesensvollzüge der Kirche';
+  }
+  prog.addEventListener('click', e => { const b = e.target.closest('.pseg'); if (b) go(+b.dataset.i, { all: true }); });
+
+  /* Übersicht */
+  const ov = $('#overview'), ovBody = $('#ovBody');
+  function openOverview() {
+    ovBody.innerHTML = CH.map(([name], ci) => {
+      const idx = slides.map((s, i) => i).filter(i => chOf(i) === ci + 1);
+      return `<div class="ov-ch"><h3>${ci + 1} · ${name}</h3><div class="ov-grid">${idx.map(i => `<button data-i="${i}" class="${i === cur ? 'cur' : ''}"><b>${i + 1}</b><span>${slides[i].dataset.title}</span></button>`).join('')}</div></div>`;
+    }).join('');
+    ov.hidden = false;
+    $('button.cur', ovBody)?.focus();
+  }
+  ovBody.addEventListener('click', e => { const b = e.target.closest('button[data-i]'); if (b) { ov.hidden = true; go(+b.dataset.i, { all: true }); } });
+  $('#ovBtn').onclick = openOverview;
+  $('#ovClose').onclick = () => ov.hidden = true;
+  $('#helpBtn').onclick = () => $('#help').hidden = false;
+  $('#helpClose').onclick = () => $('#help').hidden = true;
+  $('#prev').onclick = prev;
+  $('#next').onclick = next;
+  $('#black').onclick = () => $('#black').hidden = true;
+  $('#fsBtn').onclick = toggleFs;
+  function toggleFs() {
+    try {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen?.().catch(() => {});
+    } catch (e) {}
+  }
+
+  /* Sprung-Links innerhalb der Folien */
+  document.addEventListener('click', e => {
+    const g = e.target.closest('[data-goto]');
+    if (g && !busy) go(+g.dataset.goto, { all: true });
+  });
+
+  /* Tastatur */
+  let digits = '', digitTimer;
+  const jumpbox = $('#jumpbox');
+  addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const k = e.key;
+    if (!ov.hidden || !$('#help').hidden) {
+      if (k === 'Escape' || k === 'o' || k === 'O') { ov.hidden = true; $('#help').hidden = true; }
+      return;
+    }
+    if (!$('#black').hidden) { $('#black').hidden = true; e.preventDefault(); return; }
+    if (/^[0-9]$/.test(k)) {
+      digits = (digits + k).slice(-2);
+      jumpbox.textContent = '→ ' + digits; jumpbox.hidden = false;
+      clearTimeout(digitTimer); digitTimer = setTimeout(() => { digits = ''; jumpbox.hidden = true; }, 2000);
+      return;
+    }
+    if (k === 'Enter' && digits) { go(+digits - 1, { all: true }); digits = ''; jumpbox.hidden = true; e.preventDefault(); return; }
+    const onBtn = document.activeElement && document.activeElement.matches('button, [role=button]');
+    switch (k) {
+      case 'ArrowRight': case 'PageDown': next(); break;
+      case ' ': if (onBtn && document.activeElement.closest('.slide')) return; next(); break;
+      case 'ArrowLeft': case 'PageUp': case 'Backspace': prev(); break;
+      case 'Home': go(0, { all: true }); break;
+      case 'End': go(N - 1, { all: true }); break;
+      case 'o': case 'O': openOverview(); break;
+      case 'f': case 'F': toggleFs(); break;
+      case 'b': case 'B': case '.': $('#black').hidden = false; break;
+      case 't': case 'T': t0 = Date.now(); tick(); break;
+      case '?': case 'h': case 'H': $('#help').hidden = false; break;
+      case 'Escape': return;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
+  /* Wischen */
+  let sx = null, sy = 0;
+  const vp = $('#viewport');
+  vp.addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; });
+  vp.addEventListener('pointerup', e => {
+    if (sx === null) return;
+    const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4) (dx < 0 ? next : prev)();
+  });
+
+  /* Skalierung der Bühne */
+  const scaler = $('#scaler');
+  function fit() {
+    const r = vp.getBoundingClientRect();
+    const s = Math.min(r.width / 1600, r.height / 900);
+    scaler.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  new ResizeObserver(fit).observe(vp); fit();
+
+  /* Vortragszeit */
+  let t0 = Date.now();
+  const timerEl = $('#timer');
+  function tick() {
+    const s = Math.floor((Date.now() - t0) / 1000);
+    timerEl.textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  }
+  setInterval(tick, 1000);
+  timerEl.onclick = () => { t0 = Date.now(); tick(); };
+
+  /* Zusammenhang-Diagramm */
+  const EXPL = {
+    M: ['Martyria', 'Was verkündet wird, wird in der Leiturgia gefeiert. Glaubwürdig wird das Zeugnis erst, wenn die Gemeinschaft es vorlebt.', ['ML', 'KM']],
+    L: ['Leiturgia', 'Im Gottesdienst wird der verkündete Glaube gefeiert. Am Ende der Messe steht die Sendung in den Alltag – hin zum Dienst am Nächsten.', ['ML', 'LD']],
+    D: ['Diakonia', 'Aus der Feier folgt praktische Hilfe. Wer hilft, stiftet Beziehungen – und braucht eine Gemeinschaft, die ihn trägt.', ['LD', 'DK']],
+    K: ['Koinonia', 'Gemeinschaft trägt Feier und Dienst. Eine lebendige Gemeinschaft ist selbst ein Zeugnis, das nach außen wirkt.', ['DK', 'KM']]
+  };
+  const explain = $('#explain');
+  const DEFAULT_EXPL = explain.innerHTML;
+  let selNode = null;
+  function selectNode(k) {
+    selNode = selNode === k ? null : k;
+    $$('.web .node').forEach(n => n.classList.toggle('sel', n.dataset.k === selNode));
+    $$('.web .edge, .web .elabel').forEach(el => { el.classList.remove('hot', 'flow', 'M', 'L', 'D', 'K'); });
+    if (!selNode) { explain.className = 'explain'; explain.innerHTML = DEFAULT_EXPL; return; }
+    const [name, text, edges] = EXPL[selNode];
+    edges.forEach(id => { $('#e-' + id).classList.add('hot', 'flow', selNode); $('#t-' + id).classList.add('hot'); });
+    explain.className = 'explain ' + selNode;
+    explain.innerHTML = `<span class="who">${name}</span><p>${text}</p><p class="hint">Noch einmal anklicken, um zur Gesamtsicht zurückzukehren.</p>`;
+    if (!reduce) explain.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: ease });
+  }
+  $$('.web .node').forEach(n => {
+    n.addEventListener('click', () => selectNode(n.dataset.k));
+    n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); selectNode(n.dataset.k); } });
+  });
+
+  /* Vergleich: Spalten hervorheben */
+  $$('[data-cmp]').forEach(b => b.addEventListener('click', () => {
+    const m = b.dataset.cmp;
+    $$('[data-cmp]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    $$('#cmp .cw').forEach(c => c.classList.toggle('dim', m === 'k'));
+    $$('#cmp .ck').forEach(c => c.classList.toggle('dim', m === 'w'));
+  }));
+
+  /* Live-Ampel */
+  const STATES = ['noch offen', 'gut erfüllt', 'teilweise erfüllt', 'kaum erfüllt'];
+  let votes = {};
+  try { votes = JSON.parse(localStorage.getItem('wv-ampel') || '{}'); } catch (e) {}
+  function renderAmp() {
+    $$('.amp').forEach(a => { const v = votes[a.dataset.k] || 0; a.dataset.v = v; $('.state', a).textContent = STATES[v]; });
+    try { localStorage.setItem('wv-ampel', JSON.stringify(votes)); } catch (e) {}
+  }
+  $$('.amp').forEach(a => a.addEventListener('click', () => { votes[a.dataset.k] = ((votes[a.dataset.k] || 0) % 3) + 1; renderAmp(); }));
+  $('#amp-reset').onclick = () => { votes = {}; renderAmp(); };
+  renderAmp();
+
+  /* Start (auch per Link #folie-N) */
+  const m = /folie-(\d+)/.exec(location.hash);
+  go(m ? +m[1] - 1 : 0, { all: !!m });
+  addEventListener('hashchange', () => { const h = /folie-(\d+)/.exec(location.hash); if (h && +h[1] - 1 !== cur) go(+h[1] - 1, { all: true }); });
+})();
+</script>
