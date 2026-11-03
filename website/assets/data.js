@@ -420,7 +420,7 @@ window.PFARREI = {
   ],
   [
    "Familiengottesdienst & Kleine Leute",
-   "gottesdienste.html?art=fam",
+   "gottesdienste.html#art-fam",
    "familie kinder kleine leute familiengottesdienst"
   ],
   [

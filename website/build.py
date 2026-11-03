@@ -168,7 +168,7 @@ def header(current):
 <div class="notice" role="note"><div class="wrap"><strong>Entwurf</strong><span>Neugestaltung als Schulprojekt – keine offizielle Seite der Pfarrei. Angaben von <a href="{OFFICIAL}/">katholisch-in-wipperfuerth.de</a>, Stand {STAND}.</span></div></div>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Katholisch in Wipperfürth – Startseite">{LOGO}<span><b>Katholisch in Wipperfürth</b><small>Pfarrei St. Nikolaus</small></span></a>
+    <a class="brand" href="index.html" aria-label="Katholisch in Wipperfürth – Startseite">{LOGO}<span><b>Katholisch in Wipperfürth</b><small>Pfarrei St. Nikolaus · Website-Entwurf</small></span></a>
     <nav class="main" aria-label="Hauptmenü">{nav}</nav>
     <div class="head-actions">
       <button class="icon-btn" id="searchBtn" type="button" aria-label="Suche öffnen" aria-expanded="false" aria-controls="searchpanel">{ICON["search"]}</button>
@@ -394,9 +394,9 @@ NEWS = [
     ("Termin · Sa, 5. Dezember 2026", "Tauftreff in St. Nikolaus", "Für Eltern, die ihr Kind taufen lassen möchten: kennenlernen, Fragen klären, Taufe vorbereiten. 10:30 Uhr.", "taufe.html", "Zur Taufe"),
     ("Patrozinium · 6. Dezember", "Fest des hl. Nikolaus", "Unser Pfarrpatron steht für Großzügigkeit und den Schutz der Kinder. Die Festgottesdienste stehen in den Pfarrnachrichten.", f"{OFFICIAL}/aktuelles/pfarrnachichten/", "Pfarrnachrichten"),
     ("Erstkommunion 2027", "Feiern ab 3. April 2027", "Sechs Erstkommunionfeiern in Neye, Agathaberg, Hämmern, Kreuzberg und Wipperfeld. Kinder der 3. Klasse werden angeschrieben.", "erstkommunion.html", "Termine ansehen"),
-    ("Ehrenamt gesucht", "Taufgeschenke überbringen", "Wir suchen Menschen, die neu getauften Kindern und ihren Familien ein Geschenk der Gemeinde vorbeibringen.", "kontakt.html?anliegen=Ehrenamt", "Mitmachen"),
+    ("Ehrenamt gesucht", "Taufgeschenke überbringen", "Wir suchen Menschen, die neu getauften Kindern und ihren Familien ein Geschenk der Gemeinde vorbeibringen.", "kontakt.html#anliegen-Ehrenamt", "Mitmachen"),
     ("Schöpfung bewahren", "Schöpfungsbotschafter:in werden", "Mit „Klima+Kirche“ und unserem Projekt Schöpfungsverantwortung (nach „Laudato Si’“) wird die Pfarrei klimafreundlicher.", "gruppen.html#schoepfung", "Mehr erfahren"),
-    ("Gemeindereise 2027", "Donauklöster und Wien", "Gemeinsam reisen, Klöster entdecken, Gemeinschaft erleben. Infos und Anmeldung über das Pastoralbüro.", "kontakt.html?anliegen=Gemeindereise", "Interesse melden"),
+    ("Gemeindereise 2027", "Donauklöster und Wien", "Gemeinsam reisen, Klöster entdecken, Gemeinschaft erleben. Infos und Anmeldung über das Pastoralbüro.", "kontakt.html#anliegen-Gemeindereise", "Interesse melden"),
     ("Stellenangebot", "Leitung KiTa St. Raphael, Kreuzberg", "Gesucht zum 1. September 2026. Außerdem: Berater:in mit stellvertretender Leitung in der Beratungsstelle Herbstmühle.", f"{OFFICIAL}/aktuelles/offene-stellen/", "Alle Stellen"),
     ("Taufsonntage ab 2027", "Neue feste Tauftermine", "Ab 1. Januar 2027 in St. Nikolaus: 2. Sonntag im Monat 12:15 Uhr und 4. Sonntag 15:00 Uhr, je bis zu drei Familien.", "taufe.html", "Zur Taufe"),
 ]
@@ -430,7 +430,7 @@ def build_gottesdienste():
   <div class="svc-list" id="svcList" aria-live="polite"></div>
 
   <h2 id="ordnung">Gottesdienstordnung</h2>
-  <p>So sieht eine normale Woche aus. <button class="btn ghost" type="button" data-print style="padding:6px 12px;font-size:14px">Drucken</button></p>
+  <p>So sieht eine normale Woche aus.</p>
   {plan_table(main_ids)}
 
   <h2 id="beichte">Beichte</h2>
@@ -472,7 +472,7 @@ def build_anliegen():
     tiles = "".join(f'<a href="{h}"><b>{t}</b><span>{d}</span><span class="go">Öffnen →</span></a>' for h, t, d in ANLIEGEN)
     body = hero("Wir begleiten dich", "An den wichtigen Tagen deines Lebens – von der Taufe bis zum Abschied. Wähle dein Anliegen: Du findest jeweils Termine, Ablauf und Ansprechpersonen.", [(None, "Anliegen")], "Sakramente &amp; Lebenswege") + f'''
 <section class="block"><div class="wrap"><div class="tiles">{tiles}</div>
-<div class="info" style="margin-top:28px"><b>Zurückkommen?</b>Du bist ausgetreten und denkst über einen Wiedereintritt nach – oder möchtest als Erwachsene:r getauft werden? Ein unverbindliches Gespräch ist der erste Schritt. Deine Taufe bleibt gültig. <a href="kontakt.html?anliegen=Wiedereintritt">Gespräch anfragen</a></div>
+<div class="info" style="margin-top:28px"><b>Zurückkommen?</b>Du bist ausgetreten und denkst über einen Wiedereintritt nach – oder möchtest als Erwachsene:r getauft werden? Ein unverbindliches Gespräch ist der erste Schritt. Deine Taufe bleibt gültig. <a href="kontakt.html#anliegen-Wiedereintritt">Gespräch anfragen</a></div>
 </div></section>'''
     page("anliegen.html", "Anliegen", "Taufe, Erstkommunion, Firmung, Hochzeit, Beichte, Krankensalbung und Trauerfall in Wipperfürth.", body)
 
@@ -499,7 +499,7 @@ def build_taufe():
 <p>Nach dem Kirchenrecht sollte mindestens eine Patin oder ein Pate katholisch und gefirmt sein und das 16. Lebensjahr vollendet haben. Bei Fragen hilft das Pastoralbüro.</p>
 <h3>Erwachsene und ältere Kinder</h3>
 <p>Auch als Jugendliche:r oder Erwachsene:r kannst du getauft werden. Ein Gespräch mit dem Seelsorgeteam ist der erste Schritt.</p>
-<p><a class="btn primary" href="kontakt.html?anliegen=Taufe">Taufe anfragen</a></p>'''
+<p><a class="btn primary" href="kontakt.html#anliegen-Taufe">Taufe anfragen</a></p>'''
     aside = f'''<div class="side-card"><h3>Taufbegleitung</h3><p><b>Joseph Abitya</b>, Pfarrvikar<br>Tel. {tel("02267 8716124")}<br>{mail("joseph.abitya@erzbistum-koeln.de")}</p></div>{office_card()}'''
     page("taufe.html", "Taufe", "Taufe in der Pfarrei St. Nikolaus Wipperfürth: Termine, Tauftreff, Anmeldung.",
          hero("Taufe", "Willkommen in der Gemeinschaft! Hier erfährst du, wie du dein Kind (oder dich selbst) taufen lassen kannst.", [("anliegen.html", "Anliegen"), (None, "Taufe")], "Sakrament") + layout(main, aside))
@@ -545,7 +545,7 @@ def build_firmung():
 </ol>
 <h2>Keine Einladung bekommen oder älter?</h2>
 <p>Auch wenn du zu einem anderen Jahrgang gehörst, später dazukommen möchtest oder als Erwachsene:r gefirmt werden willst: Melde dich im Pastoralbüro – wir finden einen Weg.</p>
-<p><a class="btn primary" href="kontakt.html?anliegen=Firmung">Frage zur Firmung</a></p>'''
+<p><a class="btn primary" href="kontakt.html#anliegen-Firmung">Frage zur Firmung</a></p>'''
     page("firmung.html", "Firmung", "Firmung in Wipperfürth: Firmkurs, Jahrgang und Firmfeier.",
          hero("Firmung", "Ja sagen – selbst entscheiden. Infos zum Firmkurs und zur Firmfeier.", [("anliegen.html", "Anliegen"), (None, "Firmung")], "Sakrament") + layout(main))
 
@@ -578,7 +578,7 @@ def build_hochzeit():
   <li>Blumenschmuck, Liedhefte und Kerzen mit dem Küsterdienst absprechen (Kontakt über das Pastoralbüro).</li>
   <li>Bitte in den Kirchen keine Blumen streuen und möglichst keinen Reis werfen.</li>
 </ul>
-<p><a class="btn primary" href="kontakt.html?anliegen=Hochzeit">Trauung anfragen</a></p>'''
+<p><a class="btn primary" href="kontakt.html#anliegen-Hochzeit">Trauung anfragen</a></p>'''
     page("hochzeit.html", "Hochzeit", "Kirchlich heiraten in Wipperfürth: Termine, Unterlagen, Ablauf.",
          hero("Hochzeit", "Den Bund fürs Leben schließen – in einer unserer zehn Kirchen. Alles zu Terminen, Unterlagen und Ablauf.", [("anliegen.html", "Anliegen"), (None, "Hochzeit")], "Sakrament") + layout(main))
 
@@ -666,7 +666,7 @@ def build_messe():
 <p>Du kannst eine Heilige Messe für Verstorbene, zu einem Jahrestag oder für ein persönliches Anliegen feiern lassen. Die Intention wird in der Messe genannt.</p>
 <div class="info"><b>Kosten</b>Messstipendium 5,00 € pro Intention. Zahlung im Pastoralbüro, per Post, über den Briefkasten oder im Kollektenkorb.</div>
 <h2>Online anfragen</h2>
-<p class="small muted">Das Formular öffnet dein E-Mail-Programm mit einer fertigen Nachricht an das Pastoralbüro. Auf dieser Website wird nichts gespeichert.</p>
+<p class="small muted">Das Formular stellt dir eine fertige Nachricht an das Pastoralbüro zusammen, die du kopieren oder in deinem E-Mail-Programm öffnen kannst. Auf dieser Website wird nichts gespeichert oder verschickt.</p>
 <form class="msg" data-mailform data-subject="Messbestellung">
   <label>Kirche<select name="Kirche">{opts}</select></label>
   <label>Wunschdatum<input name="Datum" type="date" required></label>
@@ -675,7 +675,7 @@ def build_messe():
   <label>Dein Name<input name="Name" required autocomplete="name"></label>
   <label>Anschrift<input name="Anschrift" autocomplete="street-address"></label>
   <label>Telefon<input name="Telefon" type="tel" autocomplete="tel"></label>
-  <button class="btn primary" type="submit">E-Mail vorbereiten</button>
+  <button class="btn primary" type="submit">Nachricht zusammenstellen</button>
 </form>
 <h2>Andere Wege</h2>
 <ul><li>persönlich im Pastoralbüro</li><li>telefonisch unter {tel(BUERO["tel"])}</li><li>mit dem Papierformular, das in den Kirchen ausliegt</li></ul>
@@ -696,7 +696,7 @@ def build_kirchorte():
         cards.append(f'''<article class="church" id="{c["id"]}"><span class="place">{e(c["place"])}</span><h3>{e(c["name"])}</h3>
 <span class="addr">{e(addr)}</span><ul class="small" style="margin:6px 0 0;padding-left:18px">{lines}</ul>
 <span class="small muted">Küsterdienst: {e(KUESTER.get(c["id"], "–"))}</span>
-<div class="acts"><a class="btn primary" href="gottesdienste.html?ort={c["id"]}">Gottesdienste</a><a class="btn ghost" href="https://www.openstreetmap.org/search?query={q.replace(" ", "%20")}">Karte</a></div></article>''')
+<div class="acts"><a class="btn primary" href="gottesdienste.html#ort-{c["id"]}">Gottesdienste</a><a class="btn ghost" href="https://www.openstreetmap.org/search?query={q.replace(" ", "%20")}">Karte</a></div></article>''')
     nik = "".join(f"<li>{e(d)} {t} – {e(ti)}</li>" for d, t, ti, _ in plan_lines("nik"))
     body = hero("Unsere Kirchorte", "Zehn Kirchen, eine Pfarrei: von der romanischen Pfarrkirche in der Altstadt bis zu den Dorfkirchen.", [(None, "Kirchorte")], "10 Kirchen · 1 Pfarrei") + f'''
 <section class="block"><div class="wrap">
@@ -718,7 +718,7 @@ def build_kirchorte():
     </div>
     <div class="side-card"><h3>Gottesdienste in St. Nikolaus</h3><ul class="small">{nik}</ul>
       <p class="small muted" style="margin-top:8px">Küsterdienst: Markus Löhr</p>
-      <a class="btn primary" href="gottesdienste.html?ort=nik">Nächste Termine</a></div>
+      <a class="btn primary" href="gottesdienste.html#ort-nik">Nächste Termine</a></div>
   </div>
   <h2 style="margin:56px 0 20px">Weitere Kirchen</h2>
   <div class="churches">{"".join(cards)}</div>
@@ -744,7 +744,7 @@ GROUPS = [
     ("Kammerchor Wipperfürth e. V.", "Anspruchsvolle Chormusik für erfahrene Sänger:innen.", ["erw", "musik"], f'<a href="{OFFICIAL}/gruppen/choere/kammerchor-wipperfuerth-e.v./">Mehr zum Kammerchor</a>'),
     ("Kirchenchöre vor Ort", "In Agathaberg, Egen, Hämmern, Kreuzberg (mit Gospelchor), Neye, Niederwipper, St. Nikolaus, Thier und Wipperfeld.", ["erw", "sen", "musik"], f'<a href="{OFFICIAL}/gruppen/choere/ansprechpartner-unserer-choere/">Ansprechpartner der Chöre</a>'),
     ("Taizé-Gebet", "Gesänge, Stille und Gebet im Stil der Gemeinschaft von Taizé.", ["jugend", "erw", "musik"], f'<a href="{OFFICIAL}/gruppen/taize/">Termine</a>'),
-    ("Familien", "Familiengottesdienste (3. So, 11:00) und Kleine-Leute-Gottesdienste (letzter So, 10:30) in Neye.", ["kinder", "erw"], '<a href="gottesdienste.html?art=fam">Termine</a>'),
+    ("Familien", "Familiengottesdienste (3. So, 11:00) und Kleine-Leute-Gottesdienste (letzter So, 10:30) in Neye.", ["kinder", "erw"], '<a href="gottesdienste.html#art-fam">Termine</a>'),
     ("Frauen – kfd", "Katholische Frauengemeinschaft: Glaube, Austausch, Engagement.", ["erw", "sen"], f'<a href="{OFFICIAL}/gruppen/frauen-kfd/">Mehr zur kfd</a>'),
     ("Kolping", "Soziales Engagement, Bildung und Gemeinschaft für alle Generationen.", ["erw", "sen"], f'<a href="{OFFICIAL}/gruppen/kolping/">Mehr zu Kolping</a>'),
     ("Senior:innen", "Treffen, Ausflüge und Gottesdienste in den Seniorenzentren.", ["sen"], f'<a href="{OFFICIAL}/gruppen/senioren/">Mehr</a>'),
@@ -781,7 +781,7 @@ def build_gruppen():
       <li><b>Erstkommunion-Vorbereitung</b> – Projekte, Katechese oder Familienmessen mitgestalten.</li>
     </ul>
     <p>Wer mit Kindern und Jugendlichen arbeitet, nimmt an einer Präventionsschulung teil – wir unterstützen dich dabei.</p>
-    <p><a class="btn primary" href="kontakt.html?anliegen=Ehrenamt">Ich möchte mitmachen</a></p>
+    <p><a class="btn primary" href="kontakt.html#anliegen-Ehrenamt">Ich möchte mitmachen</a></p>
     <h2 id="kitas">Katholische Kitas</h2>
     <p>Träger ist seit 1. August 2026 die Katholino gGmbH (St. Anna, Thier: Übergang für 2027 geplant).</p>
     <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Kita</th><th>Adresse</th><th>Telefon</th></tr></thead><tbody>{ktr}</tbody></table></div>
@@ -906,13 +906,13 @@ def build_kontakt():
 <p class="small muted" style="margin-top:10px">In den Sommerferien Mo–Fr 08:30–12:30. An Heiligabend und Silvester geschlossen.</p>
 <p>Im Büro für dich da: Gudrun Spiller, Jutta Bach und Stefanie Knop.</p>
 <h2 id="nachricht">Nachricht schreiben</h2>
-<p class="small muted">Das Formular öffnet dein E-Mail-Programm mit einer vorbereiteten Nachricht. Auf dieser Website wird nichts gespeichert.</p>
+<p class="small muted">Das Formular stellt dir eine fertige Nachricht zusammen, die du kopieren oder in deinem E-Mail-Programm öffnen kannst. Auf dieser Website wird nichts gespeichert oder verschickt.</p>
 <form class="msg" data-mailform>
   <label>Anliegen<select name="Anliegen" id="mTopic">{opts}</select></label>
   <label>Dein Name<input name="Name" required autocomplete="name"></label>
   <label>Telefon für Rückruf (optional)<input name="Telefon" type="tel" autocomplete="tel"></label>
   <label>Nachricht<textarea name="Nachricht" required placeholder="Worum geht es?"></textarea></label>
-  <button class="btn primary" type="submit">E-Mail vorbereiten</button>
+  <button class="btn primary" type="submit">Nachricht zusammenstellen</button>
 </form>'''
     aside = f'''<div class="side-card"><h3>Direkt zum Seelsorger</h3><p>Alle Telefonnummern und E-Mail-Adressen des Teams.</p><a class="btn ghost" href="team.html">Ansprechpersonen</a></div>
 <div class="side-card"><h3>Messe bestellen</h3><p>Eigenes Formular mit Kirche und Datum.</p><a class="btn ghost" href="messe-bestellen.html">Zur Messbestellung</a></div>
@@ -930,7 +930,7 @@ def build_suche():
 
 SEARCH_INDEX = [
     ("Gottesdienste & Messzeiten", "gottesdienste.html", "messe gottesdienst sonntag vorabend hochamt zeiten uhrzeit heute morgen wochenende"),
-    ("Familiengottesdienst & Kleine Leute", "gottesdienste.html?art=fam", "familie kinder kleine leute familiengottesdienst"),
+    ("Familiengottesdienst & Kleine Leute", "gottesdienste.html#art-fam", "familie kinder kleine leute familiengottesdienst"),
     ("Taufe", "taufe.html", "taufe taufen baby kind tauftreff pate patin taufsonntag"),
     ("Erstkommunion", "erstkommunion.html", "kommunion erstkommunion eucharistie 2027 dritte klasse"),
     ("Firmung", "firmung.html", "firmung firmen jugendliche firmkurs"),

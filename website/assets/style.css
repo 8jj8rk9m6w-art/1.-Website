@@ -32,8 +32,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.15; m
 h2 { font-size: clamp(28px, 4.5vw, 40px); }
 h3 { font-size: 20px; }
 p { margin: 0 0 .8em; }
-.wrap { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
-@media (min-width: 720px) { .wrap { padding: 0 28px; } }
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+@media (min-width: 720px) { .wrap { padding-left: max(28px, env(safe-area-inset-left, 0px)); padding-right: max(28px, env(safe-area-inset-right, 0px)); } }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: 12px; top: -60px; background: var(--accent); color: var(--accent-ink); padding: 10px 14px; border-radius: 10px; z-index: 100; }
 .skip:focus { top: 12px; }
@@ -45,7 +45,7 @@ p { margin: 0 0 .8em; }
 .notice strong { color: var(--gold); }
 
 /* Kopf */
-header.top { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
 header.top .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); min-width: 0; }
 .brand svg { flex: none; }
@@ -340,3 +340,10 @@ noscript .empty { margin-bottom: 12px; }
   .tbl.plan td:nth-child(2) { color: var(--muted); font-size: 14px; }
   .tbl.plan td:nth-child(3) { font-weight: 700; }
 }
+
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 70; background: var(--bg); }
+.mailbox { margin-top: 16px; background: var(--surface); border: 1px solid var(--accent); border-radius: 14px; padding: 16px; display: grid; gap: 8px; }
+.mailbox p { margin: 0; }
+.mailbox pre { margin: 0; white-space: pre-wrap; word-break: break-word; background: var(--surface-2); border-radius: 10px; padding: 12px; font: 14.5px/1.5 var(--body); }
+.mailbox .row { display: flex; flex-wrap: wrap; gap: 8px; }
+.sel { user-select: all; font-weight: 700; }

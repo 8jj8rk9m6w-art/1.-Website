@@ -9,6 +9,8 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 const DATA = window.PFARREI || { churches: [], services: [], search: [] };
 const C = Object.fromEntries(DATA.churches.map(c => [c.id, c]));
 const params = new URLSearchParams(location.search);
+/* Parameter kommen als #ort-kreuz, #art-fam, #anliegen-Taufe (funktioniert überall, auch eingebettet) */
+const hashParam = key => { const m = decodeURIComponent(location.hash.slice(1)).match(new RegExp("^" + key + "-(.+)$")); return m ? m[1] : params.get(key); };
 
 const DAYS = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
 const DS = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
@@ -47,7 +49,6 @@ $("#themeBtn") && $("#themeBtn").addEventListener("click", () => {
   root.dataset.theme = dark ? "light" : "dark";
   try { localStorage.setItem("theme", root.dataset.theme); } catch (_) {}
 });
-$$("[data-print]").forEach(b => b.addEventListener("click", () => window.print()));
 
 /* ---------- Suche ---------- */
 const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
@@ -80,19 +81,23 @@ $$("form[data-search]").forEach(form => {
     }
   });
   form.addEventListener("submit", e => {
-    const items = $$("a", res);
-    if (!res.hidden && items.length) { e.preventDefault(); location.href = (items[sel] || items[0]).getAttribute("href"); }
+    e.preventDefault(); render();
+    const hits = findHits(q.value);
+    if (hits.length) location.href = hits[Math.max(sel, 0)].h;
   });
   document.addEventListener("click", e => { if (!form.contains(e.target)) res.hidden = true; });
 });
 const all = $("#searchAll");
-if (all) {
-  const v = params.get("q") || "";
-  const inp = $("#q3"); if (inp) inp.value = v;
+function renderAll(v) {
   const hits = findHits(v);
   all.innerHTML = v ? (hits.length ? `<p>${hits.length} Treffer für „${esc(v)}“:</p><div class="tiles">` +
       hits.map(x => `<a href="${x.h}"><b>${esc(x.t)}</b><span class="go">Öffnen →</span></a>`).join("") + "</div>"
     : `<div class="empty">Nichts gefunden für „${esc(v)}“. Ruf gern im Pastoralbüro an: 02267 88187-0.</div>`) : "";
+}
+if (all) {
+  const inp = $("#q3");
+  if (inp) { inp.value = params.get("q") || ""; inp.addEventListener("input", () => renderAll(inp.value)); }
+  renderAll(inp ? inp.value : "");
 }
 
 /* ---------- Nächster Gottesdienst (Startseite) ---------- */
@@ -115,7 +120,7 @@ function renderNext() {
 }
 
 /* ---------- Gottesdienst-Finder ---------- */
-const state = { day: 0, kind: params.get("art") || "all", place: params.get("ort") || "" };
+const state = { day: 0, kind: hashParam("art") || "all", place: hashParam("ort") || "" };
 function renderServices() {
   const list = $("#svcList"); if (!list) return;
   const d = addDays(today0(), state.day);
@@ -178,14 +183,27 @@ function renderOffice() {
 }
 
 /* ---------- Formulare → E-Mail ---------- */
-const topic = params.get("anliegen");
-if (topic && $("#mTopic")) { const o = [...$("#mTopic").options].find(o => o.text === topic); if (o) $("#mTopic").value = o.text; }
+const topic = hashParam("anliegen");
+if (topic && $("#mTopic")) { const o = [...$("#mTopic").options].find(o => o.text.startsWith(topic)); if (o) $("#mTopic").value = o.text; }
 $$("form[data-mailform]").forEach(f => f.addEventListener("submit", e => {
   e.preventDefault();
   const fd = new FormData(f), lines = [];
   let subject = f.dataset.subject || "Anfrage";
   for (const [k, v] of fd) { if (!String(v).trim()) continue; if (k === "Anliegen") subject = "Anfrage: " + v; else lines.push(`${k}: ${v}`); }
-  location.href = `mailto:pastoralbuero-wipp@erzbistum-koeln.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+  const to = "pastoralbuero-wipp@erzbistum-koeln.de", body = lines.join("\n");
+  let box = f.nextElementSibling;
+  if (!box || !box.classList.contains("mailbox")) { box = document.createElement("div"); box.className = "mailbox"; f.after(box); }
+  box.innerHTML = `<b>Deine Nachricht ist fertig</b>
+    <p class="small muted">Kopiere sie und schicke sie an <span class="sel">${to}</span> – oder öffne sie direkt in deinem E-Mail-Programm. Abgeschickt ist sie erst, wenn du sie dort sendest.</p>
+    <pre>Betreff: ${esc(subject)}\n\n${esc(body)}</pre>
+    <div class="row"><button class="btn primary" type="button" data-copy>Text kopieren</button>
+    <a class="btn ghost" href="mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}">Im E-Mail-Programm öffnen</a></div>`;
+  $("[data-copy]", box).addEventListener("click", async ev => {
+    const pre = $("pre", box), btn = ev.currentTarget;
+    try { await navigator.clipboard.writeText(`An: ${to}\nBetreff: ${subject}\n\n${body}`); btn.textContent = "Kopiert"; }
+    catch (_) { const r = document.createRange(); r.selectNodeContents(pre); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); btn.textContent = "Text markiert – jetzt kopieren"; }
+  });
+  box.scrollIntoView({ block: "nearest" });
 }));
 
 window.addEventListener("beforeprint", () => $$("details").forEach(d => d.open = true));
