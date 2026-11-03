@@ -3,8 +3,29 @@
 Schulprojekt Q2 Kath. Religion, Gruppe 1 – **keine offizielle Seite der Pfarrei St. Nikolaus**.
 Inhalte übernommen von der bestehenden Website www.katholisch-in-wipperfuerth.de (Stand 3. November 2026).
 
-- `index.html` – neue Website (eine Datei, ohne Backend, hell/dunkel, Handy zuerst)
-- `konzept-entwurf-v1.html` – unser erster Konzeptentwurf mit Platzhaltern
+## Aufbau
+
+Mehrseitige, statische Website (kein Server nötig, läuft z. B. auf GitHub Pages):
+
+| Seite | Inhalt |
+|---|---|
+| `index.html` | Start: nächster Gottesdienst, Bürostatus, Notruf, Anliegen, Wochenende, Aktuelles |
+| `gottesdienste.html` | Tagesansicht der nächsten 7 Tage mit Filtern, komplette Gottesdienstordnung, Beichte, Seniorenheime |
+| `anliegen.html` + `taufe`, `erstkommunion`, `firmung`, `hochzeit`, `beichte`, `krankensalbung`, `trauerfall`, `messe-bestellen` | je eine Seite mit Terminen, Schritten, Unterlagen, Ansprechpersonen |
+| `kirchorte.html` | Geschichte von St. Nikolaus, alle 10 Kirchen mit Adresse, Zeiten, Karte |
+| `gruppen.html` | Gruppen-Finder, Ehrenamt, Kitas, Gremien |
+| `hilfe.html` | Notruf, Prävention mit Ansprechpersonen, Familie & Beratung, Caritas |
+| `team.html`, `kontakt.html`, `aktuelles.html`, `suche.html` | Ansprechpersonen, Pastoralbüro mit Formular, Neuigkeiten, Suche |
+| `konzept-entwurf-v1.html` | unser erster Konzeptentwurf mit Platzhaltern |
+
+Alle Inhalte stehen direkt im HTML und sind auch ohne JavaScript lesbar. `assets/app.js` ergänzt
+Tagesansicht, Bürostatus, Suche, Filter und Formulare.
+
+**Inhalte ändern:** Texte und Gottesdienstzeiten in `build.py` bearbeiten, dann `python3 build.py` ausführen –
+alle Seiten und `assets/data.js` werden neu erzeugt.
+
+**Online stellen (GitHub Pages):** Repository → Settings → Pages → „Deploy from a branch“ → Branch wählen, Ordner `/ (root)`.
+Die Website ist dann unter `https://<benutzer>.github.io/<repo>/website/` erreichbar.
 
 ## Analyse der alten Website → Verbesserung
 

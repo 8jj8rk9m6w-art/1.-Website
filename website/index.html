@@ -4,346 +4,63 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Katholisch in Wipperfürth</title>
-<meta name="description" content="Pfarrei St. Nikolaus Wipperfürth – Gottesdienste, Taufe, Hochzeit, Trauerfall, Kirchorte, Gruppen und Kontakt auf einen Blick.">
+<meta name="description" content="Pfarrei St. Nikolaus Wipperfürth – Gottesdienste, Taufe, Hochzeit, Trauerfall, Kirchorte, Gruppen und Kontakt.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#7d2328">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%237d2328'/%3E%3Cpath d='M20 7v26M13 14h14' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap">
-<style>
-/* Farben: warmes Sandstein-Weiß wie die Bruchsteinmauern der Kirchen, Bischofsrot als Akzent (St. Nikolaus), Gold sparsam. */
-:root {
-  --bg: #f7f4ef; --surface: #ffffff; --surface-2: #efe9e0; --ink: #221c1a; --muted: #6a5f58; --line: #e1d9cd;
-  --accent: #7d2328; --accent-ink: #ffffff; --accent-soft: #f5e3e1; --gold: #9a7429; --gold-soft: #f4ead3;
-  --ok: #2d6a45; --ok-soft: #dcefe3; --warn: #8a5a00; --warn-soft: #fbefd2;
-  --hero: #2a1d1c; --on-hero: #faf5ee; --on-hero-muted: #cdbfb3;
-  --display: "Fraunces", Georgia, "Times New Roman", serif;
-  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
-  --r: 16px; --shadow: 0 1px 2px rgba(40,25,20,.06), 0 6px 24px rgba(40,25,20,.06);
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #171312; --surface: #211b1a; --surface-2: #2a2321; --ink: #f3ece6; --muted: #b9aca3; --line: #3a312e;
-  --accent: #e58c86; --accent-ink: #1b1110; --accent-soft: #3c2221; --gold: #d9b467; --gold-soft: #352b17;
-  --ok: #7fcf9c; --ok-soft: #183323; --warn: #f0c86a; --warn-soft: #3a2e12;
-  --hero: #0f0b0b; --shadow: 0 1px 2px rgba(0,0,0,.3); color-scheme: dark; } }
-:root[data-theme="dark"] {
-  --bg: #171312; --surface: #211b1a; --surface-2: #2a2321; --ink: #f3ece6; --muted: #b9aca3; --line: #3a312e;
-  --accent: #e58c86; --accent-ink: #1b1110; --accent-soft: #3c2221; --gold: #d9b467; --gold-soft: #352b17;
-  --ok: #7fcf9c; --ok-soft: #183323; --warn: #f0c86a; --warn-soft: #3a2e12;
-  --hero: #0f0b0b; --shadow: 0 1px 2px rgba(0,0,0,.3); color-scheme: dark; }
-
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 76px; -webkit-text-size-adjust: 100%; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-img { max-width: 100%; display: block; }
-a { color: var(--accent); text-underline-offset: 3px; }
-button, input, select, textarea { font: inherit; color: inherit; }
-h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.15; margin: 0; letter-spacing: -.01em; }
-h2 { font-size: clamp(28px, 4.5vw, 40px); }
-h3 { font-size: 20px; }
-p { margin: 0 0 .8em; }
-.wrap { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
-@media (min-width: 720px) { .wrap { padding: 0 28px; } }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: absolute; left: 12px; top: -60px; background: var(--accent); color: var(--accent-ink); padding: 10px 14px; border-radius: 10px; z-index: 100; }
-.skip:focus { top: 12px; }
-:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
-
-/* Hinweisleiste */
-.notice { background: var(--gold-soft); color: var(--ink); font-size: 14px; }
-.notice .wrap { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
-.notice strong { color: var(--gold); }
-
-/* Kopf */
-header.top { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
-header.top .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); min-width: 0; }
-.brand svg { flex: none; }
-.brand b { font-family: var(--display); font-size: 19px; font-weight: 600; display: block; line-height: 1.1; }
-.brand small { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.2; }
-@media (max-width: 420px) { .brand b { font-size: 16.5px; } }
-nav.main { margin-left: auto; display: none; gap: 2px; }
-nav.main a { text-decoration: none; color: var(--ink); padding: 8px 11px; border-radius: 10px; font-weight: 600; font-size: 15.5px; }
-nav.main a:hover { background: var(--surface-2); }
-.icon-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; width: 42px; height: 42px; display: grid; place-items: center; cursor: pointer; flex: none; }
-.icon-btn:hover { background: var(--surface-2); }
-.head-actions { display: flex; gap: 8px; margin-left: auto; }
-@media (min-width: 1040px) { nav.main { display: flex; } .head-actions { margin-left: 8px; } #menuBtn { display: none; } }
-.drawer { display: none; border-top: 1px solid var(--line); background: var(--surface); }
-.drawer.open { display: block; }
-.drawer a { display: block; padding: 14px 16px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-weight: 600; }
-
-/* Hero */
-.hero { background: var(--hero); color: var(--on-hero); position: relative; overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: 0; background:
-  radial-gradient(900px 400px at 85% -10%, rgba(229,140,134,.22), transparent 60%),
-  radial-gradient(600px 300px at 0% 110%, rgba(217,180,103,.16), transparent 60%); pointer-events: none; }
-.hero .wrap { position: relative; padding-top: 48px; padding-bottom: 40px; display: grid; gap: 32px; }
-@media (min-width: 900px) { .hero .wrap { grid-template-columns: 1.25fr 1fr; align-items: end; padding-top: 72px; padding-bottom: 64px; } }
-.eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 14px; }
-.hero .eyebrow { color: #e4c27a; }
-.hero h1 { font-size: clamp(38px, 7vw, 68px); font-weight: 600; }
-.hero h1 em { font-style: italic; color: #f0b3ad; font-weight: 500; }
-.hero p.lead { color: var(--on-hero-muted); font-size: 19px; max-width: 34em; margin-top: 16px; }
-.search { margin-top: 26px; position: relative; max-width: 560px; }
-.search input { width: 100%; height: 56px; border-radius: 14px; border: 0; padding: 0 16px 0 48px; font-size: 17px; background: #fffaf4; color: #221c1a; }
-.search input::placeholder { color: #7d716a; }
-.search svg { position: absolute; left: 16px; top: 18px; color: #7d716a; }
-.results { position: absolute; left: 0; right: 0; top: 62px; background: var(--surface); color: var(--ink); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,.25); overflow: hidden; z-index: 20; }
-.results a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px; text-decoration: none; color: var(--ink); border-bottom: 1px solid var(--line); }
-.results a:last-child { border-bottom: 0; }
-.results a:hover, .results a[aria-selected="true"] { background: var(--surface-2); }
-.results small { color: var(--muted); white-space: nowrap; }
-.chips-hero { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.chips-hero a { color: var(--on-hero); text-decoration: none; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 6px 12px; font-size: 14.5px; }
-.chips-hero a:hover { background: rgba(255,255,255,.08); }
-
-.now { display: grid; gap: 12px; }
-.now-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--r); padding: 18px 20px; }
-.now-card .label { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--on-hero-muted); font-weight: 700; }
-.now-card .big { font-family: var(--display); font-size: 26px; margin-top: 4px; line-height: 1.2; }
-.now-card .sub { color: var(--on-hero-muted); font-size: 15.5px; margin-top: 2px; }
-.now-card a { color: #f0b3ad; }
-.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
-.dot.on { background: #6fd39a; box-shadow: 0 0 0 4px rgba(111,211,154,.18); }
-.dot.off { background: #c7a8a2; }
-
-/* Abschnitte */
-section.block { padding: 64px 0; }
-section.block.alt { background: var(--surface-2); }
-.sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 24px; margin-bottom: 28px; }
-.sec-head p { color: var(--muted); max-width: 40em; margin: 10px 0 0; }
-
-/* Schnelleinstiege */
-.quick { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-@media (min-width: 720px) { .quick { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1040px) { .quick { grid-template-columns: repeat(6, 1fr); } }
-.quick a { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 16px; text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow); transition: transform .15s, border-color .15s; min-height: 128px; }
-.quick a:hover { transform: translateY(-2px); border-color: var(--accent); }
-.quick .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
-.quick b { font-size: 16.5px; line-height: 1.25; }
-.quick span { font-size: 14px; color: var(--muted); line-height: 1.35; }
-
-/* Gottesdienst-Finder */
-.days { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
-.days button { flex: none; border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 10px 14px; min-width: 76px; cursor: pointer; text-align: center; line-height: 1.2; }
-.days button b { display: block; font-size: 15px; }
-.days button small { color: var(--muted); font-size: 13px; }
-.days button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.days button[aria-pressed="true"] small { color: inherit; opacity: .85; }
-.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0 20px; }
-.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 7px 14px; cursor: pointer; font-size: 15px; font-weight: 600; }
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.filters select { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 7px 12px; font-weight: 600; font-size: 15px; max-width: 100%; }
-.svc-list { display: grid; gap: 10px; }
-.svc { display: grid; grid-template-columns: 72px 1fr; gap: 4px 16px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
-.svc time { font-family: var(--display); font-size: 24px; font-weight: 600; line-height: 1.1; }
-.svc .t { font-weight: 700; }
-.svc .w { color: var(--muted); font-size: 15px; }
-.tag { display: inline-block; font-size: 12.5px; font-weight: 700; border-radius: 6px; padding: 2px 8px; margin: 6px 6px 0 0; background: var(--surface-2); color: var(--muted); }
-.tag.fam { background: var(--gold-soft); color: var(--gold); }
-.tag.school { background: var(--warn-soft); color: var(--warn); }
-.tag.prayer { background: var(--ok-soft); color: var(--ok); }
-.empty { padding: 24px; text-align: center; color: var(--muted); background: var(--surface); border: 1px dashed var(--line); border-radius: 14px; }
-.svc-grid { display: grid; gap: 24px; }
-.svc-grid > * { min-width: 0; }
-@media (min-width: 900px) { .svc-grid { grid-template-columns: 1.6fr 1fr; } }
-.side-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; }
-.side-card + .side-card { margin-top: 14px; }
-.side-card h3 { font-size: 18px; margin-bottom: 8px; }
-.side-card ul { margin: 0; padding-left: 18px; }
-.side-card li { margin: 4px 0; }
-.muted { color: var(--muted); }
-.small { font-size: 14.5px; }
-details.plan { margin-top: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
-details.plan summary { cursor: pointer; padding: 14px 16px; font-weight: 700; }
-.plan-table { padding: 0 16px 16px; display: grid; gap: 14px; }
-@media (min-width: 720px) { .plan-table { grid-template-columns: 1fr 1fr; } }
-.plan-table h4 { margin: 0 0 4px; font-size: 16px; }
-.plan-table ul { margin: 0; padding-left: 18px; font-size: 15px; color: var(--muted); }
-
-/* Lebenswege */
-.life { display: grid; gap: 14px; }
-@media (min-width: 720px) { .life { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1040px) { .life { grid-template-columns: repeat(3, 1fr); } }
-.life article { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; display: flex; flex-direction: column; box-shadow: var(--shadow); }
-.life article h3 { margin-bottom: 6px; }
-.life article .when { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
-.life ol { margin: 6px 0 14px; padding-left: 20px; }
-.life li { margin: 3px 0; }
-.life .foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
-.btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 12px; padding: 10px 16px; font-weight: 700; text-decoration: none; border: 1px solid transparent; cursor: pointer; font-size: 15.5px; }
-.btn.primary { background: var(--accent); color: var(--accent-ink); }
-.btn.ghost { border-color: var(--line); color: var(--ink); background: var(--surface); }
-.btn.ghost:hover { background: var(--surface-2); }
-.highlight { background: var(--gold-soft); border-radius: 10px; padding: 10px 12px; font-size: 15px; margin-bottom: 12px; }
-
-/* Kirchorte */
-.churches { display: grid; gap: 12px; }
-@media (min-width: 720px) { .churches { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1040px) { .churches { grid-template-columns: repeat(3, 1fr); } }
-.church { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 6px; }
-.church .place { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 700; }
-.church h3 { font-size: 21px; }
-.church .addr { color: var(--muted); font-size: 15px; }
-.church .rule { font-size: 15px; }
-.church .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-.church .acts button, .church .acts a { font-size: 14px; padding: 7px 12px; }
-.church.main { border-color: var(--accent); background: linear-gradient(180deg, var(--accent-soft), var(--surface) 70%); }
-
-/* News */
-.news { display: grid; gap: 14px; }
-@media (min-width: 900px) { .news { grid-template-columns: repeat(3, 1fr); } }
-.news article { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; display: flex; flex-direction: column; gap: 6px; }
-.news .kind { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; }
-.news p { color: var(--muted); font-size: 15.5px; }
-.news a.more { margin-top: auto; font-weight: 700; }
-
-/* Gruppen */
-.groups { display: grid; gap: 12px; }
-@media (min-width: 720px) { .groups { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1040px) { .groups { grid-template-columns: repeat(4, 1fr); } }
-.group { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.group h3 { font-size: 18px; margin-bottom: 4px; }
-.group p { font-size: 15px; color: var(--muted); margin-bottom: 8px; }
-.group a { font-weight: 700; font-size: 15px; }
-
-/* Hilfe */
-.help { display: grid; gap: 14px; }
-@media (min-width: 900px) { .help { grid-template-columns: 1fr 1fr 1fr; } }
-.help .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; }
-.help .card.urgent { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.help .card.urgent a { color: inherit; }
-.help .card.urgent .phone { font-family: var(--display); font-size: 30px; display: block; margin: 6px 0; text-decoration: none; }
-.help ul { margin: 0; padding-left: 18px; }
-.help li { margin: 6px 0; }
-
-/* Team */
-.team { display: grid; gap: 12px; }
-@media (min-width: 720px) { .team { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1040px) { .team { grid-template-columns: repeat(3, 1fr); } }
-.person { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: flex; gap: 14px; align-items: flex-start; }
-.avatar { width: 56px; height: 56px; border-radius: 50%; flex: none; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-family: var(--display); font-weight: 600; font-size: 20px; overflow: hidden; }
-.avatar img { width: 100%; height: 100%; object-fit: cover; }
-.person b { display: block; font-size: 17px; }
-.person .role { color: var(--muted); font-size: 14.5px; line-height: 1.35; display: block; margin-bottom: 6px; }
-.person a { display: block; font-size: 14.5px; word-break: break-word; }
-
-/* Kontakt */
-.contact { display: grid; gap: 20px; }
-@media (min-width: 900px) { .contact { grid-template-columns: 1fr 1.1fr; } }
-.hours { width: 100%; border-collapse: collapse; font-size: 16px; }
-.hours td { padding: 8px 0; border-bottom: 1px solid var(--line); }
-.hours td:last-child { text-align: right; }
-.hours tr.today td { font-weight: 700; color: var(--accent); }
-.status { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 4px 12px; font-weight: 700; font-size: 14.5px; margin-bottom: 14px; }
-.status.on { background: var(--ok-soft); color: var(--ok); }
-.status.off { background: var(--surface-2); color: var(--muted); }
-form.msg { display: grid; gap: 12px; }
-form.msg label { font-weight: 700; font-size: 15px; display: grid; gap: 6px; }
-form.msg input, form.msg select, form.msg textarea { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 12px 14px; width: 100%; }
-form.msg textarea { min-height: 120px; resize: vertical; }
-
-/* Pastorale Einheit */
-.unit { display: grid; gap: 20px; align-items: center; }
-@media (min-width: 900px) { .unit { grid-template-columns: 1fr 1fr; } }
-.unit-map { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.unit-map div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
-.unit-map div.me { border-color: var(--accent); background: var(--accent-soft); }
-.unit-map b { display: block; }
-.unit-map span { color: var(--muted); font-size: 14px; }
-
-footer { background: var(--hero); color: var(--on-hero-muted); padding: 40px 0 100px; font-size: 15px; }
-footer a { color: var(--on-hero); }
-footer .cols { display: grid; gap: 24px; }
-@media (min-width: 900px) { footer .cols { grid-template-columns: 1.4fr 1fr 1fr; } footer { padding-bottom: 40px; } }
-footer h3 { color: var(--on-hero); font-size: 17px; margin-bottom: 8px; }
-footer ul { list-style: none; margin: 0; padding: 0; }
-footer li { margin: 4px 0; }
-
-/* Tab-Leiste auf dem Handy */
-.tabbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-template-columns: repeat(4, 1fr); background: var(--surface); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0); }
-.tabbar a { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 4px 9px; text-decoration: none; color: var(--muted); font-size: 12px; font-weight: 700; }
-.tabbar a:active { color: var(--accent); }
-@media (min-width: 900px) { .tabbar { display: none; } }
-@media (max-width: 899px) { body { padding-bottom: 64px; } }
-
-@media print {
-  header.top, .tabbar, .hero, .notice, #start, #aktuelles, #gruppen, #hilfe, #team, #einheit, #kontakt, #lebenswege, #kirchorte, footer, .days, .filters { display: none !important; }
-  body { background: #fff; color: #000; padding: 0; }
-  section.block { padding: 0; }
-  details.plan { border: 0; } details.plan > * { display: block; }
-}
-</style>
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(_){}</script>
 </head>
-<body>
+<body data-page="index">
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
-
-<div class="notice" role="note"><div class="wrap"><strong>Entwurf</strong><span>Neugestaltung als Schulprojekt – keine offizielle Seite der Pfarrei. Angaben übernommen von <a href="https://www.katholisch-in-wipperfuerth.de/">katholisch-in-wipperfuerth.de</a> (Stand 3.&nbsp;November&nbsp;2026), bitte dort bzw. in den Pfarrnachrichten prüfen.</span></div></div>
-
+<div class="notice" role="note"><div class="wrap"><strong>Entwurf</strong><span>Neugestaltung als Schulprojekt – keine offizielle Seite der Pfarrei. Angaben von <a href="https://www.katholisch-in-wipperfuerth.de/">katholisch-in-wipperfuerth.de</a>, Stand 3. November 2026.</span></div></div>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#" aria-label="Katholisch in Wipperfürth – Startseite">
-      <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--accent)"/><path d="M20 7v26M13 14h14" stroke="var(--accent-ink)" stroke-width="3" stroke-linecap="round"/><path d="M11 33c0-6 4-9 9-9s9 3 9 9" fill="none" stroke="var(--accent-ink)" stroke-width="2.4" stroke-linecap="round" opacity=".7"/></svg>
-      <span><b>Katholisch in Wipperfürth</b><small>Pfarrei St. Nikolaus</small></span>
-    </a>
-    <nav class="main" aria-label="Hauptmenü">
-      <a href="#gottesdienste">Gottesdienste</a>
-      <a href="#lebenswege">Taufe, Hochzeit &amp; Co.</a>
-      <a href="#kirchorte">Kirchorte</a>
-      <a href="#gruppen">Mitmachen</a>
-      <a href="#hilfe">Hilfe</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
+    <a class="brand" href="index.html" aria-label="Katholisch in Wipperfürth – Startseite"><svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--accent)"/><path d="M20 7v26M13 14h14" stroke="var(--accent-ink)" stroke-width="3" stroke-linecap="round"/><path d="M11 33c0-6 4-9 9-9s9 3 9 9" fill="none" stroke="var(--accent-ink)" stroke-width="2.4" stroke-linecap="round" opacity=".7"/></svg><span><b>Katholisch in Wipperfürth</b><small>Pfarrei St. Nikolaus</small></span></a>
+    <nav class="main" aria-label="Hauptmenü"><a href="gottesdienste.html">Gottesdienste</a><a href="anliegen.html">Taufe, Hochzeit &amp; Co.</a><a href="kirchorte.html">Kirchorte</a><a href="gruppen.html">Gruppen</a><a href="aktuelles.html">Aktuelles</a><a href="hilfe.html">Hilfe</a><a href="kontakt.html">Kontakt</a></nav>
     <div class="head-actions">
+      <button class="icon-btn" id="searchBtn" type="button" aria-label="Suche öffnen" aria-expanded="false" aria-controls="searchpanel"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
       <button class="icon-btn" id="themeBtn" type="button" aria-label="Hell/Dunkel umschalten"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
       <button class="icon-btn" id="menuBtn" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="drawer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
-  <nav class="drawer" id="drawer" aria-label="Menü">
-    <a href="#gottesdienste">Gottesdienste</a>
-    <a href="#lebenswege">Taufe, Hochzeit, Trauerfall …</a>
-    <a href="#kirchorte">Kirchorte</a>
-    <a href="#aktuelles">Aktuelles</a>
-    <a href="#gruppen">Gruppen &amp; Mitmachen</a>
-    <a href="#hilfe">Hilfe &amp; Schutz</a>
-    <a href="#team">Ansprechpersonen</a>
-    <a href="#kontakt">Pastoralbüro &amp; Kontakt</a>
-  </nav>
+  <div class="searchpanel" id="searchpanel"><div class="wrap"><form class="search" role="search" action="suche.html" data-search>
+  <label class="sr" for="q2">Was suchst du?</label><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+  <input id="q2" name="q" type="search" placeholder="Was suchst du? z. B. Taufe, Beichte, Messdiener" autocomplete="off">
+  <div class="results" role="listbox" hidden></div>
+</form></div></div>
+  <nav class="drawer" id="drawer" aria-label="Menü"><a href="index.html" aria-current="page">Start</a><a href="gottesdienste.html">Gottesdienste</a><a href="anliegen.html">Taufe, Hochzeit &amp; Co.</a><a href="kirchorte.html">Kirchorte</a><a href="gruppen.html">Gruppen</a><a href="aktuelles.html">Aktuelles</a><a href="hilfe.html">Hilfe</a><a href="kontakt.html">Kontakt</a><a href="team.html">Ansprechpersonen</a><a href="messe-bestellen.html">Messe bestellen</a></nav>
 </header>
-
 <main id="inhalt">
+
 <section class="hero" aria-labelledby="h1">
   <div class="wrap">
     <div>
       <div class="eyebrow">Pfarrei St. Nikolaus · 10 Kirchen · ein Ort für dich</div>
       <h1 id="h1">Willkommen in <em>Wipperfürth.</em></h1>
       <p class="lead">Gottesdienste, Taufe, Hochzeit, Abschied, Gemeinschaft und Hilfe – hier findest du schnell, was du suchst. Egal, ob du jeden Sonntag kommst oder lange nicht mehr da warst.</p>
-      <div class="search" role="search">
-        <label class="sr" for="q">Was suchst du?</label>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="q" type="search" placeholder="Was suchst du? z. B. Taufe, Beichte, Messdiener" autocomplete="off" aria-controls="qres" aria-autocomplete="list">
-        <div class="results" id="qres" role="listbox" hidden></div>
-      </div>
+      <form class="search" role="search" action="suche.html" data-search>
+  <label class="sr" for="q">Was suchst du?</label><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+  <input id="q" name="q" type="search" placeholder="Was suchst du? z. B. Taufe, Beichte, Messdiener" autocomplete="off">
+  <div class="results" role="listbox" hidden></div>
+</form>
       <div class="chips-hero" aria-label="Häufig gesucht">
-        <a href="#gottesdienste">Messe am Sonntag</a>
-        <a href="#taufe">Taufe anmelden</a>
-        <a href="#sterbefall">Trauerfall</a>
-        <a href="#kontakt">Messe bestellen</a>
+        <a href="gottesdienste.html">Messe am Sonntag</a><a href="taufe.html">Taufe anmelden</a><a href="trauerfall.html">Trauerfall</a><a href="messe-bestellen.html">Messe bestellen</a>
       </div>
     </div>
     <div class="now" aria-live="polite">
       <div class="now-card">
         <div class="label">Nächster Gottesdienst</div>
-        <div class="big" id="nextTitle">–</div>
-        <div class="sub" id="nextSub"></div>
+        <div class="big" id="nextTitle">Sa 18:00 · So 08:00 &amp; 11:00</div>
+        <div class="sub" id="nextSub">St. Nikolaus, Kirchplatz · <a href="gottesdienste.html">alle Zeiten</a></div>
       </div>
       <div class="now-card">
         <div class="label">Pastoralbüro</div>
-        <div class="big" id="officeNow">–</div>
-        <div class="sub"><a href="tel:+492267881870">02267 88187-0</a> · <a href="mailto:pastoralbuero-wipp@erzbistum-koeln.de">E-Mail schreiben</a></div>
+        <div class="big" id="officeNow">Mo–Fr ab 08:30</div>
+        <div class="sub"><a href="tel:+492267881870">02267 88187-0</a> · <a href="kontakt.html">Kontakt &amp; Öffnungszeiten</a></div>
       </div>
       <div class="now-card">
         <div class="label">Seelsorglicher Notruf – rund um die Uhr</div>
@@ -354,271 +71,63 @@ footer li { margin: 4px 0; }
   </div>
 </section>
 
-<section class="block" id="start" aria-labelledby="h-start">
+<section class="block" aria-labelledby="h-start">
   <div class="wrap">
     <div class="sec-head"><div><div class="eyebrow">Ich möchte …</div><h2 id="h-start">Die häufigsten Anliegen</h2></div></div>
-    <div class="quick">
-      <a href="#taufe"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span><b>mein Kind taufen lassen</b><span>Taufsonntage &amp; Tauftreff</span></a>
-      <a href="#hochzeit"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/></svg></span><b>kirchlich heiraten</b><span>ca. 6–12 Monate vorher melden</span></a>
-      <a href="#sterbefall"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M7 8h10"/></svg></span><b>einen Trauerfall melden</b><span>Was jetzt zu tun ist</span></a>
-      <a href="#kontakt" data-topic="Messbestellung"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4c-3 4-3 7 0 9 3-2 3-5 0-9zM8 20h8M12 13v7"/></svg></span><b>eine Messe bestellen</b><span>für Verstorbene oder ein Anliegen</span></a>
-      <a href="#beichte"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5h16v10H9l-5 4z"/></svg></span><b>reden oder beichten</b><span>Gespräch mit Seelsorger:in</span></a>
-      <a href="#gruppen"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M15 14.5c3 0 6 2 6 5.5"/></svg></span><b>mitmachen</b><span>Chöre, Jugend, Ehrenamt</span></a>
+    <div class="tiles"><a href="gottesdienste.html"><b>Gottesdienste</b><span>Alle Zeiten in 10 Kirchen – heute, morgen, am Wochenende.</span><span class="go">Öffnen →</span></a><a href="taufe.html"><b>Taufe</b><span>Taufsonntage, Tauftreff und Anmeldung.</span><span class="go">Öffnen →</span></a><a href="hochzeit.html"><b>Hochzeit</b><span>Termine, Unterlagen und Ablauf der Trauung.</span><span class="go">Öffnen →</span></a><a href="trauerfall.html"><b>Trauerfall</b><span>Was jetzt zu tun ist – und wer hilft.</span><span class="go">Öffnen →</span></a><a href="erstkommunion.html"><b>Erstkommunion</b><span>Termine 2027 und Vorbereitung.</span><span class="go">Öffnen →</span></a><a href="beichte.html"><b>Beichte &amp; Gespräch</b><span>Samstags 17:00 in St. Nikolaus oder nach Absprache.</span><span class="go">Öffnen →</span></a><a href="messe-bestellen.html"><b>Messe bestellen</b><span>Für Verstorbene oder ein persönliches Anliegen.</span><span class="go">Öffnen →</span></a><a href="gruppen.html"><b>Mitmachen</b><span>Messdiener, Chöre, Pfadfinder, Ehrenamt.</span><span class="go">Öffnen →</span></a></div>
+  </div>
+</section>
+
+<section class="block alt" aria-labelledby="h-week">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow">Jede Woche</div><h2 id="h-week">Gottesdienste am Wochenende</h2>
+    <p>Die wichtigsten Zeiten auf einen Blick. Alle Gottesdienste mit Tagesansicht und Filtern findest du auf der Gottesdienst-Seite.</p></div>
+    <a class="btn primary" href="gottesdienste.html">Alle Gottesdienste</a></div>
+    <div class="week">
+      <div><b>Sa 17:00</b><span>Beichtgelegenheit · St. Nikolaus</span></div>
+      <div><b>Sa 18:00</b><span>Vorabendmesse · St. Nikolaus</span></div>
+      <div><b>Sa 19:00</b><span>Hl. Messe, wechselnd: 1. Sa Egen · 2. Sa Hämmern · 3. Sa Niederwipper · 4. Sa Ommerborn</span></div>
+      <div><b>So 08:00</b><span>Hl. Messe · St. Nikolaus</span></div>
+      <div><b>So 09:30</b><span>1./3. So Agathaberg &amp; Thier · 2./4. So Kreuzberg &amp; Wipperfeld</span></div>
+      <div><b>So 11:00</b><span>Hochamt · St. Nikolaus <span class="muted">(3. So zusätzlich Familiengottesdienst in Neye)</span></span></div>
+      <div><b>So 19:00</b><span>Hl. Messe · St. Michael, Neye</span></div>
     </div>
   </div>
 </section>
 
-<section class="block alt" id="gottesdienste" aria-labelledby="h-gd">
+<section class="block" aria-labelledby="h-news">
   <div class="wrap">
-    <div class="sec-head">
-      <div><div class="eyebrow">Die nächsten 7 Tage</div><h2 id="h-gd">Gottesdienste finden</h2>
-      <p>Alle regelmäßigen Gottesdienste in den zehn Kirchen und den Seniorenheimen – automatisch für die kommenden Tage berechnet. Änderungen, Feiertage und Ferien stehen in den <a href="https://www.katholisch-in-wipperfuerth.de/aktuelles/pfarrnachichten/">Pfarrnachrichten</a>.</p></div>
-      <button class="btn ghost" type="button" onclick="window.print()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M7 14h10v7H7z"/></svg>Plan drucken</button>
-    </div>
-    <div class="svc-grid">
-      <div>
-        <div class="days" id="days" role="group" aria-label="Tag wählen"></div>
-        <div class="filters">
-          <span class="sr">Art</span>
-          <button class="chip" type="button" data-kind="all" aria-pressed="true">Alle</button>
-          <button class="chip" type="button" data-kind="mass" aria-pressed="false">Hl. Messe</button>
-          <button class="chip" type="button" data-kind="fam" aria-pressed="false">Familie &amp; Kinder</button>
-          <button class="chip" type="button" data-kind="prayer" aria-pressed="false">Andacht &amp; Gebet</button>
-          <button class="chip" type="button" data-kind="school" aria-pressed="false">Schule</button>
-          <label class="sr" for="placeSel">Ort</label>
-          <select id="placeSel"><option value="">Alle Orte</option></select>
-        </div>
-        <div class="svc-list" id="svcList" aria-live="polite"></div>
-      </div>
-      <aside>
-        <div class="side-card">
-          <h3>Am Wochenende</h3>
-          <ul class="small">
-            <li><b>Sa 18:00</b> Vorabendmesse, St. Nikolaus</li>
-            <li><b>So 08:00</b> Hl. Messe, St. Nikolaus</li>
-            <li><b>So 09:30</b> wechselnd in Agathaberg, Thier, Kreuzberg, Wipperfeld</li>
-            <li><b>So 11:00</b> Hochamt, St. Nikolaus</li>
-            <li><b>So 19:00</b> Hl. Messe, St. Michael Neye</li>
-          </ul>
-        </div>
-        <div class="side-card">
-          <h3>Für Familien</h3>
-          <p class="small muted" style="margin:0">Familiengottesdienst am <b>3. Sonntag</b> um 11:00 und Kleine-Leute-Gottesdienst am <b>letzten Sonntag</b> im Monat um 10:30 – beide in St. Michael, Neye.</p>
-        </div>
-        <div class="side-card">
-          <h3>Messe bestellen</h3>
-          <p class="small muted">Für Verstorbene, zum Geburtstag oder für ein persönliches Anliegen.</p>
-          <a class="btn ghost" href="#kontakt" data-topic="Messbestellung">Anfrage stellen</a>
-        </div>
-      </aside>
-    </div>
-    <details class="plan" id="planAll">
-      <summary>Komplette Gottesdienstordnung aller Kirchen anzeigen</summary>
-      <div class="plan-table" id="planTable"></div>
-    </details>
+    <div class="sec-head"><div><div class="eyebrow">Aktuelles</div><h2 id="h-news">Was gerade los ist</h2></div><a class="btn ghost" href="aktuelles.html">Alle Meldungen</a></div>
+    <div class="news"><article><span class="kind">Firmung · Mitte November 2026</span><h3>Firmung in St. Michael, Neye</h3><p>Die Jugendlichen des Jahrgangs 2010 werden in Neye gefirmt – in Abstimmung mit Weihbischof Ansgar Puff. Bitte betet für sie!</p><a class="more" href="firmung.html">Zur Firmung →</a></article><article><span class="kind">Termin · Sa, 5. Dezember 2026</span><h3>Tauftreff in St. Nikolaus</h3><p>Für Eltern, die ihr Kind taufen lassen möchten: kennenlernen, Fragen klären, Taufe vorbereiten. 10:30 Uhr.</p><a class="more" href="taufe.html">Zur Taufe →</a></article><article><span class="kind">Patrozinium · 6. Dezember</span><h3>Fest des hl. Nikolaus</h3><p>Unser Pfarrpatron steht für Großzügigkeit und den Schutz der Kinder. Die Festgottesdienste stehen in den Pfarrnachrichten.</p><a class="more" href="https://www.katholisch-in-wipperfuerth.de/aktuelles/pfarrnachichten/">Pfarrnachrichten →</a></article></div>
   </div>
 </section>
 
-<section class="block" id="lebenswege" aria-labelledby="h-life">
-  <div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">Sakramente &amp; Lebenswege</div><h2 id="h-life">Wir begleiten dich – an wichtigen Tagen</h2>
-    <p>Für jeden Schritt: was du tun musst, wen du ansprichst und wie viel Zeit du einplanen solltest. Erster Kontakt ist immer das Pastoralbüro.</p></div></div>
-    <div class="life">
-      <article id="taufe">
-        <div class="when">Taufe</div>
-        <h3>Willkommen in der Gemeinschaft</h3>
-        <div class="highlight"><b>Nächster Tauftreff:</b> Sa, 5. Dezember 2026, 10:30 Uhr in St. Nikolaus</div>
-        <ol>
-          <li>Im Pastoralbüro melden – Termin wird gemeinsam abgestimmt.</li>
-          <li>Zum Tauftreff kommen und Taufgespräch führen.</li>
-          <li>Taufe feiern: ab 2027 in St. Nikolaus am <b>2. Sonntag 12:15</b> und <b>4. Sonntag 15:00</b> (bis zu 3 Familien), auch in Sonntagsmessen oder Familiengottesdiensten möglich.</li>
-        </ol>
-        <div class="foot"><a class="btn primary" href="#kontakt" data-topic="Taufe">Taufe anfragen</a><a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/geistliche-angebote/taufe/">Details</a></div>
-      </article>
-      <article id="kommunion">
-        <div class="when">Erstkommunion</div>
-        <h3>Das erste Mal am Tisch des Herrn</h3>
-        <ol>
-          <li>Familien mit Kindern im 3. Schuljahr erhalten eine Einladung.</li>
-          <li>Vorbereitung in Gruppen und Familiengottesdiensten.</li>
-          <li>Feier der Erstkommunion in der Osterzeit.</li>
-        </ol>
-        <p class="small muted">Keine Einladung bekommen? Einfach im Büro melden.</p>
-        <div class="foot"><a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/geistliche-angebote/erstkommunion-eucharistie/">Details</a></div>
-      </article>
-      <article id="firmung">
-        <div class="when">Firmung</div>
-        <h3>Ja sagen – selbst entscheiden</h3>
-        <ol>
-          <li>Jugendliche werden eingeladen; Anmeldung über das Büro.</li>
-          <li>Vorbereitung mit Projekten und Gemeinschaft.</li>
-          <li>Firmfeier mit dem Bischof bzw. seinem Beauftragten.</li>
-        </ol>
-        <div class="foot"><a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/geistliche-angebote/firmung/">Details</a></div>
-      </article>
-      <article id="hochzeit">
-        <div class="when">Hochzeit</div>
-        <h3>Den Bund fürs Leben schließen</h3>
-        <ol>
-          <li>Möglichst 6–12 Monate vorher Kontakt aufnehmen und Wunschtermin abstimmen.</li>
-          <li>Traugespräch mit dem Seelsorger, Unterlagen (u.&nbsp;a. Taufschein) besorgen.</li>
-          <li>Trauung in einer unserer zehn Kirchen feiern.</li>
-        </ol>
-        <div class="foot"><a class="btn primary" href="#kontakt" data-topic="Hochzeit">Trauung anfragen</a><a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/geistliche-angebote/Hochzeit/">Details</a></div>
-      </article>
-      <article id="beichte">
-        <div class="when">Versöhnung &amp; Gespräch</div>
-        <h3>Etwas loswerden dürfen</h3>
-        <p>Beichte und seelsorgliches Gespräch sind jederzeit nach Vereinbarung möglich – mit einem Priester oder jemandem aus dem Seelsorgeteam, vertraulich.</p>
-        <div class="foot"><a class="btn primary" href="#team">Seelsorger:in wählen</a><a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/geistliche-angebote/versoehnung-beichte/">Details</a></div>
-      </article>
-      <article id="krankheit">
-        <div class="when">Krankheit</div>
-        <h3>Krankensalbung &amp; Besuch</h3>
-        <p>Bei schwerer Krankheit, vor einer Operation oder im Alter kommt ein Priester nach Hause, ins Krankenhaus oder ins Heim. Im Notfall jederzeit:</p>
-        <div class="foot"><a class="btn primary" href="tel:+4922678818777">02267 88187-77</a></div>
-      </article>
-      <article id="sterbefall">
-        <div class="when">Sterbefall</div>
-        <h3>Abschied nehmen</h3>
-        <ol>
-          <li>Bestattungsinstitut beauftragen – es meldet sich bei uns zur Terminabsprache.</li>
-          <li>Trauergespräch mit der Person, die die Beerdigung hält.</li>
-          <li>Begräbnisfeier und Sechswochenamt; auf Wunsch weitere Messen.</li>
-        </ol>
-        <p class="small muted">Sterbebegleitung oder Gebet am Sterbebett: Notruf 02267 88187-77.</p>
-        <div class="foot"><a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/geistliche-angebote/sterbefall/">Details</a><a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/orte-kirchlichen-lebens/friedhoefe/">Friedhöfe</a></div>
-      </article>
-      <article id="wiedereintritt">
-        <div class="when">Zurückkommen</div>
-        <h3>Wieder dazugehören</h3>
-        <p>Du bist ausgetreten und denkst über einen Wiedereintritt nach – oder möchtest als Erwachsene:r getauft werden? Ein unverbindliches Gespräch ist der erste Schritt. Deine Taufe bleibt gültig.</p>
-        <div class="foot"><a class="btn ghost" href="#kontakt" data-topic="Wiedereintritt / Erwachsenentaufe">Gespräch anfragen</a></div>
-      </article>
-      <article id="wallfahrt">
-        <div class="when">Unterwegs</div>
-        <h3>Wallfahrten &amp; Prozessionen</h3>
-        <p>Von Fronleichnam bis zur Gemeindereise: Gemeinsam unterwegs sein hat in Wipperfürth Tradition. 2027 geht die Gemeindereise zu den Donauklöstern und nach Wien.</p>
-        <div class="foot"><a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/geistliche-angebote/wallfahrten-prozessionen/">Details</a></div>
-      </article>
+<section class="block alt" aria-labelledby="h-kirche">
+  <div class="wrap feature">
+    <div>
+      <div class="eyebrow">Unsere Pfarrkirche</div>
+      <h2 id="h-kirche">St. Nikolaus – seit 1143</h2>
+      <p style="margin-top:14px">Stiftsherren von St. Aposteln in Köln begannen 1143 mit dem Bau. Entstanden ist eine dreischiffige romanische Pfeilerbasilika mit Kreuzrippengewölben aus dem 13. Jahrhundert. Das Taufbecken stammt aus den ersten Jahrzehnten des 13. Jahrhunderts – hier wird bis heute getauft.</p>
+      <p class="muted">Zur Pfarrei gehören zehn Kirchen von Agathaberg bis Wipperfeld, rund 9.970 Katholik:innen leben in Wipperfürth.</p>
+      <a class="btn ghost" href="kirchorte.html">Alle Kirchorte</a>
+    </div>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 200 150" width="70%" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+        <path d="M92 10v12M86 16h12"/><path d="M78 140V46l14-20 14 20v94"/><path d="M106 70h70v70H106M78 70H24v70h54"/>
+        <path d="M24 70l27-22 27 22M106 70l35-26 35 26"/><path d="M86 140v-22a6 6 0 0 1 12 0v22"/>
+        <path d="M38 96v-8a5 5 0 0 1 10 0v8zM58 96v-8a5 5 0 0 1 10 0v8zM122 96v-8a5 5 0 0 1 10 0v8zM150 96v-8a5 5 0 0 1 10 0v8z"/>
+        <path d="M86 62v-6a6 6 0 0 1 12 0v6z"/><path d="M10 140h180"/>
+      </svg>
     </div>
   </div>
 </section>
 
-<section class="block alt" id="kirchorte" aria-labelledby="h-orte">
-  <div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">10 Kirchen · 1 Pfarrei</div><h2 id="h-orte">Unsere Kirchorte</h2>
-    <p>Von der Pfarrkirche in der Altstadt bis zur Dorfkirche: Wähle einen Ort, um nur dessen Gottesdienste zu sehen.</p></div></div>
-    <div class="churches" id="churches"></div>
-  </div>
-</section>
-
-<section class="block" id="aktuelles" aria-labelledby="h-news">
-  <div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">Aktuelles</div><h2 id="h-news">Was gerade los ist</h2></div>
-      <a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/aktuelles/pfarrnachichten/">Pfarrnachrichten lesen</a></div>
-    <div class="news">
-      <article>
-        <span class="kind">Termin · 5. Dezember 2026</span>
-        <h3>Tauftreff in St. Nikolaus</h3>
-        <p>Für Eltern, die ihr Kind taufen lassen möchten: Kennenlernen, Fragen klären, Taufe vorbereiten. Samstag, 10:30 Uhr.</p>
-        <a class="more" href="#taufe">Zur Taufe →</a>
-      </article>
-      <article>
-        <span class="kind">Ehrenamt gesucht</span>
-        <h3>Taufgeschenke überbringen</h3>
-        <p>Wir suchen Menschen, die neu getauften Kindern und ihren Familien ein kleines Geschenk der Gemeinde vorbeibringen – ein schöner, überschaubarer Einsatz.</p>
-        <a class="more" href="https://www.katholisch-in-wipperfuerth.de/aktuelles/aktuelles/Wir-suchen-EhrenamtlerInnen/">Mehr erfahren →</a>
-      </article>
-      <article>
-        <span class="kind">Schöpfung bewahren</span>
-        <h3>Schöpfungsbotschafter:in werden</h3>
-        <p>Mit der Aktion „Klima+Kirche“ des Erzbistums und unserem Projekt Schöpfungsverantwortung (nach „Laudato Si’“) machen wir die Pfarrei klimafreundlicher. Mach mit!</p>
-        <a class="more" href="https://www.katholisch-in-wipperfuerth.de/aktuelles/aktuelles/Schoepfungsbotschafterin/">Mehr erfahren →</a>
-      </article>
-      <article>
-        <span class="kind">Gemeindereise 2027</span>
-        <h3>Donauklöster und Wien</h3>
-        <p>Gemeinsam reisen, Klöster entdecken, Gemeinschaft erleben. Infos und Anmeldung über das Pastoralbüro.</p>
-        <a class="more" href="#kontakt" data-topic="Gemeindereise 2027">Interesse melden →</a>
-      </article>
-      <article>
-        <span class="kind">Stellenangebot</span>
-        <h3>Leitung für KiTa St. Raphael, Kreuzberg</h3>
-        <p>Zum 1. September 2026 gesucht. Weitere offene Stellen u. a. in der Beratungsstelle Herbstmühle.</p>
-        <a class="more" href="https://www.katholisch-in-wipperfuerth.de/aktuelles/offene-stellen/">Alle Stellen →</a>
-      </article>
-      <article>
-        <span class="kind">Patrozinium</span>
-        <h3>6. Dezember: Fest des hl. Nikolaus</h3>
-        <p>Unser Pfarrpatron steht für Großzügigkeit und Schutz der Kinder. Die Festgottesdienste stehen in den Pfarrnachrichten.</p>
-        <a class="more" href="https://www.katholisch-in-wipperfuerth.de/aktuelles/pfarrnachichten/">Pfarrnachrichten →</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="block alt" id="gruppen" aria-labelledby="h-groups">
-  <div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">Gemeinschaft</div><h2 id="h-groups">Finde deine Gruppe</h2>
-    <p>Singen, Zelten, Ministrieren, Diskutieren – oder einfach mal ab und zu helfen. Wähle aus, was zu dir passt.</p></div></div>
-    <div class="filters" id="groupFilters">
-      <button class="chip" type="button" data-g="all" aria-pressed="true">Alle</button>
-      <button class="chip" type="button" data-g="kinder" aria-pressed="false">Kinder</button>
-      <button class="chip" type="button" data-g="jugend" aria-pressed="false">Jugend</button>
-      <button class="chip" type="button" data-g="erw" aria-pressed="false">Erwachsene</button>
-      <button class="chip" type="button" data-g="sen" aria-pressed="false">Senior:innen</button>
-      <button class="chip" type="button" data-g="musik" aria-pressed="false">Musik</button>
-    </div>
-    <div class="groups" id="groups"></div>
-  </div>
-</section>
-
-<section class="block" id="hilfe" aria-labelledby="h-help">
-  <div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">Hilfe &amp; Schutz</div><h2 id="h-help">Du bist nicht allein</h2>
-    <p>Kirche heißt auch: da sein, wenn es schwer wird. Und alles dafür tun, dass Kinder und Schutzbedürftige bei uns sicher sind.</p></div></div>
-    <div class="help">
-      <div class="card urgent">
-        <h3>Akute Not</h3>
-        <p style="margin:6px 0 0">Seelsorglicher Notruf der Pfarrei</p>
-        <a class="phone" href="tel:+4922678818777">02267 88187-77</a>
-        <p class="small" style="margin:0">Telefonseelsorge, anonym &amp; kostenlos: <a href="tel:08001110111">0800 111 0 111</a> · <a href="tel:08001110222">0800 111 0 222</a></p>
-      </div>
-      <div class="card">
-        <h3>Beratung &amp; Unterstützung</h3>
-        <ul>
-          <li><a href="https://www.katholisch-in-wipperfuerth.de/ansprechpartner/caritas/">Caritas vor Ort</a> – Hilfe in finanzieller und sozialer Not</li>
-          <li><a href="https://www.katholisch-in-wipperfuerth.de/orte-kirchlichen-lebens/institutionen/psychologische-beratungsstelle/">Psychologische Beratungsstelle</a> für Ehe-, Familien- und Lebensfragen</li>
-          <li><a href="https://www.katholisch-in-wipperfuerth.de/orte-kirchlichen-lebens/institutionen/haus-der-familie/">Haus der Familie</a> &amp; <a href="https://www.katholisch-in-wipperfuerth.de/orte-kirchlichen-lebens/institutionen/familienzentrum/">Familienzentrum</a></li>
-          <li>Krankenhausseelsorge Helios-Klinik: Georg Kalkum</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Prävention &amp; Schutz</h3>
-        <p>Alle, die bei uns mit Kindern und Jugendlichen arbeiten, sind geschult und haben ein erweitertes Führungszeugnis vorgelegt. Bei Verdacht oder Sorge gibt es eine unabhängige Ansprechperson.</p>
-        <a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/ansprechpartner/praeventionsfachkraft/">Präventionsfachkraft kontaktieren</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="block alt" id="team" aria-labelledby="h-team">
-  <div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">Ansprechpersonen</div><h2 id="h-team">Unser Seelsorgeteam</h2>
-    <p>Direkt erreichbar – per Telefon oder E-Mail.</p></div>
-    <a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/ansprechpartner/kirchenmusiker/">Kirchenmusik, Küster &amp; Gremien</a></div>
-    <div class="team" id="teamList"></div>
-  </div>
-</section>
-
-<section class="block" id="einheit" aria-labelledby="h-unit">
+<section class="block" aria-labelledby="h-unit">
   <div class="wrap unit">
     <div>
       <div class="eyebrow">Kirche im Wandel</div>
-      <h2 id="h-unit">Gemeinsam: Pastorale Einheit Oberberg-Nord</h2>
+      <h2 id="h-unit">Pastorale Einheit Oberberg-Nord</h2>
       <p style="margin-top:14px">Seit dem 1. September 2023 bildet unsere Pfarrei mit Lindlar, Marienheide und Hückeswagen/Radevormwald eine Pastorale Einheit. Pfarrer Lambert Schäfer ist koordinierender Pfarrer. Wir teilen Ideen, Personal und Angebote – und bleiben vor Ort ansprechbar.</p>
-      <p class="muted">Rund 9.970 Katholik:innen leben in Wipperfürth. Unser Leitbild: Raum für vielfältige Gottesbegegnung, offen für Suchende und Fernstehende, getragen von vielen Ehrenamtlichen.</p>
       <a class="btn ghost" href="https://www.katholisch-in-wipperfuerth.de/oberberg-nord/oberberg-nord-gemeinsam/">Mehr zu Oberberg-Nord</a>
     </div>
     <div class="unit-map" aria-label="Partner der Pastoralen Einheit">
@@ -629,390 +138,31 @@ footer li { margin: 4px 0; }
     </div>
   </div>
 </section>
-
-<section class="block alt" id="kontakt" aria-labelledby="h-contact">
-  <div class="wrap">
-    <div class="sec-head"><div><div class="eyebrow">Kontakt</div><h2 id="h-contact">Pastoralbüro</h2>
-    <p>Gudrun Spiller, Jutta Bach und Stefanie Knop sind für dich da – für Anmeldungen, Messbestellungen, Bescheinigungen und alle Fragen.</p></div></div>
-    <div class="contact">
-      <div class="side-card">
-        <span class="status off" id="officeBadge">–</span>
-        <p><b>Kath. Pfarrei St. Nikolaus</b><br>Kirchplatz 1<br>51688 Wipperfürth</p>
-        <p>Telefon <a href="tel:+492267881870">02267 88187-0</a><br>Fax 02267 88187-70<br><a href="mailto:pastoralbuero-wipp@erzbistum-koeln.de">pastoralbuero-wipp@erzbistum-koeln.de</a></p>
-        <table class="hours" aria-label="Öffnungszeiten">
-          <tbody id="hoursBody"></tbody>
-        </table>
-        <p class="small muted" style="margin-top:12px">In den Sommerferien Mo–Fr 08:30–12:30. An Heiligabend und Silvester geschlossen.</p>
-        <a class="btn ghost" href="https://www.openstreetmap.org/search?query=Kirchplatz%201%2C%2051688%20Wipperf%C3%BCrth">Auf der Karte zeigen</a>
-      </div>
-      <div class="side-card">
-        <h3>Nachricht ans Büro</h3>
-        <p class="small muted">Das Formular öffnet dein E-Mail-Programm mit einer vorbereiteten Nachricht. Es wird nichts auf dieser Seite gespeichert.</p>
-        <form class="msg" id="msgForm">
-          <label>Anliegen
-            <select id="mTopic">
-              <option>Allgemeine Frage</option><option>Taufe</option><option>Hochzeit</option><option>Messbestellung</option><option>Sterbefall</option><option>Wiedereintritt / Erwachsenentaufe</option><option>Gemeindereise 2027</option><option>Ehrenamt / Mitmachen</option>
-            </select>
-          </label>
-          <label>Dein Name<input id="mName" required autocomplete="name"></label>
-          <label>Telefon für Rückruf (optional)<input id="mTel" type="tel" autocomplete="tel"></label>
-          <label>Nachricht<textarea id="mText" required placeholder="z. B. Wunschtermin, Name der/des Verstorbenen, Anliegen …"></textarea></label>
-          <button class="btn primary" type="submit">E-Mail vorbereiten</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
-
 <footer>
   <div class="wrap cols">
     <div>
       <h3>Katholisch in Wipperfürth</h3>
-      <p>Pfarrei St. Nikolaus · Kirchplatz 1 · 51688 Wipperfürth<br>Im Erzbistum Köln · Pastorale Einheit Oberberg-Nord</p>
-      <p class="small">Dieser Entwurf ist ein Schulprojekt und keine offizielle Seite der Pfarrei. Verbindlich sind <a href="https://www.katholisch-in-wipperfuerth.de/">katholisch-in-wipperfuerth.de</a> und die Pfarrnachrichten. <a href="konzept-entwurf-v1.html">Erster Konzeptentwurf</a></p>
+      <p>Kath. Pfarrei St. Nikolaus · Kirchplatz 1, 51688 Wipperfürth<br>Tel. 02267 88187-0 · <a href="mailto:pastoralbuero-wipp@erzbistum-koeln.de">pastoralbuero-wipp@erzbistum-koeln.de</a><br>Erzbistum Köln · Pastorale Einheit Oberberg-Nord</p>
+      <p class="small">Diese Website ist ein Schulprojekt (Q2 Kath. Religion) und keine offizielle Seite der Pfarrei. Verbindlich sind <a href="https://www.katholisch-in-wipperfuerth.de/">katholisch-in-wipperfuerth.de</a> und die Pfarrnachrichten.</p>
     </div>
     <div>
       <h3>Schnell gefunden</h3>
-      <ul><li><a href="#gottesdienste">Gottesdienste</a></li><li><a href="#taufe">Taufe</a></li><li><a href="#sterbefall">Trauerfall</a></li><li><a href="#gruppen">Gruppen</a></li><li><a href="#kontakt">Kontakt</a></li></ul>
+      <ul><li><a href="gottesdienste.html">Gottesdienste</a></li><li><a href="taufe.html">Taufe</a></li><li><a href="hochzeit.html">Hochzeit</a></li><li><a href="trauerfall.html">Trauerfall</a></li><li><a href="messe-bestellen.html">Messe bestellen</a></li><li><a href="team.html">Ansprechpersonen</a></li></ul>
     </div>
     <div>
       <h3>Links</h3>
-      <ul><li><a href="https://www.katholisch-in-wipperfuerth.de/">Offizielle Website</a></li><li><a href="https://www.erzbistum-koeln.de/">Erzbistum Köln</a></li><li><a href="https://www.katholisch-in-wipperfuerth.de/impressum/">Impressum</a> · <a href="https://www.katholisch-in-wipperfuerth.de/datenschutz/">Datenschutz</a></li></ul>
+      <ul><li><a href="https://www.katholisch-in-wipperfuerth.de/">Offizielle Website</a></li><li><a href="https://www.katholisch-in-wipperfuerth.de/aktuelles/pfarrnachichten/">Pfarrnachrichten</a></li><li><a href="https://www.erzbistum-koeln.de/">Erzbistum Köln</a></li><li><a href="https://www.katholisch-in-wipperfuerth.de/impressum/">Impressum</a> · <a href="https://www.katholisch-in-wipperfuerth.de/datenschutz/">Datenschutz</a></li><li><a href="konzept-entwurf-v1.html">Unser erster Konzeptentwurf</a></li></ul>
     </div>
   </div>
 </footer>
-
 <nav class="tabbar" aria-label="Schnellnavigation">
-  <a href="#gottesdienste"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Messen</a>
-  <a href="#lebenswege"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Anliegen</a>
-  <a href="#kirchorte"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2v4M10 4h4M6 21V11l6-5 6 5v10zM10 21v-5h4v5"/></svg>Kirchen</a>
-  <a href="#kontakt"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Kontakt</a>
+  <a href="gottesdienste.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Messen</a>
+  <a href="anliegen.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Anliegen</a>
+  <a href="kirchorte.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2v4M10 4h4M6 21V11l6-5 6 5v10zM10 21v-5h4v5"/></svg>Kirchen</a>
+  <a href="kontakt.html"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Kontakt</a>
 </nav>
-
-<script>
-(() => {
-"use strict";
-const $ = (s, r = document) => r.querySelector(s);
-const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-
-/* ---------- Daten (Stand 03.11.2026, katholisch-in-wipperfuerth.de) ---------- */
-const OLD = "https://www.katholisch-in-wipperfuerth.de/orte-kirchlichen-lebens/kirchenorte/";
-const CHURCHES = [
-  { id: "nik", name: "St. Nikolaus", place: "Wipperfürth (Pfarrkirche)", addr: "Kirchplatz 3", rule: "Täglich Hl. Messe, Sa 18:00, So 08:00 &amp; 11:00", url: OLD + "st.-nikolaus/", main: true },
-  { id: "neye", name: "St. Michael", place: "Neye", addr: "Paulstraße 10", rule: "So 19:00 · Familien- &amp; Kleine-Leute-Gottesdienste", url: OLD + "st.-michael/" },
-  { id: "aga", name: "St. Agatha", place: "Agathaberg", addr: "Agathaberg 24", rule: "1. &amp; 3. So 09:30", url: OLD + "st.-agatha/" },
-  { id: "kreuz", name: "St. Johannes Ap. u. Ev.", place: "Kreuzberg", addr: "Westfalenstraße 36", rule: "2. &amp; 4. So 09:30 · Do Andacht", url: OLD + "st.-johannes/" },
-  { id: "thier", name: "St. Anna", place: "Thier", addr: "Joh.-Wilh.-Roth-Straße 30a", rule: "1. &amp; 3. So 09:30 · Mi 09:00", url: OLD + "st.-anna-thier/" },
-  { id: "wipf", name: "St. Clemens", place: "Wipperfeld", addr: "Dorfstraße 8b", rule: "2. &amp; 4. So 09:30", url: OLD + "st.-clemens/" },
-  { id: "egen", name: "Unbefleckte Empfängnis", place: "Egen", addr: "Egen", rule: "1. Sa im Monat 19:00", url: OLD + "unbefleckte-empfaengnis/" },
-  { id: "haem", name: "St. Anna", place: "Hämmern", addr: "Jostberg 4", rule: "2. Sa im Monat 19:00", url: OLD + "st.-anna-haemmern/" },
-  { id: "nied", name: "Herz Jesu", place: "Niederwipper", addr: "Niederwipper 83", rule: "3. Sa im Monat 19:00", url: OLD + "herz-jesu/" },
-  { id: "omm", name: "St. Johannes der Täufer", place: "Ommerborn", addr: "Ommerborn", rule: "4. Sa im Monat 19:00", url: OLD + "st.-johannes-der-taeufer/" },
-  { id: "franz", name: "Franziskusheim", place: "Seniorenzentrum", addr: "Konrad-Martin-Weg 3", rule: "Sa 16:30", senior: true },
-  { id: "quart", name: "Senioren-Quartier", place: "Seniorenzentrum", addr: "Lüdenscheider Str. 49–51", rule: "1. Do im Monat 16:00", senior: true }
-];
-const C = Object.fromEntries(CHURCHES.map(c => [c.id, c]));
-
-/* d = Wochentag (0 So … 6 Sa); n = Woche im Monat (1–5) oder "last"; m = Monate (1–12); k = Art */
-const S = [
-  { c: "nik", d: [6], t: "18:00", title: "Vorabendmesse", k: "mass" },
-  { c: "nik", d: [0], t: "08:00", title: "Hl. Messe", k: "mass" },
-  { c: "nik", d: [0], t: "11:00", title: "Hochamt", k: "mass" },
-  { c: "nik", d: [1, 2, 5], t: "08:00", title: "Hl. Messe", k: "mass" },
-  { c: "nik", d: [3], t: "08:00", title: "Schulmesse", k: "school", note: "nicht in den Ferien" },
-  { c: "nik", d: [3], t: "18:00", title: "Hl. Messe", k: "mass" },
-  { c: "nik", d: [4], t: "08:00", title: "Hl. Messe / Schulmesse", k: "mass", note: "Schulmesse ggf. 08:15" },
-  { c: "neye", d: [0], t: "19:00", title: "Hl. Messe", k: "mass" },
-  { c: "neye", d: [0], n: [3], t: "11:00", title: "Familiengottesdienst", k: "fam", note: "Abweichungen in den Pfarrnachrichten" },
-  { c: "neye", d: [0], n: ["last"], t: "10:30", title: "Kleine-Leute-Gottesdienst", k: "fam" },
-  { c: "aga", d: [0], n: [1, 3], t: "09:30", title: "Hl. Messe", k: "mass" },
-  { c: "aga", d: [2], n: [1, 3], m: [3,4,5,6,7,8,9,10], t: "18:30", title: "Andacht", k: "prayer" },
-  { c: "kreuz", d: [0], n: [2, 4], t: "09:30", title: "Hl. Messe", k: "mass" },
-  { c: "kreuz", d: [4], t: "18:30", tw: "17:30", title: "Andacht", k: "prayer" },
-  { c: "kreuz", d: [3], n: [2], t: "08:00", title: "Schulmesse", k: "school", note: "nicht in den Ferien" },
-  { c: "kreuz", d: [3], n: [4], t: "08:00", title: "Schulgottesdienst", k: "school", note: "nicht in den Ferien" },
-  { c: "thier", d: [0], n: [1, 3], t: "09:30", title: "Hl. Messe", k: "mass" },
-  { c: "thier", d: [3], t: "09:00", title: "Hl. Messe bzw. Wortgottesdienst", k: "mass" },
-  { c: "thier", d: [5], t: "08:30", title: "Morgenlob", k: "prayer", note: "nicht in den Ferien" },
-  { c: "thier", d: [3], n: [2], t: "19:00", title: "Friedensgebet", k: "prayer" },
-  { c: "wipf", d: [0], n: [2, 4], t: "09:30", title: "Hl. Messe", k: "mass" },
-  { c: "wipf", d: [2], t: "08:00", title: "Schulgottesdienst", k: "school", note: "nicht in den Ferien" },
-  { c: "egen", d: [6], n: [1], t: "19:00", title: "Hl. Messe", k: "mass" },
-  { c: "haem", d: [6], n: [2], t: "19:00", title: "Hl. Messe", k: "mass" },
-  { c: "nied", d: [6], n: [3], t: "19:00", title: "Hl. Messe", k: "mass" },
-  { c: "omm", d: [6], n: [4], t: "19:00", title: "Hl. Messe", k: "mass" },
-  { c: "franz", d: [6], t: "16:30", title: "Hl. Messe", k: "mass" },
-  { c: "quart", d: [4], n: [1], t: "16:00", title: "Hl. Messe", k: "mass" }
-];
-const EXTRA_PLAN = {
-  nik: [], aga: ["Schulgottesdienste nach Absprache (3–4× im Jahr)"],
-  kreuz: ["Andacht Okt. bis Ostern um 17:30"],
-  _: ["DRK-Seniorenzentrum, Sonnenweg 2–4: Mo 10:30 Hl. Messe (alle 4 Wochen)", "Krankenhauskapelle St. Josef, Alte Kölner Str. 3: nur nach Ankündigung"]
-};
-
-const TEAM = [
-  { n: "Lambert Schäfer", r: "Leitender Pfarrer, koordinierender Pfarrer der Pastoralen Einheit Oberberg-Nord", tel: "02267 8818713", mail: "lambert.schaefer@erzbistum-koeln.de", img: "../assets/pfarrer.jpg" },
-  { n: "Stefan Ochalski", r: "Pfarrvikar", tel: "02267 828302", mail: "stefan.ochalski@erzbistum-koeln.de" },
-  { n: "Joseph Abitya", r: "Pfarrvikar · Taufbegleitung", tel: "02267 8716124", mail: "joseph.abitya@erzbistum-koeln.de" },
-  { n: "Markus Urbatzka", r: "Pastoralreferent", tel: "02267 8889577", mail: "markus.urbatzka@erzbistum-koeln.de" },
-  { n: "Peter Bühlstahl", r: "Gemeindereferent", tel: "02268 800620", mail: "peter.buehlstahl@erzbistum-koeln.de" },
-  { n: "Georg Kalkum", r: "Gemeindereferent · Krankenhausseelsorge Helios-Klinik · Schöpfungsverantwortung", tel: "02195 684453", mail: "georg.kalkum@erzbistum-koeln.de" },
-  { n: "Thomas Ufer", r: "Verwaltungsleitung", tel: "02267 88187-14", mail: "ufer@kath-wipp.de" }
-];
-
-const G = "https://www.katholisch-in-wipperfuerth.de/gruppen/";
-const GROUPS = [
-  { n: "Messdiener:innen", d: "Am Altar mitwirken, Fahrten und Gemeinschaft – ab der Erstkommunion.", g: ["kinder", "jugend"], u: G + "Jugend/jugendliche/" },
-  { n: "Pfadfinder", d: "Draußen sein, Zeltlager, Verantwortung übernehmen.", g: ["kinder", "jugend"], u: G + "Jugend/pfadfinder/" },
-  { n: "Ferienfreizeiten", d: "Gemeinsam unterwegs in den Sommerferien – mit erfahrenen Betreuer:innen.", g: ["kinder", "jugend"], u: G + "Jugend/ferienfreizeiten/ferienfreizeit-2026/" },
-  { n: "Kinderchor Nikolinis", d: "Singen und Musik für Kinder in St. Nikolaus.", g: ["kinder", "musik"], u: G + "choere/kinderchor-nikolinis/" },
-  { n: "Jugendchor Kaleidoscope", d: "Moderne geistliche Musik für Jugendliche und junge Erwachsene.", g: ["jugend", "musik"], u: G + "choere/jugendchor-kaleidoscope/" },
-  { n: "Kanisa", d: "Neues geistliches Lied – auch als musikalisches Gottesdienstangebot.", g: ["erw", "musik"], u: G + "choere/kanisa/" },
-  { n: "Kammerchor Wipperfürth e. V.", d: "Anspruchsvolle Chormusik für erfahrene Sänger:innen.", g: ["erw", "musik"], u: G + "choere/kammerchor-wipperfuerth-e.v./" },
-  { n: "Kirchenchöre vor Ort", d: "In Agathaberg, Egen, Hämmern, Kreuzberg (auch Gospel), Neye, Niederwipper, St. Nikolaus, Thier und Wipperfeld.", g: ["erw", "sen", "musik"], u: G + "choere/ansprechpartner-unserer-choere/" },
-  { n: "Taizé-Gebet", d: "Gesänge, Stille und Gebet im Stil der Gemeinschaft von Taizé.", g: ["jugend", "erw", "musik"], u: G + "taize/" },
-  { n: "Familien", d: "Familiengottesdienste, Kleine-Leute-Gottesdienste und Angebote für Eltern.", g: ["kinder", "erw"], u: G + "familien/" },
-  { n: "Frauen – kfd", d: "Katholische Frauengemeinschaft: Glaube, Austausch, Engagement.", g: ["erw", "sen"], u: G + "frauen-kfd/" },
-  { n: "Kolping", d: "Soziales Engagement, Bildung und Gemeinschaft für alle Generationen.", g: ["erw", "sen"], u: G + "kolping/" },
-  { n: "Senior:innen", d: "Treffen, Ausflüge und Gottesdienste in den Seniorenzentren.", g: ["sen"], u: G + "senioren/" },
-  { n: "Schützen", d: "Bruderschaften mit Tradition – Glaube, Sitte, Heimat.", g: ["erw"], u: G + "schuetzen/" },
-  { n: "Öffentliche Bücherei (KÖB)", d: "Lesen, ausleihen, mithelfen – ein Ort für alle.", g: ["kinder", "erw", "sen"], u: "https://www.katholisch-in-wipperfuerth.de/orte-kirchlichen-lebens/institutionen/koeb/" },
-  { n: "Ehrenamt auf Zeit", d: "Taufgeschenke überbringen, Schöpfungsbotschafter:in, Feste helfen – auch nur ab und zu.", g: ["jugend", "erw", "sen"], u: "#kontakt", topic: "Ehrenamt / Mitmachen" }
-];
-
-const HOURS = [ // 0 So … 6 Sa
-  { d: 1, l: "Montag", o: [[8.5, 15.5]] }, { d: 2, l: "Dienstag", o: [[8.5, 15.5]] }, { d: 3, l: "Mittwoch", o: [[8.5, 12.5]] },
-  { d: 4, l: "Donnerstag", o: [[8.5, 15.5]] }, { d: 5, l: "Freitag", o: [[8.5, 15.5]] }, { d: 6, l: "Samstag", o: [], txt: "10:00–12:00 nur per E-Mail" }, { d: 0, l: "Sonntag", o: [] }
-];
-
-/* ---------- Hilfsfunktionen ---------- */
-const DAYS = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
-const DS = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
-const MON = ["Jan.", "Feb.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sept.", "Okt.", "Nov.", "Dez."];
-const fmtH = h => `${String(Math.floor(h)).padStart(2, "0")}:${String(Math.round((h % 1) * 60)).padStart(2, "0")}`;
-const isLast = dt => new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + 7).getMonth() !== dt.getMonth();
-const nth = dt => Math.ceil(dt.getDate() / 7);
-function servicesOn(dt) {
-  const wd = dt.getDay(), mo = dt.getMonth() + 1;
-  return S.filter(s => s.d.includes(wd)
-    && (!s.n || s.n.some(n => n === "last" ? isLast(dt) : n === nth(dt)))
-    && (!s.m || s.m.includes(mo)))
-    .map(s => ({ ...s, time: s.tw && (mo >= 10 || mo <= 3) ? s.tw : s.t }))
-    .sort((a, b) => a.time.localeCompare(b.time));
-}
-const today0 = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
-const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
-const dayLabel = (d, i) => i === 0 ? "Heute" : i === 1 ? "Morgen" : DAYS[d.getDay()];
-const KIND = { mass: ["Hl. Messe", ""], fam: ["Familie & Kinder", "fam"], prayer: ["Andacht & Gebet", "prayer"], school: ["Schule", "school"] };
-
-/* ---------- Nächster Gottesdienst ---------- */
-function renderNext() {
-  const now = new Date(), base = today0();
-  for (let i = 0; i < 8; i++) {
-    const d = addDays(base, i);
-    for (const s of servicesOn(d)) {
-      if (s.k === "school") continue;
-      const [h, m] = s.time.split(":").map(Number);
-      const at = new Date(d.getFullYear(), d.getMonth(), d.getDate(), h, m);
-      if (at > now) {
-        const c = C[s.c];
-        $("#nextTitle").textContent = `${i < 2 ? dayLabel(d, i) : DAYS[d.getDay()] + ", " + d.getDate() + ". " + MON[d.getMonth()]}, ${s.time} Uhr`;
-        $("#nextSub").innerHTML = `${esc(s.title)} · ${esc(c.name)}, ${esc(c.place.replace(" (Pfarrkirche)", ""))} · <a href="#gottesdienste">alle Termine</a>`;
-        return;
-      }
-    }
-  }
-}
-
-/* ---------- Gottesdienst-Finder ---------- */
-const state = { day: 0, kind: "all", place: "" };
-function renderDays() {
-  const base = today0();
-  $("#days").innerHTML = Array.from({ length: 7 }, (_, i) => {
-    const d = addDays(base, i);
-    return `<button type="button" data-i="${i}" aria-pressed="${i === state.day}"><b>${i < 2 ? dayLabel(d, i) : DS[d.getDay()]}</b><small>${d.getDate()}. ${MON[d.getMonth()]}</small></button>`;
-  }).join("");
-}
-function renderServices() {
-  const d = addDays(today0(), state.day);
-  const list = servicesOn(d).filter(s => (state.kind === "all" || s.k === state.kind) && (!state.place || s.c === state.place));
-  $$("#days button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.i === state.day)));
-  $("#svcList").innerHTML = list.length ? list.map(s => {
-    const c = C[s.c], [kl, kc] = KIND[s.k];
-    return `<div class="svc"><time>${s.time}</time><div><div class="t">${esc(s.title)}</div><div class="w">${esc(c.name)} · ${esc(c.place)} · ${esc(c.addr)}</div>
-      <span class="tag ${kc}">${kl}</span>${s.note ? `<span class="tag school">${esc(s.note)}</span>` : ""}</div></div>`;
-  }).join("") : `<div class="empty">Keine regelmäßigen Gottesdienste mit dieser Auswahl am ${DAYS[d.getDay()]}. Probier einen anderen Tag oder „Alle Orte“.</div>`;
-}
-function renderPlan() {
-  const order = ["nik", "neye", "aga", "kreuz", "thier", "wipf", "egen", "haem", "nied", "omm", "franz", "quart"];
-  const nn = n => n === "last" ? "letzten" : n + ".";
-  $("#planTable").innerHTML = order.map(id => {
-    const c = C[id];
-    const lines = S.filter(s => s.c === id).map(s => {
-      const days = s.d.map(x => DS[x]).join(", ");
-      const when = s.n ? `${s.n.map(nn).join(" & ")} ${days}` : days;
-      return `${when} ${s.t} – ${s.title}${s.note ? ` (${s.note})` : ""}`;
-    }).concat(EXTRA_PLAN[id] || []);
-    return `<div><h4>${esc(c.name)}, ${esc(c.place)}</h4><ul>${lines.map(l => `<li>${esc(l)}</li>`).join("")}</ul></div>`;
-  }).join("") + `<div><h4>Weitere</h4><ul>${EXTRA_PLAN._.map(l => `<li>${esc(l)}</li>`).join("")}</ul></div>`;
-}
-function initFinder() {
-  $("#placeSel").innerHTML += CHURCHES.map(c => `<option value="${c.id}">${esc(c.name)} – ${esc(c.place)}</option>`).join("");
-  renderDays(); renderServices(); renderPlan();
-  $("#days").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { state.day = +b.dataset.i; renderServices(); } });
-  $$("#gottesdienste [data-kind]").forEach(b => b.addEventListener("click", () => {
-    state.kind = b.dataset.kind; $$("#gottesdienste [data-kind]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); renderServices();
-  }));
-  $("#placeSel").addEventListener("change", e => { state.place = e.target.value; renderServices(); });
-}
-
-/* ---------- Kirchorte ---------- */
-function renderChurches() {
-  $("#churches").innerHTML = CHURCHES.filter(c => !c.senior).map(c => `
-    <article class="church${c.main ? " main" : ""}">
-      <span class="place">${esc(c.place)}</span><h3>${esc(c.name)}</h3>
-      <span class="addr">${esc(c.addr)}${/\d/.test(c.addr) ? ", 51688 Wipperfürth" : ""}</span>
-      <span class="rule">${c.rule}</span>
-      <div class="acts">
-        <button class="btn primary" type="button" data-show="${c.id}">Gottesdienste</button>
-        <a class="btn ghost" href="https://www.openstreetmap.org/search?query=${encodeURIComponent(c.name + " " + (/\d/.test(c.addr) ? c.addr + " " : c.place + " ") + "Wipperfürth")}">Karte</a>
-        <a class="btn ghost" href="${c.url}">Über die Kirche</a>
-      </div>
-    </article>`).join("");
-  $("#churches").addEventListener("click", e => {
-    const b = e.target.closest("[data-show]"); if (!b) return;
-    state.place = b.dataset.show; $("#placeSel").value = state.place;
-    state.kind = "all"; $$("#gottesdienste [data-kind]").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.kind === "all")));
-    // ersten Tag mit Gottesdienst an diesem Ort wählen
-    const base = today0(); state.day = 0;
-    for (let i = 0; i < 7; i++) if (servicesOn(addDays(base, i)).some(s => s.c === state.place)) { state.day = i; break; }
-    renderServices(); $("#gottesdienste").scrollIntoView();
-  });
-}
-
-/* ---------- Gruppen ---------- */
-function renderGroups(f = "all") {
-  $("#groups").innerHTML = GROUPS.filter(g => f === "all" || g.g.includes(f)).map(g =>
-    `<div class="group"><h3>${esc(g.n)}</h3><p>${esc(g.d)}</p><a href="${g.u}"${g.topic ? ` data-topic="${esc(g.topic)}"` : ""}>${g.topic ? "Melden →" : "Mehr erfahren →"}</a></div>`).join("");
-}
-$("#groupFilters").addEventListener("click", e => {
-  const b = e.target.closest("[data-g]"); if (!b) return;
-  $$("#groupFilters [data-g]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); renderGroups(b.dataset.g);
-});
-
-/* ---------- Team ---------- */
-$("#teamList").innerHTML = TEAM.map(p => {
-  const ini = p.n.split(" ").map(w => w[0]).join("");
-  return `<div class="person"><div class="avatar">${p.img ? `<img src="${p.img}" alt="" loading="lazy" onerror="this.parentNode.textContent='${ini}'">` : ini}</div>
-    <div><b>${esc(p.n)}</b><span class="role">${esc(p.r)}</span><a href="tel:${p.tel.replace(/[^\d+]/g, "")}">${esc(p.tel)}</a><a href="mailto:${p.mail}">${esc(p.mail)}</a></div></div>`;
-}).join("");
-
-/* ---------- Büro: Öffnungszeiten & Status ---------- */
-function officeStatus(now = new Date()) {
-  const h = now.getHours() + now.getMinutes() / 60, wd = now.getDay();
-  const isClosedDay = (now.getMonth() === 11 && (now.getDate() === 24 || now.getDate() === 31));
-  const today = HOURS.find(x => x.d === wd);
-  const open = !isClosedDay && today.o.some(([a, b]) => h >= a && h < b);
-  if (open) { const end = today.o.find(([a, b]) => h >= a && h < b)[1]; return { open, text: `Jetzt geöffnet bis ${fmtH(end)} Uhr` }; }
-  for (let i = 0; i < 8; i++) {
-    const d = addDays(today0(), i), e = HOURS.find(x => x.d === d.getDay());
-    const slot = e.o.find(([a]) => i > 0 || a > h);
-    if (slot && !(d.getMonth() === 11 && (d.getDate() === 24 || d.getDate() === 31)))
-      return { open, text: `Geschlossen · öffnet ${i === 0 ? "heute" : i === 1 ? "morgen" : DAYS[d.getDay()]} ${fmtH(slot[0])} Uhr` };
-  }
-  return { open, text: "Geschlossen" };
-}
-function renderOffice() {
-  const st = officeStatus();
-  $("#officeNow").innerHTML = `<span class="dot ${st.open ? "on" : "off"}"></span>${st.open ? "Geöffnet" : "Geschlossen"}`;
-  const badge = $("#officeBadge"); badge.textContent = st.text; badge.className = "status " + (st.open ? "on" : "off");
-  $("#officeNow").title = st.text;
-  const wd = new Date().getDay();
-  $("#hoursBody").innerHTML = HOURS.map(x => `<tr class="${x.d === wd ? "today" : ""}"><td>${x.l}</td><td>${x.o.length ? x.o.map(([a, b]) => `${fmtH(a)}–${fmtH(b)}`).join(", ") : (x.txt || "geschlossen")}</td></tr>`).join("");
-}
-
-/* ---------- Suche ---------- */
-const INDEX = [
-  ["Gottesdienste & Messzeiten", "#gottesdienste", "messe gottesdienst sonntag vorabend hochamt zeiten uhrzeit kirche heute morgen"],
-  ["Familiengottesdienst & Kleine Leute", "#gottesdienste", "familie kinder kleine leute familiengottesdienst"],
-  ["Taufe", "#taufe", "taufe taufen baby kind tauftreff pate patin taufsonntag"],
-  ["Erstkommunion", "#kommunion", "kommunion erstkommunion eucharistie"],
-  ["Firmung", "#firmung", "firmung firmen jugendliche"],
-  ["Hochzeit / Trauung", "#hochzeit", "hochzeit heiraten trauung ehe"],
-  ["Beichte & Gespräch", "#beichte", "beichte versöhnung gespräch reden seelsorge"],
-  ["Krankensalbung", "#krankheit", "krank krankensalbung krankenhaus besuch"],
-  ["Trauerfall / Beerdigung", "#sterbefall", "tod sterbefall beerdigung trauer begräbnis bestattung friedhof sechswochenamt"],
-  ["Wiedereintritt / Erwachsenentaufe", "#wiedereintritt", "wiedereintritt austritt erwachsene eintreten konversion"],
-  ["Messe bestellen", "#kontakt", "messe bestellen messbestellung intention verstorbene"],
-  ["Kirchorte", "#kirchorte", "kirche kirchen orte neye agathaberg kreuzberg thier wipperfeld egen hämmern niederwipper ommerborn adresse karte"],
-  ["Messdiener", "#gruppen", "messdiener ministranten jugend"],
-  ["Pfadfinder & Ferienfreizeit", "#gruppen", "pfadfinder zeltlager ferien freizeit"],
-  ["Chöre & Musik", "#gruppen", "chor chöre singen musik kanisa gospel kaleidoscope nikolinis taizé"],
-  ["Ehrenamt / Mitmachen", "#gruppen", "ehrenamt helfen mitmachen engagement"],
-  ["Caritas & Beratung", "#hilfe", "caritas hilfe not beratung geld familie"],
-  ["Prävention & Schutz", "#hilfe", "prävention schutz missbrauch kinderschutz ansprechperson"],
-  ["Seelsorglicher Notruf", "#hilfe", "notruf notfall sterben akut telefonseelsorge"],
-  ["Seelsorgeteam / Pfarrer", "#team", "pfarrer kaplan pfarrvikar team schäfer seelsorger ansprechpartner verwaltung"],
-  ["Pfarrbüro & Öffnungszeiten", "#kontakt", "büro pfarrbüro pastoralbüro öffnungszeiten telefon email kontakt adresse"],
-  ["Pfarrnachrichten & Aktuelles", "#aktuelles", "aktuelles pfarrnachrichten news termine veranstaltungen stellen jobs reise"],
-  ["Pastorale Einheit Oberberg-Nord", "#einheit", "oberberg nord lindlar marienheide hückeswagen radevormwald einheit zukunft"]
-];
-const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
-const q = $("#q"), res = $("#qres"); let sel = -1;
-function search() {
-  const v = norm(q.value.trim());
-  if (!v) { res.hidden = true; return; }
-  const words = v.split(/\s+/);
-  const hits = INDEX.map(([t, h, k]) => {
-    const hay = norm(t + " " + k); let sc = 0;
-    for (const w of words) { if (norm(t).includes(w)) sc += 3; else if (hay.includes(w)) sc += 1; else return null; }
-    return { t, h, sc };
-  }).filter(Boolean).sort((a, b) => b.sc - a.sc).slice(0, 6);
-  sel = -1;
-  res.innerHTML = hits.length ? hits.map((x, i) => `<a href="${x.h}" role="option" id="r${i}">${esc(x.t)}<small>→</small></a>`).join("")
-    : `<a href="#kontakt" role="option">Nichts gefunden – frag das Pastoralbüro<small>→</small></a>`;
-  res.hidden = false;
-}
-q.addEventListener("input", search);
-q.addEventListener("keydown", e => {
-  const items = $$("a", res); if (res.hidden || !items.length) return;
-  if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); sel = (sel + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length; items.forEach((a, i) => a.setAttribute("aria-selected", String(i === sel))); }
-  else if (e.key === "Enter") { e.preventDefault(); (items[sel] || items[0]).click(); }
-  else if (e.key === "Escape") res.hidden = true;
-});
-res.addEventListener("click", () => { res.hidden = true; q.value = ""; });
-document.addEventListener("click", e => { if (!e.target.closest(".search")) res.hidden = true; });
-
-/* ---------- Kontaktformular → E-Mail ---------- */
-document.addEventListener("click", e => {
-  const a = e.target.closest("[data-topic]"); if (!a) return;
-  const sel = $("#mTopic"); const opt = [...sel.options].find(o => o.text === a.dataset.topic); if (opt) sel.value = opt.text;
-});
-$("#msgForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const topic = $("#mTopic").value, name = $("#mName").value.trim(), tel = $("#mTel").value.trim(), text = $("#mText").value.trim();
-  const body = `${text}\n\n${name}${tel ? "\nRückruf: " + tel : ""}`;
-  location.href = `mailto:pastoralbuero-wipp@erzbistum-koeln.de?subject=${encodeURIComponent("Anfrage: " + topic)}&body=${encodeURIComponent(body)}`;
-});
-
-/* ---------- Menü & Theme ---------- */
-const menuBtn = $("#menuBtn"), drawer = $("#drawer");
-menuBtn.addEventListener("click", () => { const o = drawer.classList.toggle("open"); menuBtn.setAttribute("aria-expanded", String(o)); });
-drawer.addEventListener("click", e => { if (e.target.closest("a")) { drawer.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); } });
-const root = document.documentElement;
-try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (_) {}
-$("#themeBtn").addEventListener("click", () => {
-  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-  root.dataset.theme = dark ? "light" : "dark";
-  try { localStorage.setItem("theme", root.dataset.theme); } catch (_) {}
-});
-window.addEventListener("beforeprint", () => { $("#planAll").open = true; });
-
-renderNext(); initFinder(); renderChurches(); renderGroups(); renderOffice();
-setInterval(() => { renderNext(); renderOffice(); }, 60000);
-})();
-</script>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
 </body>
 </html>
