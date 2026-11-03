@@ -298,6 +298,7 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 15.5px; }
 aside .side-card h3 { font-size: 18px; }
 aside .side-card p { font-size: 15.5px; }
 .tiles { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+.tiles a { min-width: 0; } .tiles b { hyphens: auto; overflow-wrap: anywhere; }
 @media (max-width: 639px) { .tiles a { padding: 16px 14px; } .tiles b { font-size: 18px; } .tiles span { font-size: 14px; } }
 
 @media (min-width: 1040px) { .tiles { grid-template-columns: repeat(4, 1fr); } }
