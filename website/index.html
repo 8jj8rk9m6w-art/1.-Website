@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kirche in Wipperfürth – Konzeptentwurf</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: mobil zuerst – oben Suche und vier Einstiege, darunter Bereiche nach den vier Grundvollzügen; auf dem Handy eine App-artige Tab-Leiste unten.
+   Farben: die vier Grundvollzüge (M blau, L gold, D grün, K rot) als Wegweiser, sonst ruhige kühle Neutraltöne. */
+:root {
+  --bg: #f5f6fa; --surface: #ffffff; --surface-2: #eceff6; --ink: #17213a; --muted: #5a6680; --line: #dbe0ea;
+  --m: #2f5fa5; --l: #b8871c; --d: #2f7a51; --k: #b03f45;
+  --m-soft: #e2eaf7; --l-soft: #f6edd6; --d-soft: #dff0e6; --k-soft: #f6e1e2;
+  --hero: #17213a; --on-hero: #f1f4fb; --on-hero-muted: #a8b4cc;
+  --warn-bg: #fff4d6; --warn-ink: #6b4a00;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --r: 18px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1526; --surface: #18213a; --surface-2: #1f2a47; --ink: #eef2fa; --muted: #a3afc7; --line: #2c385a;
+  --m: #7aa6ea; --l: #e2b64f; --d: #6cc596; --k: #ea7f84;
+  --m-soft: #1d2d4d; --l-soft: #3a2f14; --d-soft: #16352a; --k-soft: #3d1f24;
+  --hero: #0a1020; --warn-bg: #3a2f10; --warn-ink: #f4dc9a; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1526; --surface: #18213a; --surface-2: #1f2a47; --ink: #eef2fa; --muted: #a3afc7; --line: #2c385a;
+  --m: #7aa6ea; --l: #e2b64f; --d: #6cc596; --k: #ea7f84;
+  --m-soft: #1d2d4d; --l-soft: #3a2f14; --d-soft: #16352a; --k-soft: #3d1f24;
+  --hero: #0a1020; --warn-bg: #3a2f10; --warn-ink: #f4dc9a; color-scheme: dark; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--body); -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+img { max-width: 100%; }
+a { color: var(--m); }
+button, input, textarea, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--l); outline-offset: 2px; border-radius: 6px; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.08; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h2 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; }
+h3 { font-size: 22px; font-weight: 700; }
+p { margin: 0; }
+.eyebrow { font: 700 13px/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--c, var(--muted)); display: inline-flex; gap: 8px; align-items: center; }
+.eyebrow::before { content: attr(data-l); width: 22px; height: 22px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font-size: 12px; letter-spacing: 0; }
+.eyebrow:not([data-l])::before { display: none; }
+.M { --c: var(--m); --soft: var(--m-soft); } .L { --c: var(--l); --soft: var(--l-soft); }
+.D { --c: var(--d); --soft: var(--d-soft); } .K { --c: var(--k); --soft: var(--k-soft); }
+
+/* Hinweisband */
+.notice { background: var(--warn-bg); color: var(--warn-ink); font-size: 14px; line-height: 1.4; }
+.notice .wrap { padding-block: 8px; display: flex; gap: 10px; align-items: center; }
+.notice strong { white-space: nowrap; }
+
+/* Kopf */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--surface); }
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; gap: 18px; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font: 800 19px/1 var(--display); flex: none; }
+.brand .dots { display: grid; grid-template-columns: 9px 9px; gap: 3px; }
+.brand .dots i { width: 9px; height: 9px; border-radius: 50%; }
+nav.main { display: flex; gap: 4px; margin-left: auto; }
+nav.main a { text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px; padding: 8px 12px; border-radius: 99px; }
+nav.main a:hover { background: var(--surface-2); }
+.icon-btn { border: 1px solid var(--line); background: var(--surface); border-radius: 99px; height: 38px; min-width: 38px; padding: 0 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; }
+
+/* Hero */
+.hero { background: var(--hero); color: var(--on-hero); position: relative; overflow: hidden; }
+.hero .wrap { padding-block: 56px 40px; display: grid; gap: 28px; position: relative; }
+.hero h1 { font-size: clamp(40px, 8vw, 84px); font-weight: 800; max-width: 12ch; }
+.hero h1 em { font-style: normal; background: linear-gradient(90deg, var(--m), var(--k)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--on-hero-muted); max-width: 52ch; }
+.orbs { position: absolute; right: -40px; top: -40px; width: 420px; height: 420px; pointer-events: none; opacity: .9; }
+.orbs i { position: absolute; border-radius: 50%; filter: blur(2px); animation: drift 12s ease-in-out infinite; }
+.orbs i:nth-child(1) { width: 200px; height: 200px; background: var(--m); left: 80px; top: 60px; opacity: .55; }
+.orbs i:nth-child(2) { width: 120px; height: 120px; background: var(--l); left: 250px; top: 190px; opacity: .55; animation-delay: -3s; }
+.orbs i:nth-child(3) { width: 90px; height: 90px; background: var(--d); left: 60px; top: 260px; opacity: .55; animation-delay: -6s; }
+.orbs i:nth-child(4) { width: 150px; height: 150px; background: var(--k); left: 230px; top: 20px; opacity: .45; animation-delay: -9s; }
+@keyframes drift { 50% { transform: translate(-14px, 16px); } }
+
+.search { position: relative; max-width: 640px; }
+.search input { width: 100%; height: 60px; border-radius: 16px; border: 0; padding: 0 20px 0 52px; font-size: 18px; background: #ffffff; color: #17213a; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+.search svg { position: absolute; left: 18px; top: 19px; width: 22px; height: 22px; color: #5a6680; }
+.results { position: absolute; left: 0; right: 0; top: 66px; z-index: 30; background: var(--surface); color: var(--ink); border-radius: 14px; box-shadow: 0 20px 50px rgba(0,0,0,.3); overflow: hidden; }
+.results a { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; padding: 12px 16px; text-decoration: none; color: var(--ink); border-top: 1px solid var(--line); }
+.results a:first-child { border-top: 0; }
+.results a:hover, .results a.act { background: var(--surface-2); }
+.results small { display: block; color: var(--muted); font-size: 14px; }
+.results .pill { width: 28px; height: 28px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font: 700 13px/1 var(--body); }
+.results .empty { padding: 14px 16px; color: var(--muted); }
+.quick { display: flex; gap: 8px; flex-wrap: wrap; }
+.quick button { border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); color: var(--on-hero); border-radius: 99px; padding: 7px 14px; cursor: pointer; font-size: 15px; }
+.quick button:hover { background: rgba(255,255,255,.14); }
+
+/* Vier Einstiege */
+.doors { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: -1px; padding-block: 28px; }
+.door { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; text-decoration: none; color: var(--ink); display: grid; gap: 8px; position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; min-width: 0; }
+.door:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(23,33,58,.12); }
+.door .big { font: 800 26px/1.05 var(--display); color: var(--c); }
+.door p { color: var(--muted); font-size: 15px; line-height: 1.4; }
+.door .arrow { position: absolute; right: 16px; top: 16px; width: 34px; height: 34px; border-radius: 50%; background: var(--soft); color: var(--c); display: grid; place-items: center; transition: transform .2s; }
+.door:hover .arrow { transform: translateX(3px); }
+.door .eyebrow { padding-right: 40px; min-width: 0; }
+@media (max-width: 480px) { .door .arrow { display: none; } .door .eyebrow { padding-right: 0; letter-spacing: .08em; font-size: 12px; } }
+
+section.block { padding-block: 56px; }
+.head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 26px; }
+.head .sub { color: var(--muted); max-width: 56ch; margin-top: 10px; }
+.tag-sample { font-size: 13px; font-weight: 700; color: var(--warn-ink); background: var(--warn-bg); padding: 4px 10px; border-radius: 99px; }
+
+/* Gottesdienst-Finder */
+.finder { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.f-bar { display: flex; gap: 10px; flex-wrap: wrap; padding: 16px; border-bottom: 1px solid var(--line); align-items: center; }
+.days { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.days button, .chips button { border: 1px solid var(--line); background: var(--surface); border-radius: 99px; padding: 8px 14px; cursor: pointer; font-weight: 600; font-size: 15px; white-space: nowrap; }
+.days button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+.chips button[aria-pressed="true"] { background: var(--l-soft); border-color: var(--l); color: var(--ink); }
+.svc { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px; border-top: 1px solid var(--line); }
+.svc:first-child { border-top: 0; }
+.svc time { font: 800 26px/1 var(--display); font-variant-numeric: tabular-nums; }
+.svc .what { font-weight: 700; }
+.svc .where { color: var(--muted); font-size: 15px; }
+.badge { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 99px; background: var(--surface-2); color: var(--muted); white-space: nowrap; }
+.badge.fam { background: var(--l-soft); color: var(--ink); }
+.badge.youth { background: var(--k-soft); color: var(--ink); }
+.badge.off { background: var(--k); color: #fff; }
+.svc.cancel time, .svc.cancel .what { text-decoration: line-through; opacity: .55; }
+.svc .note { color: var(--k); font-size: 14px; font-weight: 600; }
+.f-empty { padding: 26px 16px; color: var(--muted); }
+.f-foot { padding: 14px 16px; background: var(--surface-2); font-size: 15px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; }
+
+/* Jugend */
+.youth-sec { background: var(--hero); color: var(--on-hero); }
+.youth-sec .head .sub { color: var(--on-hero-muted); }
+.ycards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.ycard { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--r); padding: 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.ycard .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--c); display: grid; place-items: center; color: #fff; font: 800 18px/1 var(--display); }
+.ycard p { color: var(--on-hero-muted); font-size: 16px; }
+.ycard .when { font-size: 14px; font-weight: 700; color: var(--on-hero); }
+.path { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 30px; border-radius: var(--r); overflow: hidden; border: 1px solid rgba(255,255,255,.12); }
+.path div { padding: 18px; border-left: 1px solid rgba(255,255,255,.12); min-width: 0; }
+.path div:first-child { border-left: 0; }
+.path b { font: 800 15px/1 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--l); display: block; margin-bottom: 6px; }
+.path span { font-size: 15px; color: var(--on-hero-muted); }
+.stats { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 34px; }
+.stats strong { font: 800 54px/1 var(--display); display: block; font-variant-numeric: tabular-nums; }
+.stats span { color: var(--on-hero-muted); font-size: 15px; }
+.social { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+.social span { border: 1px dashed rgba(255,255,255,.3); border-radius: 99px; padding: 8px 14px; font-size: 15px; color: var(--on-hero-muted); }
+
+/* Mitmach-Finder */
+.quiz { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+.qbox, .qres { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; min-width: 0; }
+.q { display: grid; gap: 10px; margin-bottom: 20px; }
+.q:last-child { margin-bottom: 0; }
+.q .label { font-weight: 700; }
+.opts { display: flex; gap: 8px; flex-wrap: wrap; }
+.opts label { cursor: pointer; }
+.opts input { position: absolute; opacity: 0; pointer-events: none; }
+.opts span { display: inline-block; border: 1px solid var(--line); border-radius: 99px; padding: 8px 14px; font-weight: 600; font-size: 15px; transition: background .2s, border-color .2s; }
+.opts input:checked + span { background: var(--k-soft); border-color: var(--k); }
+.opts input:focus-visible + span { outline: 3px solid var(--l); outline-offset: 2px; }
+.qres h3 { margin-bottom: 14px; }
+.match { display: grid; grid-template-columns: 6px 1fr auto; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); align-items: center; }
+.match:first-of-type { border-top: 0; }
+.match i { align-self: stretch; border-radius: 3px; background: var(--c); }
+.match b { display: block; }
+.match small { color: var(--muted); font-size: 15px; }
+.match .fit { font: 800 18px/1 var(--display); color: var(--c); font-variant-numeric: tabular-nums; }
+
+/* Hilfe */
+.toggle { display: inline-flex; background: var(--surface-2); border-radius: 99px; padding: 4px; gap: 4px; }
+.toggle button { border: 0; background: transparent; padding: 10px 18px; border-radius: 99px; font-weight: 700; cursor: pointer; }
+.toggle button[aria-pressed="true"] { background: var(--d); color: #fff; }
+.help-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.hcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.hcard h3 { font-size: 20px; }
+.hcard p { color: var(--muted); font-size: 16px; }
+.hcard .how { font-size: 15px; font-weight: 600; color: var(--d); }
+.discreet { margin-top: 16px; padding: 16px 20px; border-radius: 14px; background: var(--d-soft); font-size: 16px; }
+
+/* Vertrauen & Wandel */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 26px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.panel ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.timeline { display: grid; gap: 0; }
+.tl { display: grid; grid-template-columns: 74px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid var(--line); }
+.tl:first-child { border-top: 0; }
+.tl b { font: 800 20px/1.2 var(--display); color: var(--m); font-variant-numeric: tabular-nums; }
+.places { display: flex; gap: 6px; flex-wrap: wrap; }
+.places span { background: var(--m-soft); border-radius: 99px; padding: 4px 12px; font-size: 14px; font-weight: 600; }
+
+/* Feedback */
+.fb { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 26px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 26px; align-items: start; }
+.faces { display: flex; gap: 10px; }
+.faces button { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); font-size: 26px; cursor: pointer; transition: transform .15s; }
+.faces button[aria-pressed="true"] { border-color: var(--l); background: var(--l-soft); transform: scale(1.08); }
+.fb form { display: grid; gap: 10px; }
+.fb select, .fb textarea { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--bg); }
+.fb textarea { min-height: 90px; resize: vertical; }
+.btn { border: 0; background: var(--ink); color: var(--bg); border-radius: 99px; padding: 12px 22px; font-weight: 700; cursor: pointer; justify-self: start; }
+.thanks { color: var(--d); font-weight: 700; }
+
+footer.site { background: var(--hero); color: var(--on-hero-muted); padding-block: 40px 110px; font-size: 15px; }
+footer.site .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+footer.site h3 { color: var(--on-hero); font-size: 18px; margin-bottom: 10px; }
+footer.site .ph { border: 1px dashed rgba(255,255,255,.25); border-radius: 10px; padding: 10px 12px; }
+
+/* Tab-Leiste für Handys */
+.tabbar { display: none; }
+@media (max-width: 860px) {
+  nav.main { display: none; }
+  header.top .actions { margin-left: auto; }
+  .doors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ycards, .help-grid { grid-template-columns: minmax(0, 1fr); }
+  .path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .path div:nth-child(3) { border-left: 0; }
+  .path div:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.12); }
+  .quiz, .two, .fb, footer.site .cols { grid-template-columns: minmax(0, 1fr); }
+  .chips { margin-left: 0; }
+  .orbs { width: 260px; height: 260px; right: -110px; opacity: .5; }
+  .tabbar { display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--surface); border-top: 1px solid var(--line); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); }
+  .tabbar a { display: grid; justify-items: center; gap: 2px; text-decoration: none; color: var(--muted); font-size: 12px; font-weight: 600; padding: 4px 0; }
+  .tabbar a i { width: 26px; height: 26px; border-radius: 50%; background: var(--soft, var(--surface-2)); color: var(--c, var(--ink)); display: grid; place-items: center; font: 800 12px/1 var(--display); font-style: normal; }
+  .tabbar a.on { color: var(--ink); }
+}
+@media (max-width: 480px) {
+  .svc { grid-template-columns: 62px minmax(0, 1fr); }
+  .svc .badges { grid-column: 2; }
+  .svc time { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .orbs i { animation: none; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<div class="notice" role="note"><div class="wrap"><strong>Konzeptentwurf</strong><span>Schulprojekt Q2 Kath. Religion, Gruppe 1 – keine offizielle Website der Pfarrei. Termine, Kontakte und Links sind Platzhalter.</span></div></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#start"><span class="dots" aria-hidden="true"><i style="background:var(--m)"></i><i style="background:var(--l)"></i><i style="background:var(--k)"></i><i style="background:var(--d)"></i></span>Kirche in Wipperfürth</a>
+    <nav class="main" aria-label="Hauptmenü">
+      <a href="#gottesdienste">Gottesdienste</a>
+      <a href="#jugend">Jugend</a>
+      <a href="#mitmachen">Mitmachen</a>
+      <a href="#hilfe">Hilfe</a>
+      <a href="#vertrauen">Vertrauen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="actions"><button class="icon-btn" id="themeBtn" aria-label="Hell- oder Dunkelmodus umschalten">◐</button></div>
+  </div>
+</header>
+
+<main id="start">
+<section class="hero">
+  <div class="orbs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <h1>Kirche in Wipperfürth. <em>Für dich da.</em></h1>
+    <p class="lead">Gottesdienste finden, mitmachen, Hilfe bekommen oder einfach Leute treffen – alles an einem Ort, in zwei Klicks.</p>
+    <div class="search" role="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Was suchst du? z. B. Messdiener, Firmung, Hilfe" autocomplete="off" aria-label="Suche" aria-controls="results">
+      <div class="results" id="results" hidden></div>
+    </div>
+    <div class="quick" aria-label="Häufige Suchen">
+      <button data-q="Gottesdienst Sonntag">Gottesdienst am Sonntag</button>
+      <button data-q="Firmung">Firmung</button>
+      <button data-q="Jugendchor">Jugendchor</button>
+      <button data-q="Lebensmittel">Hilfe bei Geldsorgen</button>
+      <button data-q="Taufe">Taufe</button>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="doors">
+    <a class="door L" href="#gottesdienste"><span class="eyebrow" data-l="L">Leiturgia</span><span class="big">Feiern</span><p>Wann und wo ist Gottesdienst? Mit Ausfällen live.</p><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="door K" href="#mitmachen"><span class="eyebrow" data-l="K">Koinonia</span><span class="big">Mitmachen</span><p>Chöre, Messdiener, Pfadfinder – finde, was zu dir passt.</p><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="door D" href="#hilfe"><span class="eyebrow" data-l="D">Diakonia</span><span class="big">Hilfe</span><p>Unterstützung finden – oder selbst helfen.</p><span class="arrow" aria-hidden="true">→</span></a>
+    <a class="door M" href="#vertrauen"><span class="eyebrow" data-l="M">Martyria</span><span class="big">Glauben</span><p>Fragen stellen, Glauben entdecken, offen reden.</p><span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</div>
+
+<!-- Gottesdienste -->
+<section class="block" id="gottesdienste">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="eyebrow L" data-l="L">Leiturgia · Feiern</span><h2>Gottesdienste diese Woche</h2><p class="sub">Alle Orte in einer Liste. Fällt etwas aus, steht es hier – nicht erst in den Pfarrnachrichten.</p></div>
+      <span class="tag-sample">Beispieldaten</span>
+    </div>
+    <div class="finder">
+      <div class="f-bar">
+        <div class="days" id="days" role="group" aria-label="Tag wählen"></div>
+        <div class="chips" id="chips" role="group" aria-label="Art filtern">
+          <button data-f="all" aria-pressed="true">Alle</button>
+          <button data-f="fam" aria-pressed="false">Familien</button>
+          <button data-f="kids" aria-pressed="false">Kleine Leute</button>
+          <button data-f="youth" aria-pressed="false">Jugend</button>
+        </div>
+      </div>
+      <div id="svcList" aria-live="polite"></div>
+      <div class="f-foot"><span>Ausfälle werden hier eingetragen, sobald sie feststehen.</span><span>Später: Kalender-Abo und Push-Hinweis</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Jugend -->
+<section class="block youth-sec" id="jugend">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="eyebrow K" data-l="K" style="color:var(--on-hero-muted)">Koinonia · Für dich</span><h2>Jung &amp; dabei</h2><p class="sub">Nach der Kommunion ist nicht Schluss. Hier siehst du, wie es weitergeht – Schritt für Schritt.</p></div>
+    </div>
+    <div class="ycards">
+      <div class="ycard K"><span class="ic">♪</span><h3>Jugendchor</h3><p>Singen, auftreten, Leute kennenlernen. Keine Vorkenntnisse nötig.</p><span class="when">Probe: [Tag/Uhrzeit eintragen]</span></div>
+      <div class="ycard L"><span class="ic">✦</span><h3>Messdiener</h3><p>Mitten im Gottesdienst dabei – plus Gruppenstunden, Fahrten und Aktionen.</p><span class="when">Einstieg: nach der Erstkommunion</span></div>
+      <div class="ycard D"><span class="ic">▲</span><h3>Pfadfinder</h3><p>Draußen sein, Verantwortung übernehmen, Lager und Abenteuer.</p><span class="when">Gruppenstunde: [Tag eintragen]</span></div>
+    </div>
+    <div class="path" aria-label="Der Weg nach der Erstkommunion">
+      <div><b>1 · Kommunion</b><span>Vorbereitung mit Katechese, Eltern und Begleitern</span></div>
+      <div><b>2 · Projekte</b><span>Danach weiter eingebunden über Projekte und Gruppen</span></div>
+      <div><b>3 · Firmung</b><span>Neu gestaltet, Gemeinden arbeiten zusammen</span></div>
+      <div><b>4 · Mitgestalten</b><span>Selbst Gruppen leiten, Ehrenamt übernehmen</span></div>
+    </div>
+    <div class="stats">
+      <div><strong>400+</strong><span>Ehrenamtliche</span></div>
+      <div><strong>20</strong><span>Chöre</span></div>
+      <div><strong>1</strong><span>Platz, der auf dich wartet</span></div>
+    </div>
+    <div class="social" aria-label="Social Media (Platzhalter)"><span>Instagram: [Kanal eintragen]</span><span>WhatsApp-Kanal: [Link eintragen]</span><span>TikTok/YouTube: [optional]</span></div>
+  </div>
+</section>
+
+<!-- Mitmachen -->
+<section class="block" id="mitmachen">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow K" data-l="K">Koinonia · Gemeinschaft</span><h2>Was passt zu dir?</h2><p class="sub">Drei Fragen, sofort ein Vorschlag. Ehrenamt geht auch in klein – du entscheidest, wie viel Zeit du gibst.</p></div></div>
+    <div class="quiz">
+      <form class="qbox" id="quiz">
+        <div class="q"><span class="label" id="q1l">Wie alt bist du?</span><div class="opts" role="radiogroup" aria-labelledby="q1l">
+          <label><input type="radio" name="age" id="age-kid" value="kid"><span>unter 13</span></label>
+          <label><input type="radio" name="age" id="age-teen" value="teen" checked><span>13–20</span></label>
+          <label><input type="radio" name="age" id="age-adult" value="adult"><span>über 20</span></label>
+        </div></div>
+        <div class="q"><span class="label" id="q2l">Was machst du gern?</span><div class="opts" role="radiogroup" aria-labelledby="q2l">
+          <label><input type="radio" name="like" id="like-music" value="music" checked><span>Musik</span></label>
+          <label><input type="radio" name="like" id="like-out" value="out"><span>Draußen sein</span></label>
+          <label><input type="radio" name="like" id="like-people" value="people"><span>Menschen helfen</span></label>
+          <label><input type="radio" name="like" id="like-org" value="org"><span>Organisieren</span></label>
+        </div></div>
+        <div class="q"><span class="label" id="q3l">Wie viel Zeit hast du?</span><div class="opts" role="radiogroup" aria-labelledby="q3l">
+          <label><input type="radio" name="time" id="time-once" value="once"><span>Mal ab und zu</span></label>
+          <label><input type="radio" name="time" id="time-week" value="week" checked><span>Jede Woche</span></label>
+        </div></div>
+      </form>
+      <div class="qres" aria-live="polite"><h3>Deine Vorschläge</h3><div id="matches"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Hilfe -->
+<section class="block" id="hilfe" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="eyebrow D" data-l="D">Diakonia · Dienst am Menschen</span><h2>Hilfe finden. Hilfe geben.</h2><p class="sub">Viele Angebote gibt es schon – sie sind nur zu wenig bekannt. Hier stehen sie alle zusammen.</p></div>
+      <div class="toggle" role="group" aria-label="Ansicht wählen"><button id="h-need" aria-pressed="true">Ich brauche Hilfe</button><button id="h-give" aria-pressed="false">Ich will helfen</button></div>
+    </div>
+    <div class="help-grid" id="helpGrid"></div>
+    <p class="discreet">Vertraulich und ohne Formular: Ruf einfach an oder komm vorbei. Niemand muss erklären, warum er Hilfe braucht. · Kontakt: [Caritas-Ansprechperson eintragen]</p>
+  </div>
+</section>
+
+<!-- Vertrauen & Wandel -->
+<section class="block" id="vertrauen">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow M" data-l="M">Martyria · Glauben bezeugen</span><h2>Offen reden. Vertrauen zurückgewinnen.</h2><p class="sub">Glaubwürdig ist Kirche nur, wenn sie offen mit Fehlern umgeht und transparent sagt, was sich verändert.</p></div></div>
+    <div class="two">
+      <div class="panel">
+        <h3>Schutz &amp; Prävention</h3>
+        <p>Alle Ehrenamtlichen und Mitarbeitenden besuchen Präventionskurse. Wer etwas erlebt oder beobachtet hat, findet hier sofort eine Ansprechperson – auch unabhängig von der Pfarrei.</p>
+        <ul><li>Ansprechperson Prävention: [Name, Telefon eintragen]</li><li>Unabhängige Beratung: [Stelle eintragen]</li><li>Schutzkonzept als PDF: [Link eintragen]</li></ul>
+        <p style="color:var(--muted)">Und für alle, die ausgetreten sind: Deine Taufe bleibt bestehen. Du bist jederzeit willkommen.</p>
+      </div>
+      <div class="panel">
+        <h3>Kirche im Wandel bis 2030</h3>
+        <div class="timeline">
+          <div class="tl"><b>heute</b><span>Pfarrei St. Nikolaus mit ihren Kirchen in Wipperfürth</span></div>
+          <div class="tl"><b>bis 2030</b><span>Neuer, größerer Bereich mit fünf Orten:<div class="places" style="margin-top:6px"><span>Radevormwald</span><span>Hückeswagen</span><span>Lindlar</span><span>Wipperfürth</span><span>Marienheide</span></div></span></div>
+          <div class="tl"><b>Folge</b><span>Weniger Priester für mehr Orte. Deshalb wichtig: Ausfälle früh zeigen, Wortgottesdienste und digitale Angebote stärken.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feedback -->
+<section class="block" id="feedback" style="padding-top:0">
+  <div class="wrap">
+    <div class="fb">
+      <div><span class="eyebrow">Deine Meinung zählt</span><h2 style="font-size:32px;margin-top:10px">Wie war's?</h2><p style="color:var(--muted);margin-top:10px">Nach jedem Gottesdienst oder jeder Veranstaltung: 10 Sekunden Feedback. So sieht die Gemeinde, was ankommt – nicht nur, was angeboten wird.</p></div>
+      <form id="fbForm">
+        <div class="faces" role="group" aria-label="Bewertung"><button type="button" data-v="3" aria-pressed="false" aria-label="Gut">😀</button><button type="button" data-v="2" aria-pressed="false" aria-label="Mittel">😐</button><button type="button" data-v="1" aria-pressed="false" aria-label="Schlecht">🙁</button></div>
+        <label for="fbWhat" style="font-weight:600">Worum geht's?</label>
+        <select id="fbWhat"><option>Gottesdienst</option><option>Jugendangebot</option><option>Veranstaltung / Pfarrfest</option><option>Diese Website</option></select>
+        <label for="fbText" style="font-weight:600">Was können wir besser machen? (optional)</label>
+        <textarea id="fbText" placeholder="Kurz und ehrlich…"></textarea>
+        <button class="btn" type="submit">Feedback senden</button>
+        <p class="thanks" id="fbThanks" hidden>Danke! Im Entwurf wird nichts verschickt – auf der echten Seite käme es beim Team an.</p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site" id="kontakt">
+  <div class="wrap">
+    <div class="cols">
+      <div><h3>Pfarrbüro</h3><div class="ph">Adresse, Telefon, E-Mail und Öffnungszeiten von der offiziellen Seite übernehmen</div></div>
+      <div><h3>Notfall-Seelsorge</h3><div class="ph">Telefonnummer für Krankensalbung und Sterbebegleitung eintragen</div></div>
+      <div><h3>Über diesen Entwurf</h3><p>Konzept einer Schülergruppe (Q2 Kath. Religion, Gruppe 1) auf Grundlage unserer Analyse der vier Grundvollzüge. Inhalte aus Website-Recherche und Interview mit Pfarrer Lambert Schäfer.</p></div>
+    </div>
+  </div>
+</footer>
+
+<nav class="tabbar" aria-label="Schnellnavigation">
+  <a href="#start"><i>⌂</i>Start</a>
+  <a href="#gottesdienste" class="L"><i>L</i>Feiern</a>
+  <a href="#mitmachen" class="K"><i>K</i>Mitmachen</a>
+  <a href="#hilfe" class="D"><i>D</i>Hilfe</a>
+  <a href="#vertrauen" class="M"><i>M</i>Glauben</a>
+</nav>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  /* Theme */
+  $('#themeBtn').onclick = () => {
+    const r = document.documentElement;
+    const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    r.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('kiw-theme', r.dataset.theme); } catch (e) {}
+  };
+  try { const t = localStorage.getItem('kiw-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+
+  /* Gottesdienst-Finder (Beispieldaten) */
+  const DAYS = ['Sa', 'So', 'Mo', 'Di', 'Mi', 'Do', 'Fr'];
+  const SVC = [
+    { d: 'Sa', t: '17:00', what: 'Vorabendmesse', where: 'St. Agatha, Agathaberg', f: [] },
+    { d: 'Sa', t: '18:30', what: 'Jugendgottesdienst mit Band', where: 'St. Nikolaus, Kirchplatz', f: ['youth'] },
+    { d: 'So', t: '09:30', what: 'Heilige Messe', where: 'St. Nikolaus, Kirchplatz', f: [] },
+    { d: 'So', t: '11:00', what: 'Familiengottesdienst', where: 'St. Nikolaus, Kirchplatz', f: ['fam'] },
+    { d: 'So', t: '11:15', what: 'Kleine-Leute-Gottesdienst', where: 'Pfarrzentrum', f: ['kids', 'fam'] },
+    { d: 'So', t: '18:00', what: 'Abendmesse', where: 'St. Agatha, Agathaberg', f: [], cancel: 'Fällt aus – stattdessen 11:00 St. Nikolaus' },
+    { d: 'Di', t: '08:30', what: 'Heilige Messe', where: 'St. Nikolaus, Kirchplatz', f: [] },
+    { d: 'Mi', t: '19:00', what: 'Abendgebet (Taizé)', where: 'St. Nikolaus, Kirchplatz', f: ['youth'] },
+    { d: 'Do', t: '15:00', what: 'Seniorenmesse', where: 'Pfarrzentrum', f: [] },
+    { d: 'Fr', t: '18:00', what: 'Wortgottesdienst', where: 'St. Agatha, Agathaberg', f: [] }
+  ];
+  const LABEL = { fam: ['Familien', 'fam'], kids: ['Kleine Leute', 'fam'], youth: ['Jugend', 'youth'] };
+  let day = 'So', filt = 'all';
+  $('#days').innerHTML = DAYS.map(d => `<button data-d="${d}" aria-pressed="${d === day}">${d}</button>`).join('');
+  function renderSvc() {
+    const list = SVC.filter(s => s.d === day && (filt === 'all' || s.f.includes(filt)));
+    $('#svcList').innerHTML = list.length ? list.map(s => `
+      <div class="svc ${s.cancel ? 'cancel' : ''}">
+        <time>${s.t}</time>
+        <div><div class="what">${s.what}</div><div class="where">${s.where}</div>${s.cancel ? `<div class="note">${s.cancel}</div>` : ''}</div>
+        <div class="badges">${s.cancel ? '<span class="badge off">Ausfall</span>' : s.f.slice(0, 1).map(f => `<span class="badge ${LABEL[f][1]}">${LABEL[f][0]}</span>`).join('')}</div>
+      </div>`).join('') : '<div class="f-empty">An diesem Tag gibt es kein passendes Angebot. Probier einen anderen Tag oder „Alle“.</div>';
+  }
+  $('#days').onclick = e => { const b = e.target.closest('button'); if (!b) return; day = b.dataset.d; $$('#days button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); renderSvc(); };
+  $('#chips').onclick = e => { const b = e.target.closest('button'); if (!b) return; filt = b.dataset.f; $$('#chips button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); renderSvc(); };
+  renderSvc();
+
+  /* Mitmach-Finder */
+  const OFFERS = [
+    { n: 'Jugendchor', s: 'Wöchentliche Probe, Auftritte im Gottesdienst', c: 'K', age: ['teen'], like: ['music'], time: ['week'] },
+    { n: 'Kinder- und Erwachsenenchöre', s: 'Eine von 20 Chorgruppen', c: 'K', age: ['kid', 'adult'], like: ['music'], time: ['week'] },
+    { n: 'Messdiener', s: 'Gottesdienst mitgestalten, Gruppenstunden, Fahrten', c: 'L', age: ['kid', 'teen'], like: ['org', 'people'], time: ['week', 'once'] },
+    { n: 'Pfadfinder', s: 'Gruppenstunden, Zeltlager, Natur', c: 'D', age: ['kid', 'teen', 'adult'], like: ['out'], time: ['week'] },
+    { n: 'Helfen bei der Kleider- und Essensausgabe', s: 'Ökumenische Initiative, flexible Schichten', c: 'D', age: ['teen', 'adult'], like: ['people'], time: ['once', 'week'] },
+    { n: 'Trauerfrühstück unterstützen', s: 'Einmal im Monat, vorbereiten und da sein', c: 'D', age: ['adult'], like: ['people'], time: ['once'] },
+    { n: 'Pfarrfest-Team', s: 'Planen, aufbauen, feiern – einmal im Jahr', c: 'K', age: ['teen', 'adult'], like: ['org', 'out'], time: ['once'] },
+    { n: 'Social-Media-Team', s: 'Fotos, Reels und Posts für die Gemeinde', c: 'M', age: ['teen', 'adult'], like: ['org', 'music'], time: ['once', 'week'] }
+  ];
+  function renderQuiz() {
+    const v = n => ($(`input[name=${n}]:checked`) || {}).value;
+    const a = v('age'), l = v('like'), t = v('time');
+    const scored = OFFERS.map(o => ({ o, s: (o.age.includes(a) ? 2 : 0) + (o.like.includes(l) ? 3 : 0) + (o.time.includes(t) ? 1 : 0) }))
+      .filter(x => x.o.age.includes(a)).sort((x, y) => y.s - x.s).slice(0, 3);
+    $('#matches').innerHTML = scored.map(({ o, s }) => `<div class="match ${o.c}"><i></i><div><b>${o.n}</b><small>${o.s}</small></div><span class="fit">${Math.round(s / 6 * 100)} %</span></div>`).join('')
+      + '<p style="color:var(--muted);font-size:15px;margin-top:12px">Unverbindlich reinschnuppern: [Kontakt eintragen]</p>';
+  }
+  $('#quiz').addEventListener('change', renderQuiz); renderQuiz();
+
+  /* Hilfe */
+  const NEED = [
+    ['Lebensmittelgutscheine', 'Schnelle Unterstützung, wenn das Geld am Monatsende nicht reicht.', 'Anrufen oder ins Pfarrbüro kommen'],
+    ['Kleidung & Essen', 'Ökumenische Initiative gemeinsam mit der evangelischen Gemeinde.', 'Ausgabezeiten: [eintragen]'],
+    ['Günstiger Wohnraum', 'Wohnungen für Bedürftige und Familien.', 'Ansprechperson: [eintragen]'],
+    ['Trauerfrühstück', 'Einmal im Monat: frühstücken, reden, begleitet von Seelsorge.', 'Ohne Anmeldung'],
+    ['Hilfe in Notlagen', 'Wie nach dem Brand in Wipperfürth: schnelle, unbürokratische Unterstützung.', 'Pfarrbüro oder Caritas'],
+    ['Seniorenangebote', 'Treffen, Besuche und Begleitung im Alter.', 'Termine: [eintragen]']
+  ];
+  const GIVE = [
+    ['Spenden', 'Caritas-Kollekte und Hilfsaktionen der Gemeinde unterstützen.', 'Spendenkonto: [eintragen]'],
+    ['Ausgabe unterstützen', 'Bei Kleidung und Essen mit anpacken, auch einmalig.', 'Schichtplan: [Link eintragen]'],
+    ['Zeit verschenken', 'Senioren besuchen, vorlesen, zuhören.', 'Kontakt: [eintragen]'],
+    ['Trauerfrühstück', 'Tische decken, Kaffee kochen, da sein.', 'Einmal im Monat'],
+    ['Sozialstunden & Praktikum', 'Für Schule oder Firmvorbereitung – mit Bescheinigung.', 'Anfrage per Mail'],
+    ['Aktionen teilen', 'Hilfsangebote in deiner Klasse oder Story weitersagen.', 'Material: [Link eintragen]']
+  ];
+  function renderHelp(list) { $('#helpGrid').innerHTML = list.map(([h, p, how]) => `<div class="hcard"><h3>${h}</h3><p>${p}</p><span class="how">${how}</span></div>`).join(''); }
+  $('#h-need').onclick = () => { $('#h-need').setAttribute('aria-pressed', 'true'); $('#h-give').setAttribute('aria-pressed', 'false'); renderHelp(NEED); };
+  $('#h-give').onclick = () => { $('#h-give').setAttribute('aria-pressed', 'true'); $('#h-need').setAttribute('aria-pressed', 'false'); renderHelp(GIVE); };
+  renderHelp(NEED);
+
+  /* Suche */
+  const INDEX = [
+    ...SVC.map(s => ({ t: `${s.what} (${s.d} ${s.t})`, s: s.where, c: 'L', href: '#gottesdienste', k: 'gottesdienst messe sonntag ' + s.what })),
+    ...OFFERS.map(o => ({ t: o.n, s: o.s, c: o.c, href: '#mitmachen', k: 'mitmachen ehrenamt ' + o.n + ' ' + o.s })),
+    ...NEED.map(([h, p]) => ({ t: h, s: p, c: 'D', href: '#hilfe', k: 'hilfe caritas geld not ' + h + ' ' + p })),
+    { t: 'Firmung', s: 'Neu gestaltete Vorbereitung für Jugendliche', c: 'K', href: '#jugend', k: 'firmung jugend sakrament' },
+    { t: 'Erstkommunion', s: 'Vorbereitung mit Katechese', c: 'M', href: '#jugend', k: 'kommunion erstkommunion kinder' },
+    { t: 'Taufe', s: 'Anmeldung über das Pfarrbüro', c: 'L', href: '#kontakt', k: 'taufe kind sakrament' },
+    { t: 'Prävention & Schutz', s: 'Ansprechperson und Schutzkonzept', c: 'M', href: '#vertrauen', k: 'prävention missbrauch schutz hilfe' },
+    { t: 'Wiedereintritt', s: 'Deine Taufe bleibt – du bist willkommen', c: 'M', href: '#vertrauen', k: 'austritt wiedereintritt eintreten' },
+    { t: 'Pfarrbüro & Kontakt', s: 'Adresse, Öffnungszeiten', c: 'L', href: '#kontakt', k: 'kontakt büro telefon adresse öffnungszeiten' }
+  ];
+  const q = $('#q'), res = $('#results');
+  let act = -1;
+  function search() {
+    const words = q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+    if (!words.length) { res.hidden = true; return; }
+    const hits = INDEX.map(it => ({ it, sc: words.filter(w => (it.t + ' ' + it.k).toLowerCase().includes(w)).length })).filter(x => x.sc).sort((a, b) => b.sc - a.sc).slice(0, 6);
+    act = -1;
+    res.innerHTML = hits.length ? hits.map(({ it }) => `<a href="${it.href}" class="${it.c}"><span class="pill">${it.c}</span><span>${esc(it.t)}<small>${esc(it.s)}</small></span></a>`).join('') : '<div class="empty">Nichts gefunden. Versuch „Gottesdienst“, „Hilfe“ oder „Jugend“.</div>';
+    res.hidden = false;
+  }
+  q.addEventListener('input', search);
+  q.addEventListener('keydown', e => {
+    const links = $$('a', res);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); act = (act + (e.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length; links.forEach((l, i) => l.classList.toggle('act', i === act)); }
+    if (e.key === 'Enter' && links.length) { (links[act] || links[0]).click(); }
+    if (e.key === 'Escape') res.hidden = true;
+  });
+  res.addEventListener('click', () => { res.hidden = true; });
+  document.addEventListener('click', e => { if (!e.target.closest('.search')) res.hidden = true; });
+  $$('.quick button').forEach(b => b.onclick = () => { q.value = b.dataset.q; q.focus(); search(); });
+
+  /* Feedback */
+  let rating = 0;
+  $$('.faces button').forEach(b => b.onclick = () => { rating = +b.dataset.v; $$('.faces button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); });
+  $('#fbForm').addEventListener('submit', e => { e.preventDefault(); $('#fbThanks').hidden = false; });
+
+  /* aktiver Tab */
+  const tabs = $$('.tabbar a');
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) tabs.forEach(t => t.classList.toggle('on', t.getAttribute('href') === '#' + en.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+  ['start', 'gottesdienste', 'mitmachen', 'hilfe', 'vertrauen'].forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+})();
+</script>
+</body>
+</html>
